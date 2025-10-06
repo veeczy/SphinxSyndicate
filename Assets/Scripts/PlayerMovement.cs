@@ -59,20 +59,18 @@ public class PlayerMovement : MonoBehaviour
         // Player presses X to dodge to the left, player presses C to dodge to the right.
         if (canDodge)
         {
-            if (Input.GetKeyDown(KeyCode.X))
-                StartDodge(-PerpendicularToFacing()); // Left dodge
-            else if (Input.GetKeyDown(KeyCode.C))
-                StartDodge(PerpendicularToFacing());  // Right dodge
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+                StartDodge(direction); // Dodge
         }
     }
 
-    
+    /* Bewy Pwetty Funcshun. sowwy :,(
     private Vector2 PerpendicularToFacing()
     {
         Vector2 facingDir = transform.right; 
         return new Vector2(-facingDir.y, facingDir.x).normalized; 
     }
-
+    */
     private void StartDodge(Vector2 dir)
     {
         isDodging = true;
