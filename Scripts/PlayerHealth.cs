@@ -22,12 +22,11 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
         Debug.Log("Player Health: " + currentHealth);
 
-        // Restart level when health runs out
         if (currentHealth <= 0)
         {
             RestartLevel();
