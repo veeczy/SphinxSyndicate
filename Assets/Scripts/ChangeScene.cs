@@ -9,7 +9,7 @@ public class ChangeScene : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(onTrigger)
+        if(other.CompareTag("Player") && onTrigger)
         changeScene(sceneIndex);
     }
     void changeScene(int index)
