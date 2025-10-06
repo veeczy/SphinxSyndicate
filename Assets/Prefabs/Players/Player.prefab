@@ -252,6 +252,7 @@ GameObject:
   - component: {fileID: 8943898560082112223}
   - component: {fileID: 7233425569726320240}
   - component: {fileID: 4340054961460727088}
+  - component: {fileID: 1419171099445873015}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -383,6 +384,9 @@ MonoBehaviour:
   myPlayer: {fileID: 4340054961460727088}
   speed: 15
   stopSpeed: 10
+  dodgeDistance: 5
+  dodgeDuration: 0.15
+  dodgeCooldown: 0.6
   aimPos: {x: 0, y: 0}
 --- !u!50 &4340054961460727088
 Rigidbody2D:
@@ -411,6 +415,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1419171099445873015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897928467854683093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8c353bf2486074a8dff8add9a1f5d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
 --- !u!1 &6758893587999136879
 GameObject:
   m_ObjectHideFlags: 0

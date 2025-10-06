@@ -22,23 +22,21 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D col)
     {
         // Damage the player
-        if (collision.gameObject.CompareTag("Player"))
+        if (col.CompareTag("Player"))
         {
-            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            PlayerHealth playerHealth = col.GetComponent<PlayerHealth>();
             if (playerHealth != null)
-            {
                 playerHealth.TakeDamage(damage);
-            }
         }
 
-        // Works with BulletId system instead of relying only on "Bullet" tag
-        if (collision.gameObject.GetComponent<BulletId>() != null)
+        // Detect bullet hits
+        if (col.GetComponent<BulletId>() != null)
         {
-            Destroy(gameObject);              // Enemy dies
-            Destroy(collision.gameObject);    // Bullet disappears
+            Destroy(gameObject);     // Kill the enemy
+            Destroy(col.gameObject); // Destroy the bullet
         }
     }
 }
