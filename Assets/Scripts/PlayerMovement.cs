@@ -10,10 +10,11 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         myPlayer.linearDamping = stopSpeed;
+        myPlayer.gravityScale = 0;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //MOVEMENT
         
