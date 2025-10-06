@@ -1,20 +1,31 @@
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
 
 public class PlayerHealthUI : MonoBehaviour
 {
-    public PlayerHealth playerHealth;    // Reference to the PlayerHealth script
-    public Image[] hearts;               // Array to hold the 3 heart images
-    public Sprite fullHeart;             // Heart when filled
-    public Sprite emptyHeart;            // Heart when lost
+    // Reference to the PlayerHealth script on the Player object
+    public PlayerHealth playerHealth;
+
+    // Array of Image components representing hearts on the UI
+    public Image[] hearts;
+
+    // Sprites for full and empty hearts
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
 
     void Update()
     {
-        // Loop through hearts and update based on current health
+        // Safety check: make sure playerHealth is assigned
+        if (playerHealth == null)
+            return;
+
+        // Loop through all hearts and update the image based on current health
         for (int i = 0; i < hearts.Length; i++)
         {
+            // If this heart index is below current health, show full heart
             if (i < playerHealth.GetCurrentHealth())
                 hearts[i].sprite = fullHeart;
+            // Otherwise show empty heart
             else
                 hearts[i].sprite = emptyHeart;
         }

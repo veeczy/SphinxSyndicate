@@ -24,7 +24,7 @@ public class EnemyAI : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // If the enemy touches the player, deal damage
+        // Damage the player
         if (collision.gameObject.CompareTag("Player"))
         {
             PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
@@ -34,11 +34,11 @@ public class EnemyAI : MonoBehaviour
             }
         }
 
-        // If hit by a bullet, destroy this enemy
-        if (collision.gameObject.CompareTag("Bullet"))
+        // Works with BulletId system instead of relying only on "Bullet" tag
+        if (collision.gameObject.GetComponent<BulletId>() != null)
         {
-            Destroy(gameObject);
-            Destroy(collision.gameObject); // Destroy the bullet too
+            Destroy(gameObject);              // Enemy dies
+            Destroy(collision.gameObject);    // Bullet disappears
         }
     }
 }
