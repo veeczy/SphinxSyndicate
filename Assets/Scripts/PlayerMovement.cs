@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        // Player presses X to dodge to the left, player presses C to dodge to the right.
+        // Player presses shift to dodge towards mouse.
         if (canDodge)
         {
             if (Input.GetKeyDown(KeyCode.LeftShift))
