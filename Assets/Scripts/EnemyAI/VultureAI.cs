@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class VultureAI : EnemyAI
 {
-    public GameObject projectilePrefab;   // Assign in Inspector
-    public float shootInterval = 2f;
-    public float safeDistance = 5f;
-    private float nextShotTime;
+    [Header("Vulture Settings")]
+    public float safeDistance = 6f;         // How far it tries to stay from the player
+    public float shootInterval = 2f;        // How often it shoots
+    public GameObject projectilePrefab;     // Assign in Inspector
+
+    private float nextShootTime = 0f;
 
     protected override void Update()
     {
@@ -13,22 +15,28 @@ public class VultureAI : EnemyAI
 
         float distance = Vector2.Distance(transform.position, player.position);
 
-        // Move away if player too close
-        if (distance < safeDistance)
-        {
-            Vector2 retreat = (transform.position - player.position).normalized;
-            transform.position += (Vector3)retreat * moveSpeed * Time.deltaTime;
-        }
-
         // Face the player
         Vector2 direction = (player.position - transform.position).normalized;
         transform.right = direction;
 
-        // Shoot at intervals
-        if (Time.time >= nextShotTime)
+        // Move away if too close, otherwise hover roughly in place
+        if (distance < safeDistance * 0.8f)
+        {
+            Vector2 retreatDir = (transform.position - player.position).normalized;
+            transform.position += (Vector3)retreatDir * moveSpeed * Time.deltaTime;
+        }
+        else if (distance > safeDistance * 1.2f)
+        {
+            // Move slightly toward player if too far away
+            Vector2 approachDir = (player.position - transform.position).normalized;
+            transform.position += (Vector3)approachDir * moveSpeed * Time.deltaTime;
+        }
+
+        // Shooting logic
+        if (Time.time >= nextShootTime)
         {
             Shoot();
-            nextShotTime = Time.time + shootInterval;
+            nextShootTime = Time.time + shootInterval;
         }
     }
 
@@ -39,7 +47,11 @@ public class VultureAI : EnemyAI
             GameObject bullet = Instantiate(projectilePrefab, transform.position, transform.rotation);
             Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
             if (rb != null)
-                rb.AddForce(transform.right * 8f, ForceMode2D.Impulse);
+            {
+                // Fire toward the player
+                Vector2 shootDir = (player.position - transform.position).normalized;
+                rb.AddForce(shootDir * 8f, ForceMode2D.Impulse);
+            }
         }
     }
 }
