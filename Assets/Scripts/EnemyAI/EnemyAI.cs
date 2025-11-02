@@ -3,7 +3,7 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {
     public float moveSpeed = 3f;        // How fast the enemy moves
-    private Transform player;           // Reference to the player's position
+    protected Transform player;         // Reference to the player's position (made protected so child scripts can use it)
     public int damage = 1;              // How much damage the enemy does
     public int health = 3;
 
@@ -13,7 +13,8 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    void Update()
+    // Marked as virtual so child classes can override it
+    protected virtual void Update()
     {
         // Move toward the player's position
         if (player != null)
