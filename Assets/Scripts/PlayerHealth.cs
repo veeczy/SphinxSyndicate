@@ -7,7 +7,7 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 3;
 
     // Tracks current lives left
-    private int currentHealth;
+    public int currentHealth;
 
     void Start()
     {

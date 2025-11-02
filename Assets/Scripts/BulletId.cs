@@ -13,12 +13,10 @@ public class BulletId : MonoBehaviour
     public GameObject[] impactPrefabs;
     void OnTriggerEnter2D(Collider2D col)
     {
-        //Debug.Log(col.gameObject + " : " + sender);
         if (col.gameObject != sender && !simpleMode)
         {
             for (int i = 0; i < surfaceTags.Length; i++)
             {
-                //Debug.Log(col.gameObject.tag + " | " + surfaceTags[i] + " | " + col.gameObject.CompareTag(surfaceTags[i]));
                 if (col.gameObject.CompareTag(surfaceTags[i]))
                 {
                     Debug.DrawRay(transform.position, transform.forward, Color.white);
