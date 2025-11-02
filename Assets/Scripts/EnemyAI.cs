@@ -5,6 +5,7 @@ public class EnemyAI : MonoBehaviour
     public float moveSpeed = 3f;        // How fast the enemy moves
     private Transform player;           // Reference to the player's position
     public int damage = 1;              // How much damage the enemy does
+    public int health = 3;
 
     void Start()
     {
@@ -19,6 +20,10 @@ public class EnemyAI : MonoBehaviour
         {
             Vector2 direction = (player.position - transform.position).normalized;
             transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+            if (health <= 0)
+            {
+                Destroy(gameObject);// Kil the enemy
+            }
         }
     }
 
@@ -35,8 +40,8 @@ public class EnemyAI : MonoBehaviour
         // Detect bullet hits
         if (col.GetComponent<BulletId>() != null)
         {
-            Destroy(gameObject);     // Kill the enemy
-            Destroy(col.gameObject); // Destroy the bullet
+            health -= col.GetComponent<BulletId>().dmg;
+            //Destroy(col.gameObject); // Destroy the bullet
         }
     }
 }

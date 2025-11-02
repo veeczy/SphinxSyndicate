@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -6,11 +7,14 @@ public class PlayerMovement : MonoBehaviour
     public Rigidbody2D myPlayer;
     public float speed = 1.0f;
     public float stopSpeed = 1.0f;
+    private bool lookRight;
 
     [Header("Dodge Settings")]
-    public float dodgeDistance = 5f;      
-    public float dodgeDuration = 0.15f;   
-    public float dodgeCooldown = 0.6f;    
+    public float dodgeDistance = 5f;
+    public float dodgeDuration = 0.15f;
+    public float dodgeCooldown = 0.6f;
+    public Sprite dodgeSprite;
+    private Sprite playerSprite;
 
     private bool isDodging = false;
     private bool canDodge = true;
@@ -25,20 +29,22 @@ public class PlayerMovement : MonoBehaviour
     {
         myPlayer.linearDamping = stopSpeed;
         myPlayer.gravityScale = 0;
+        playerSprite = GetComponent<SpriteRenderer>().sprite;
     }
 
     void FixedUpdate()
     {
         if (isDodging)
         {
-            
+
             dodgeTimer += Time.fixedDeltaTime;
             float t = dodgeTimer / dodgeDuration;
             myPlayer.MovePosition(Vector2.Lerp(dodgeStart, dodgeEnd, t));
-
+            GetComponent<SpriteRenderer>().sprite = dodgeSprite;
             if (t >= 1f)
             {
                 isDodging = false;
+                GetComponent<SpriteRenderer>().sprite = playerSprite;
                 StartCoroutine(DodgeCooldown());
             }
 
@@ -55,6 +61,15 @@ public class PlayerMovement : MonoBehaviour
         Vector2 aimDir = mousePos - (Vector2)transform.position;
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        Debug.Log(angle);
+        if (angle > 90 || angle < -90)
+        {
+            GetComponent<SpriteRenderer>().flipY = true;
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().flipY = false;
+        }
 
         // Player presses shift to dodge towards mouse.
         if (canDodge)
@@ -80,7 +95,7 @@ public class PlayerMovement : MonoBehaviour
         dodgeEnd = dodgeStart + dir * dodgeDistance;
     }
 
-    private System.Collections.IEnumerator DodgeCooldown()
+    private IEnumerator DodgeCooldown()
     {
         yield return new WaitForSeconds(dodgeCooldown);
         canDodge = true;
