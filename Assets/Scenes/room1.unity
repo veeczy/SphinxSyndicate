@@ -355,7 +355,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
+--- !u!1 &141616766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5010741212059450646, guid: 7bf3f851c1cd19d43afc51e11890ebd2, type: 3}
+  m_PrefabInstance: {fileID: 749139348491924652}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &141616772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 141616766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97bf42890d901a4d9f85183994b358e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 3
+  damage: 1
+  health: 3
+--- !u!1 &167261036 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4901751116956216301, guid: ea4892c843b51e344aaa60d87d6a53b2, type: 3}
+  m_PrefabInstance: {fileID: 1985948005}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &167261037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167261036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 491f0d7b53e39fb47845c01ed578755a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpiderAI
+  moveSpeed: 3
+  damage: 1
+  health: 3
+  webProjectilePrefab: {fileID: 3217030190005306906, guid: 786c685fa85e20947b80d2d11ecb3fc8, type: 3}
+  shootCooldown: 2
 --- !u!1001 &182396029
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -413,48 +454,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acca54ec889a35d40a04eb64ed5a15dd, type: 3}
-
---- !u!1 &141616766 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5010741212059450646, guid: 7bf3f851c1cd19d43afc51e11890ebd2, type: 3}
-  m_PrefabInstance: {fileID: 749139348491924652}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &141616772
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 141616766}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e97bf42890d901a4d9f85183994b358e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  damage: 1
---- !u!1 &167261036 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4901751116956216301, guid: ea4892c843b51e344aaa60d87d6a53b2, type: 3}
-  m_PrefabInstance: {fileID: 1985948005}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &167261037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 167261036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 491f0d7b53e39fb47845c01ed578755a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpiderAI
-  moveSpeed: 3
-  damage: 1
-  webProjectilePrefab: {fileID: 3217030190005306906, guid: 786c685fa85e20947b80d2d11ecb3fc8, type: 3}
-  shootCooldown: 2
-
 --- !u!1 &281345116
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +534,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1419171099445873015, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
   m_PrefabInstance: {fileID: 1333923439}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1083809197}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe8c353bf2486074a8dff8add9a1f5d3, type: 3}
@@ -1157,6 +1156,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::HornedToadAI
   moveSpeed: 3
   damage: 1
+  health: 3
   attackRange: 2
   attackCooldown: 3
 --- !u!4 &751136210 stripped
@@ -1301,7 +1301,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 686715536}
   - {fileID: 141616766}
-  - {fileID: 1616816571}
+  - {fileID: 2010672442}
   - {fileID: 167261036}
   enemiesToSpawn: 5
   spawnWidth: 25
@@ -1386,6 +1386,108 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1083809197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4897928467854683093, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+  m_PrefabInstance: {fileID: 1333923439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &1083809203
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1083809197}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1230735115
 GameObject:
   m_ObjectHideFlags: 0
@@ -1512,7 +1614,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4897928467854683093, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1083809203}
   m_SourcePrefab: {fileID: 100100000, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
 --- !u!1 &1388835792
 GameObject:
@@ -6764,7 +6869,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4802826403291225045, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
   m_PrefabInstance: {fileID: 7747412918040936157}
   m_PrefabAsset: {fileID: 0}
-
 --- !u!1 &1629745754
 GameObject:
   m_ObjectHideFlags: 0
@@ -6783,19 +6887,17 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &1629745755
-
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-
   m_GameObject: {fileID: 1629745754}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 504ddf3b394e0a748830b2238e5a13dd, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseManager
+  m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 502464682}
 --- !u!4 &1629745756
 Transform:
@@ -6812,7 +6914,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
 --- !u!1 &1683725541
 GameObject:
   m_ObjectHideFlags: 0
@@ -19048,6 +19149,29 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2010672442 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4901751116956216301, guid: ea4892c843b51e344aaa60d87d6a53b2, type: 3}
+  m_PrefabInstance: {fileID: 4044056899485824535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2010672447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010672442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cbfffe017197f841a54e78eb7f3c554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VultureAI
+  moveSpeed: 3
+  damage: 1
+  health: 3
+  safeDistance: 6
+  shootInterval: 2
+  projectilePrefab: {fileID: 3217030190005306906, guid: 786c685fa85e20947b80d2d11ecb3fc8, type: 3}
 --- !u!1 &2026407468
 GameObject:
   m_ObjectHideFlags: 0
@@ -19452,7 +19576,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4901751116956216301, guid: ea4892c843b51e344aaa60d87d6a53b2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1616816577}
+      addedObject: {fileID: 2010672447}
   m_SourcePrefab: {fileID: 100100000, guid: ea4892c843b51e344aaa60d87d6a53b2, type: 3}
 --- !u!1001 &7747412918040936157
 PrefabInstance:
@@ -19564,6 +19688,6 @@ SceneRoots:
   - {fileID: 1815818055}
   - {fileID: 2093423044}
   - {fileID: 1950255619}
-
   - {fileID: 1629745756}
-
+  - {fileID: 182396029}
+  - {fileID: 391180238}

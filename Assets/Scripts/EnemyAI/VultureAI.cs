@@ -38,6 +38,7 @@ public class VultureAI : EnemyAI
             Shoot();
             nextShootTime = Time.time + shootInterval;
         }
+        CheckHealth();
     }
 
     void Shoot()

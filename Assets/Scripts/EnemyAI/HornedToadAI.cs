@@ -32,6 +32,7 @@ public class HornedToadAI : EnemyAI
                 StartCoroutine(Attack());
             }
         }
+        CheckHealth();
     }
 
     private System.Collections.IEnumerator Attack()

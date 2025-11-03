@@ -16,15 +16,24 @@ public class EnemyAI : MonoBehaviour
     // Marked as virtual so child classes can override it
     protected virtual void Update()
     {
-        // Move toward the player's position
+        HandleMovement();  // For base chasing enemies only
+        CheckHealth();     // Runs for everyone
+    }
+
+    protected void HandleMovement()
+    {
         if (player != null)
         {
             Vector2 direction = (player.position - transform.position).normalized;
             transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
-            if (health <= 0)
-            {
-                Destroy(gameObject);// Kil the enemy
-            }
+        }
+    }
+
+    protected void CheckHealth()
+    {
+        if (health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 
