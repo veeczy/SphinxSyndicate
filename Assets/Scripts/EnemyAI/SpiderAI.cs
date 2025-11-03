@@ -22,6 +22,7 @@ public class SpiderAI : EnemyAI
             ShootWeb(direction);
             nextShootTime = Time.time + shootCooldown;
         }
+        CheckHealth();
     }
 
     void ShootWeb(Vector2 direction)

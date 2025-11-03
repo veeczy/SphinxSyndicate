@@ -22,70 +22,98 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dodgeEnd;
     private float dodgeTimer;
 
-    [Header("Aim")]
-    public Vector2 aimPos;
+    /* ----------------------------------------------
+ * DESIGNERS:
+ * To add walking sound effects:
+ * 1. Select the Player in the Hierarchy.
+ * 2. Find AudioSource component at the bottom.
+ * 3. Assign a looping footstep clip in Audio Resource.
+ * 4. Uncheck "Play On Awake" and check "Loop".
+ * 5. Adjust volume and clip as needed.
+ * The sound will play automatically when the player moves
+ * and stop when idle or dodging.
+ * ---------------------------------------------- */
 
-    void Start()
-    {
-        myPlayer.linearDamping = stopSpeed;
-        myPlayer.gravityScale = 0;
-        playerSprite = GetComponent<SpriteRenderer>().sprite;
-    }
+    // Sound effects
+    private AudioSource footstepAudio;
 
-    void FixedUpdate()
-    {
-        if (isDodging)
-        {
+  [Header("Aim")]
+  public Vector2 aimPos;
 
-            dodgeTimer += Time.fixedDeltaTime;
-            float t = dodgeTimer / dodgeDuration;
-            myPlayer.MovePosition(Vector2.Lerp(dodgeStart, dodgeEnd, t));
-            GetComponent<SpriteRenderer>().sprite = dodgeSprite;
-            if (t >= 1f)
-            {
-                isDodging = false;
-                GetComponent<SpriteRenderer>().sprite = playerSprite;
-                StartCoroutine(DodgeCooldown());
-            }
+  void Start()
+  {
+      myPlayer.linearDamping = stopSpeed;
+      myPlayer.gravityScale = 0;
+      playerSprite = GetComponent<SpriteRenderer>().sprite;
+      footstepAudio = GetComponent<AudioSource>();
+  }
 
-            return;
-        }
+  void FixedUpdate()
+  {
+      if (isDodging)
+      {
 
-        // Movement
-        Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        myPlayer.linearVelocity = direction * speed;
+          dodgeTimer += Time.fixedDeltaTime;
+          float t = dodgeTimer / dodgeDuration;
+          myPlayer.MovePosition(Vector2.Lerp(dodgeStart, dodgeEnd, t));
+          GetComponent<SpriteRenderer>().sprite = dodgeSprite;
+          if (t >= 1f)
+          {
+              isDodging = false;
+              GetComponent<SpriteRenderer>().sprite = playerSprite;
+              StartCoroutine(DodgeCooldown());
+          }
 
-        // Aim Rotation
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        aimPos = mousePos;
-        Vector2 aimDir = mousePos - (Vector2)transform.position;
-        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
-        Debug.Log(angle);
-        if (angle > 90 || angle < -90)
-        {
-            GetComponent<SpriteRenderer>().flipY = true;
-        }
-        else
-        {
-            GetComponent<SpriteRenderer>().flipY = false;
-        }
+          return;
+      }
 
-        // Player presses shift to dodge towards mouse.
-        if (canDodge)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-                StartDodge(direction); // Dodge
-        }
-    }
+      // Movement
+      Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+      myPlayer.linearVelocity = direction * speed;
 
-    /* Bewy Pwetty Funcshun. sowwy :,(
-    private Vector2 PerpendicularToFacing()
-    {
-        Vector2 facingDir = transform.right; 
-        return new Vector2(-facingDir.y, facingDir.x).normalized; 
-    }
-    */
+      // Footstep SFX
+      if (!isDodging && direction.magnitude > 0.1f)
+      {
+          if (!footstepAudio.isPlaying)
+              footstepAudio.Play();
+      }
+      else
+      {
+          if (footstepAudio.isPlaying)
+              footstepAudio.Stop();
+      }
+
+      // Aim Rotation
+      Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+      aimPos = mousePos;
+      Vector2 aimDir = mousePos - (Vector2)transform.position;
+      float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+      transform.rotation = Quaternion.Euler(0f, 0f, angle);
+      Debug.Log(angle);
+      if (angle > 90 || angle < -90)
+      {
+          GetComponent<SpriteRenderer>().flipY = true;
+      }
+      else
+      {
+          GetComponent<SpriteRenderer>().flipY = false;
+      }
+
+      // Player presses shift to dodge towards mouse.
+      if (canDodge)
+      {
+          if (Input.GetKeyDown(KeyCode.LeftShift))
+              StartDodge(direction); // Dodge
+      }
+  }
+
+  /* Bewy Pwetty Funcshun. sowwy :,(
+  private Vector2 PerpendicularToFacing()
+  {
+      Vector2 facingDir = transform.right; 
+      return new Vector2(-facingDir.y, facingDir.x).normalized; 
+  }
+  */
     private void StartDodge(Vector2 dir)
     {
         isDodging = true;
