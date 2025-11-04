@@ -7,6 +7,7 @@ public class HornedToadAI : EnemyAI
     private float nextAttackTime = 0f;
     private bool isAttacking = false;
 
+
     protected override void Update()
     {
         if (player == null) return;

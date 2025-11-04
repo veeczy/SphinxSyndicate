@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4944985843031088202}
   - component: {fileID: 3315563662065394446}
-  - component: {fileID: 5120274396145601672}
   - component: {fileID: 7025947830599295230}
   - component: {fileID: 2053763057115585674}
+  - component: {fileID: -7679034788966404198}
   m_Layer: 0
   m_Name: Enemy (Toad)
   m_TagString: Enemy
@@ -55,6 +55,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -76,6 +78,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
@@ -90,20 +93,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &5120274396145601672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2794270143789028901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6735dc7250ca889428ed71e15ad2d3b3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 3
-  damage: 1
 --- !u!50 &7025947830599295230
 Rigidbody2D:
   serializedVersion: 5
@@ -177,3 +166,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-7679034788966404198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794270143789028901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acdb098cb7cafc647832766c5ceab395, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HornedToadAI
+  moveSpeed: 3
+  damage: 1
+  health: 3
+  attackRange: 2
+  attackCooldown: 1.5
