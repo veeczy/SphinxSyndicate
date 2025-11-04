@@ -23,7 +23,7 @@ public class Obstacle : MonoBehaviour
         if (!destroyed && obstacleHealth <= 0)
         {
             destroyed = true;
-            //Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
     void OnTriggerEnter2D(Collider2D col)
@@ -42,7 +42,7 @@ public class Obstacle : MonoBehaviour
             if (destroyed)
             {
                 //GetComponent<SpriteRenderer>().sprite = destroyedSprite;//Show new sprite for when object is destroyed
-                GetComponent<BoxCollider2D>().enabled = false;//Disable collision when destroyed
+                //GetComponent<BoxCollider2D>().enabled = false;//Disable collision when destroyed
             }
         }
     }
