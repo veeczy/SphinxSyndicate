@@ -119,17 +119,45 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &76863692 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
+  m_PrefabInstance: {fileID: 1763019186}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &99095207 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -7679034788966404198, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
   m_PrefabInstance: {fileID: 1763019186}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_GameObject: {fileID: 76863692}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: acdb098cb7cafc647832766c5ceab395, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HornedToadAI
+--- !u!114 &99095213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76863692}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69afde39c212954d8c2214aaea85735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossAI
+  moveSpeed: 3
+  damage: 1
+  health: 3
+  minDistance: 0
+  stalkDistance: 10
+  stalkMode: 0
+  attackRange: 2
+  attackCooldown: 8
+  isAttacking: 0
+  nextAttackTime: 1
+  phase2: 1
 --- !u!1 &250953676
 GameObject:
   m_ObjectHideFlags: 0
@@ -12886,6 +12914,10 @@ PrefabInstance:
       propertyPath: health
       value: 20
       objectReference: {fileID: 0}
+    - target: {fileID: -7679034788966404198, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
       propertyPath: m_Name
       value: Enemy (Toad)
@@ -12937,7 +12969,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 99095213}
   m_SourcePrefab: {fileID: 100100000, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
 --- !u!1 &1839316285
 GameObject:
