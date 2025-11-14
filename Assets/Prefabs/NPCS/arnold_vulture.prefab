@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7774028185372638889}
   - component: {fileID: -7251656672143350283}
   - component: {fileID: -8282417129616115824}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: arnold_vulture
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -137,8 +137,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!61 &-7251656672143350283
 BoxCollider2D:
   m_ObjectHideFlags: 0
