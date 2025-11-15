@@ -149,15 +149,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossAI
   moveSpeed: 3
   damage: 1
+  healthUI: {fileID: 0}
   health: 3
   minDistance: 0
-  stalkDistance: 10
-  stalkMode: 0
+  stalkMaxDistance: 10
+  stalkMinDistance: 8
+  stalkMode: 1
   attackRange: 2
   attackCooldown: 8
   isAttacking: 0
   nextAttackTime: 1
   phase2: 1
+  sheepPrefab: {fileID: 5157790400925086649, guid: ac45a699dee5bae4b9146bd26dfc6d0f, type: 3}
+  sheepAttacking: 0
+  sheepDelay: 1
+  sheepCounter: 0
+--- !u!61 &99095219
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 76863692}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.46875, y: 1.5}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 0.5, y: 0.5}
+  m_EdgeRadius: 0
 --- !u!1 &250953676
 GameObject:
   m_ObjectHideFlags: 0
@@ -1102,7 +1154,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 8f5f49c00c9697f4e8dc294794f0131a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12973,6 +13025,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
       insertIndex: -1
       addedObject: {fileID: 99095213}
+    - targetCorrespondingSourceObject: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 99095219}
   m_SourcePrefab: {fileID: 100100000, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
 --- !u!1 &1839316285
 GameObject:
