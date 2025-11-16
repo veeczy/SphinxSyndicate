@@ -124,17 +124,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
   m_PrefabInstance: {fileID: 1763019186}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &99095207 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -7679034788966404198, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
-  m_PrefabInstance: {fileID: 1763019186}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 76863692}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acdb098cb7cafc647832766c5ceab395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HornedToadAI
 --- !u!114 &99095213
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +151,7 @@ MonoBehaviour:
   phase2: 1
   sheepPrefab: {fileID: 5157790400925086649, guid: ac45a699dee5bae4b9146bd26dfc6d0f, type: 3}
   sheepAttacking: 0
+  sheepVelocity: 10
   sheepDelay: 1
   sheepCounter: 0
 --- !u!61 &99095219
@@ -375,7 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94feb0a9756596445b87cd91ffdfe099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinTrigger
-  targetEnemy: {fileID: 99095207}
+  targetEnemy: {fileID: 0}
   winSceneName: WinScene
 --- !u!4 &397407231
 Transform:
@@ -12970,9 +12960,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2053763057115585674, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
       propertyPath: m_Name
-      value: Enemy (Toad)
+      value: TestBoss
+      objectReference: {fileID: 0}
+    - target: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3315563662065394446, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
       propertyPath: m_SortingOrder
@@ -13018,7 +13016,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -7679034788966404198, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

@@ -20,6 +20,7 @@ public class BossAI : MonoBehaviour
     public bool phase2 = false;
     public GameObject sheepPrefab;
     public bool sheepAttacking;
+    public float sheepVelocity;
     public float sheepDelay;
     public int sheepCounter = 0;
     private Vector2 direction;
@@ -36,21 +37,27 @@ public class BossAI : MonoBehaviour
     {
         // Measure distance to player
         distance = Vector2.Distance(transform.position, player.position);
-        direction = (player.position - transform.position).normalized;
+        direction = (player.position - transform.position);
         // If outside attack range, move toward player
-        if (distance > attackRange && !isAttacking && distance >= stalkMinDistance)
+        if (distance > attackRange && !isAttacking && distance >= stalkMinDistance || !stalkMode)
         {
             transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
         }
-        else if(stalkMode && distance <= stalkMaxDistance &&!sheepAttacking && sheepCounter < 5)
+        else if(distance <= stalkMaxDistance &&!sheepAttacking && sheepCounter < 5)
         {
             transform.position -= (Vector3)direction * moveSpeed * Time.deltaTime;
+            //transform.rotation = Quaternion.LookRotation(direction);
             StartCoroutine("sheepAttack");
+            StartCoroutine("stalk");
+        }
+        else if(sheepCounter >= 5)
+        {
+            StartCoroutine("stalk");
         }
         else if (distance <= attackRange)//If distance from enemy is less than attackRange, Attack()
         {
             // Stop moving and face the player
-            transform.right = direction;
+            transform.LookAt(player);
 
             // Attack if cooldown is ready
             if (Time.time >= nextAttackTime && !isAttacking)
@@ -80,7 +87,10 @@ public class BossAI : MonoBehaviour
     IEnumerator sheepAttack()
     {
         sheepAttacking = true;
-        Instantiate(sheepPrefab, transform.position, new Quaternion(direction.x, direction.y, 0, 1));
+        //float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
+        //Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+        Rigidbody2D sheep = Instantiate(sheepPrefab, transform.position, transform.rotation).GetComponent<Rigidbody2D>();
+        sheep.AddForce(direction * sheepVelocity, ForceMode2D.Impulse);
         yield return new WaitForSeconds(sheepDelay);
         sheepCounter++;
         sheepAttacking = false;
@@ -88,6 +98,7 @@ public class BossAI : MonoBehaviour
     IEnumerator stalk()
     {
         stalkMode = true;
+        sheepCounter = 0;
         yield return new WaitForSeconds(stalkTimer);
         stalkMode = false;
     }
