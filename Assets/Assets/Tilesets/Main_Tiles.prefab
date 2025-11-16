@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7125145882675162622}
   - component: {fileID: 1643780361440753582}
   m_Layer: 0
-  m_Name: Vee's Tile Palette for Background
+  m_Name: Main_Tiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2323,6 +2323,8 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 08124aa9379f0754886695706d3553e7, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: c5f098207462eca419784b18bc5de6c2, type: 2}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileSpriteArray:
   - m_RefCount: 7
     m_Data: {fileID: -413536237, guid: b3693045e37dfbb43b659ff26accb802, type: 3}
@@ -2458,6 +2460,8 @@ Tilemap:
     m_Data: {fileID: -437863, guid: 1a31fb64db0c48f4493369f6d652d60e, type: 3}
   - m_RefCount: 2
     m_Data: {fileID: -1653528388, guid: 1a31fb64db0c48f4493369f6d652d60e, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 210
     m_Data:
@@ -2480,11 +2484,13 @@ Tilemap:
   m_TileColorArray:
   - m_RefCount: 210
     m_Data: {r: 1, g: 1, b: 1, a: 1}
+  - m_RefCount: 0
+    m_Data: {r: NaN, g: NaN, b: NaN, a: NaN}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -16, y: -16, z: 0}
-  m_Size: {x: 34, y: 26, z: 1}
+  m_Origin: {x: -19, y: -16, z: 0}
+  m_Size: {x: 37, y: 26, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -2559,7 +2565,7 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &3467654205301236156
+--- !u!114 &9041193419501221272
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
