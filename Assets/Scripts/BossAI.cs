@@ -14,7 +14,10 @@ public class BossAI : MonoBehaviour
     public float stalkMinDistance = 8.0f;
     public bool stalkMode;
     public float attackRange;
-    public float attackCooldown;
+    public float attackTime = 5;
+    public float attackCooldownTime;
+    public bool attackCooldown;
+    public int contactDamage = 1;
     public bool isAttacking;
     public float nextAttackTime;
     public bool phase2 = false;
@@ -40,19 +43,19 @@ public class BossAI : MonoBehaviour
         direction = (player.position - transform.position);//Target direction
         healthUI.value = health;//Update health UI
         // If outside attack range, move toward player
-        if (distance > minDistance && !isAttacking && distance >= stalkMinDistance && !stalkMode)
+        if (distance > minDistance && !isAttacking && !stalkMode)
         {
             StartCoroutine("closeAttack");//Follow player
         }
-        else if(distance <= stalkMaxDistance &&!sheepAttacking && sheepCounter < 5)
+        else if (isAttacking && !attackCooldown)
+        {
+            transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+        }
+        else if (distance <= stalkMaxDistance && !isAttacking && !sheepAttacking && sheepCounter < 5)
         {
             transform.position -= (Vector3)direction * moveSpeed * Time.deltaTime;
             //transform.rotation = Quaternion.LookRotation(direction);
             StartCoroutine("sheepAttack");
-            StartCoroutine("stalk");
-        }
-        else if(sheepCounter >= 5)
-        {
             StartCoroutine("stalk");
         }
         if (health <= 0 && phase2)
@@ -64,9 +67,12 @@ public class BossAI : MonoBehaviour
     IEnumerator closeAttack()
     {
         isAttacking = true;
-        transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
-        yield return new WaitForSeconds(attackCooldown + Random.Range(-2.5f, 2.5f));
+        Debug.Log("CLOSE ATTACKING!");
+        yield return new WaitForSeconds(attackTime);
         isAttacking = false;
+        attackCooldown = true;
+        yield return new WaitForSeconds(attackCooldownTime + Random.Range(-2.5f, 2.5f));
+        attackCooldown = false;
     }
     IEnumerator sheepAttack()
     {
@@ -85,5 +91,16 @@ public class BossAI : MonoBehaviour
         sheepCounter = 0;
         yield return new WaitForSeconds(stalkTimer);
         stalkMode = false;
+    }
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        if(col.CompareTag("Bullet"))
+        {
+            health -= col.GetComponent<BulletId>().dmg;
+        }
+        else if(col.CompareTag("Player"))
+        {
+            player.GetComponent<PlayerHealth>().currentHealth -= contactDamage;
+        }
     }
 }

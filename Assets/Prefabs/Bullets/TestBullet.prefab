@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6620075016014393585}
   - component: {fileID: 4475180143577834013}
   - component: {fileID: 5871456422249530285}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: TestBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
   m_Color: {r: 1, g: 0.57150054, b: 0.0047169924, a: 1}
   m_FlipX: 0
@@ -146,6 +146,8 @@ MonoBehaviour:
   simpleMode: 0
   dmg: 1
   impactDestroy: 1
+  timedDestroy: 1
+  destroyTime: 5
   surfaceTags:
   - Concrete
   impactPrefabs: []
@@ -185,7 +187,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4857026454427147425}
-  m_Layer: 6
+  m_Layer: 8
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}

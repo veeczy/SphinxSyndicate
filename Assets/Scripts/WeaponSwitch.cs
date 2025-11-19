@@ -4,9 +4,10 @@ public class WeaponSwitch : MonoBehaviour
 {
     [Header("Weapon Settings")]
     public Transform weaponHolder; // Location of weapon
+    public Transform bulletSpawner;
     public GameObject[] weaponPrefabs; // Prefab assignment
     public float switchCooldown = 0.25f;
-
+    public PlayerMovement pmScript;
     private GameObject[] weaponInstances;
     private int currentIndex = 0;
     private float lastSwitchTime = 0f;
@@ -19,6 +20,7 @@ public class WeaponSwitch : MonoBehaviour
         for (int i = 0; i < weaponPrefabs.Length; i++)
         {
             GameObject weapon = Instantiate(weaponPrefabs[i], weaponHolder);
+            weapon.GetComponent<Shoot>().bulletSpawn = bulletSpawner;
             weapon.SetActive(false);
             weaponInstances[i] = weapon;
         }
@@ -42,24 +44,40 @@ public class WeaponSwitch : MonoBehaviour
             EquipWeapon((currentIndex + 1) % weaponInstances.Length);
 
         // Switch via Numbers 1-9 (Will be fully fleshed out in final version)
-        for (int i = 0; i < weaponInstances.Length && i < 9; i++)
+        /*for (int i = 0; i < weaponInstances.Length; i++)
         {
-            if (Input.GetKeyDown((i + 1).ToString()))
+            if (Input.GetKeyDown((1)))
                 EquipWeapon(i);
+        }*/
+        if(Input.GetKeyDown(KeyCode.Alpha1) && weaponInstances.Length > 0)
+        {
+            EquipWeapon(0);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && weaponInstances.Length > 1)
+        {
+            EquipWeapon(1);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponInstances.Length > 2)
+        {
+            EquipWeapon(2);
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && weaponInstances.Length > 3)
+        {
+            EquipWeapon(3);
         }
     }
 
     void EquipWeapon(int index)
     {
-        if (Time.time - lastSwitchTime < switchCooldown) return;
-        if (index == currentIndex) return;
-
+        pmScript.weaponObject = weaponInstances[index];
+        //if (Time.time - lastSwitchTime < switchCooldown) return;
+        //if (index == currentIndex) return;
         // Disable all
         for (int i = 0; i < weaponInstances.Length; i++)
             weaponInstances[i].SetActive(i == index);
 
         currentIndex = index;
-        lastSwitchTime = Time.time;
+        //lastSwitchTime = Time.time;
     }
 
     public GameObject GetCurrentWeapon()
