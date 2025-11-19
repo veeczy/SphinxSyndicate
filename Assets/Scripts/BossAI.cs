@@ -25,7 +25,7 @@ public class BossAI : MonoBehaviour
     public int sheepCounter = 0;
     private Vector2 direction;
     private float distance;
-    private float stalkTimer;
+    public float stalkTimer;
 
     void Start()
     {
@@ -37,11 +37,12 @@ public class BossAI : MonoBehaviour
     {
         // Measure distance to player
         distance = Vector2.Distance(transform.position, player.position);
-        direction = (player.position - transform.position);
+        direction = (player.position - transform.position);//Target direction
+        healthUI.value = health;//Update health UI
         // If outside attack range, move toward player
-        if (distance > attackRange && !isAttacking && distance >= stalkMinDistance || !stalkMode)
+        if (distance > minDistance && !isAttacking && distance >= stalkMinDistance && !stalkMode)
         {
-            transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+            StartCoroutine("closeAttack");//Follow player
         }
         else if(distance <= stalkMaxDistance &&!sheepAttacking && sheepCounter < 5)
         {
@@ -54,34 +55,17 @@ public class BossAI : MonoBehaviour
         {
             StartCoroutine("stalk");
         }
-        else if (distance <= attackRange)//If distance from enemy is less than attackRange, Attack()
-        {
-            // Stop moving and face the player
-            transform.LookAt(player);
-
-            // Attack if cooldown is ready
-            if (Time.time >= nextAttackTime && !isAttacking)
-            {
-                StartCoroutine(Attack());
-            }
-        }
         if (health <= 0 && phase2)
         {
             Destroy(gameObject);
         }
     }
 
-    IEnumerator Attack()
+    IEnumerator closeAttack()
     {
         isAttacking = true;
-        // Optional: placeholder for attack animation delay
-        yield return new WaitForSeconds(0.3f);
-        // Deal damage once in range
-        PlayerHealth ph = player.GetComponent<PlayerHealth>();
-        if (ph != null)
-            ph.TakeDamage(damage);
-        // Set cooldown
-        nextAttackTime = Time.time + attackCooldown;
+        transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+        yield return new WaitForSeconds(attackCooldown + Random.Range(-2.5f, 2.5f));
         isAttacking = false;
     }
     IEnumerator sheepAttack()
