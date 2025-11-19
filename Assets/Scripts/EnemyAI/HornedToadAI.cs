@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class HornedToadAI : EnemyAI
 {
@@ -36,7 +37,7 @@ public class HornedToadAI : EnemyAI
         CheckHealth();
     }
 
-    private System.Collections.IEnumerator Attack()
+    private IEnumerator Attack()
     {
         isAttacking = true;
 
