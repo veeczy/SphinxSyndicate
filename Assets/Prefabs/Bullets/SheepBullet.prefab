@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -4616611739296332196}
   - component: {fileID: 1105905113286686343}
   - component: {fileID: -8511959862462222342}
+  - component: {fileID: 2800958970744733581}
   m_Layer: 8
   m_Name: SheepBullet
   m_TagString: Bullet
@@ -183,6 +184,8 @@ MonoBehaviour:
   simpleMode: 0
   dmg: 1
   impactDestroy: 1
+  timedDestroy: 1
+  destroyTime: 5
   surfaceTags: []
   impactPrefabs: []
 --- !u!61 &-8511959862462222342
@@ -231,3 +234,23 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &2800958970744733581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5157790400925086649}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d396d3645963944db4dd60f0ba5c4cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Obstacle
+  contactDamage: 0
+  dmg: 1
+  destructible: 1
+  obstacleHealth: 3
+  destroyedSprite: {fileID: 0}
+  soundSource: {fileID: 0}
+  contactSound: {fileID: 0}
+  destroySound: {fileID: 0}
