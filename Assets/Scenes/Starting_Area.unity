@@ -18280,6 +18280,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5606947235136161330, guid: aae1c78e75352524abf8a1f34f5cdeec, type: 3}
   m_PrefabInstance: {fileID: 126367967}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &199224699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1526451713850021255, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
+  m_PrefabInstance: {fileID: 2106544816}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &264164489
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30806,6 +30811,77 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &557075770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 557075772}
+  - component: {fileID: 557075771}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &557075771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557075770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa553238edef8624e8138abf7a980ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  randomRooms:
+  - Cave_Room
+  - DV_Enemy1
+  - DV_Enemy2
+  - DV_Rest
+  - Ian_ConnectingRoom1
+  - Ian_ConnectingRoom2
+  - Ian_ConnectingRoom3
+  - Ian_ConnectingRoom4
+  - Ian_ConnectingRoom5
+  - Ian_EnemyRoom1
+  - Ian_EnemyRoom2
+  - Ian_EnemyRoom3
+  - Ian_EnemyRoom4
+  - Ian_EnemyRoom5
+  - Lesto_ConnectingRoom1
+  - Lesto_ConnectingRoom2
+  - Lesto_ConnectingRoom3
+  - Lesto_ConnectingRoom4
+  - Lesto_ConnectingRoom5
+  - Lesto_EnemyRoom1
+  - Lesto_EnemyRoom2
+  - Lesto_EnemyRoom3
+  - Lesto_EnemyRoom4
+  - Lesto_EnemyRoom5
+  secretRoomName: DV_Treasure
+  bossSceneName: DV_Boss
+--- !u!4 &557075772
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 557075770}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.73674, y: -9.24955, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &585221244
 GameObject:
   m_ObjectHideFlags: 0
@@ -32527,8 +32603,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 1476794569}
     m_Modifications:
     - target: {fileID: 1028541545441344432, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028541545441344432, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
       propertyPath: sceneIndex
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1526451713850021255, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
       propertyPath: m_Name
@@ -32605,13 +32685,31 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1526451713850021255, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2106544821}
   m_SourcePrefab: {fileID: 100100000, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
 --- !u!4 &2106544817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4802826403291225045, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
   m_PrefabInstance: {fileID: 2106544816}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2106544821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199224699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3eea64f86b6c76c45b2c00098329b3a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RandomDoor
+  onTrigger: 1
+  useRandomRoom: 1
+  fixedSceneName: 
 --- !u!1001 &2106691446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32702,3 +32800,4 @@ SceneRoots:
   - {fileID: 1476794569}
   - {fileID: 34476752}
   - {fileID: 1735457598}
+  - {fileID: 557075772}
