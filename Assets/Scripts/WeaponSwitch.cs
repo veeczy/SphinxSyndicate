@@ -6,6 +6,7 @@ public class WeaponSwitch : MonoBehaviour
     public Transform weaponHolder; // Location of weapon
     public Transform bulletSpawner;
     public GameObject[] weaponPrefabs; // Prefab assignment
+    public bool[] weaponInventory;
     public float switchCooldown = 0.25f;
     public PlayerMovement pmScript;
     private GameObject[] weaponInstances;
@@ -15,8 +16,6 @@ public class WeaponSwitch : MonoBehaviour
     void Start()
     {
         weaponInstances = new GameObject[weaponPrefabs.Length];
-
-        
         for (int i = 0; i < weaponPrefabs.Length; i++)
         {
             GameObject weapon = Instantiate(weaponPrefabs[i], weaponHolder);
@@ -24,11 +23,11 @@ public class WeaponSwitch : MonoBehaviour
             weapon.SetActive(false);
             weaponInstances[i] = weapon;
         }
-
         // First weapon equip!
         if (weaponInstances.Length > 0)
         {
             EquipWeapon(0);
+            weaponInventory[0] = true;
         }
     }
 
@@ -49,24 +48,23 @@ public class WeaponSwitch : MonoBehaviour
             if (Input.GetKeyDown((1)))
                 EquipWeapon(i);
         }*/
-        if(Input.GetKeyDown(KeyCode.Alpha1) && weaponInstances.Length > 0)
+        if(Input.GetKeyDown(KeyCode.Alpha1) && weaponInstances.Length > 0 && weaponInventory[0])
         {
             EquipWeapon(0);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && weaponInstances.Length > 1)
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && weaponInstances.Length > 1 && weaponInventory[1])
         {
             EquipWeapon(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponInstances.Length > 2)
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponInstances.Length > 2 && weaponInventory[2])
         {
             EquipWeapon(2);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && weaponInstances.Length > 3)
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && weaponInstances.Length > 3 && weaponInventory[3])
         {
             EquipWeapon(3);
         }
     }
-
     void EquipWeapon(int index)
     {
         pmScript.weaponObject = weaponInstances[index];

@@ -5,6 +5,7 @@ public class HornedToadAI : EnemyAI
 {
     public float attackRange = 2f;       // Distance to stop and attack
     public float attackCooldown = 1.5f;  // Time between attacks
+    public GameObject healthBar;
     private float nextAttackTime = 0f;
     private bool isAttacking = false;
 

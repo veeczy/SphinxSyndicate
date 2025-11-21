@@ -43,20 +43,31 @@ public class BossAI : MonoBehaviour
         direction = (player.position - transform.position);//Target direction
         healthUI.value = health;//Update health UI
         // If outside attack range, move toward player
-        if (distance > minDistance && !isAttacking && !stalkMode)
+        if (distance > minDistance && !isAttacking && !stalkMode && !attackCooldown)
         {
+            Debug.Log("CLOSE ATTACK");
             StartCoroutine("closeAttack");//Follow player
         }
         else if (isAttacking && !attackCooldown)
         {
-            transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+            Debug.Log("FOLLOW STRAIGHT");
+            //transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+            player.GetComponent<Rigidbody2D>().linearVelocity = direction * moveSpeed * Time.deltaTime;
         }
-        else if (distance <= stalkMaxDistance && !isAttacking && !sheepAttacking && sheepCounter < 5)
+        else if (distance <= stalkMaxDistance && !isAttacking)
         {
-            transform.position -= (Vector3)direction * moveSpeed * Time.deltaTime;
+            Debug.Log("STALKING");
+            //transform.position -= (Vector3)direction * moveSpeed * Time.deltaTime;
+            player.GetComponent<Rigidbody2D>().linearVelocity = -direction * moveSpeed * Time.deltaTime;
             //transform.rotation = Quaternion.LookRotation(direction);
-            StartCoroutine("sheepAttack");
-            StartCoroutine("stalk");
+            if (!sheepAttacking && sheepCounter < 5)
+            {
+                StartCoroutine("sheepAttack");
+            }
+            else
+            {
+                StartCoroutine("stalk");
+            }
         }
         if (health <= 0 && phase2)
         {
@@ -79,16 +90,15 @@ public class BossAI : MonoBehaviour
         sheepAttacking = true;
         //float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
         //Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
+        sheepCounter++;
         Rigidbody2D sheep = Instantiate(sheepPrefab, transform.position, transform.rotation).GetComponent<Rigidbody2D>();
         sheep.AddForce(direction * sheepVelocity, ForceMode2D.Impulse);
         yield return new WaitForSeconds(sheepDelay);
-        sheepCounter++;
         sheepAttacking = false;
     }
     IEnumerator stalk()
     {
         stalkMode = true;
-        sheepCounter = 0;
         yield return new WaitForSeconds(stalkTimer);
         stalkMode = false;
     }
