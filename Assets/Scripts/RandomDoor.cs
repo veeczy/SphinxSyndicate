@@ -1,3 +1,4 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,8 +26,8 @@ public class RandomDoor : MonoBehaviour
                 return;
             }
 
-            string nextScene = LevelManager.instance.GetNextRandomRoom();
-            SceneManager.LoadScene(nextScene);
+            //int nextScene = LevelManager.instance.GetNextRandomRoom();
+            //SceneManager.LoadScene(nextScene);
         }
         else
         {
@@ -38,3 +39,4 @@ public class RandomDoor : MonoBehaviour
         }
     }
 }
+

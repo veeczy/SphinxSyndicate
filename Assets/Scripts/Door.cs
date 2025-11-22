@@ -2,30 +2,24 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-    public enum DoorType { Random, Fixed, Secret }
-    public DoorType doorType;
+    [Header("Trigger Settings")]
+    public bool onTrigger = true;
 
-    [Header("Fixed Room Name (only used for Fixed doors)")]
-    public string fixedRoomName;
+    [Header("Is this a secret door?")]
+    public bool isSecretDoor = false;
 
-    private void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!col.CompareTag("Player")) return;
+        if (!onTrigger) return;
+        if (!other.CompareTag("Player")) return;
 
-        switch (doorType)
-        {
-            case DoorType.Fixed:
-                LevelManager.instance.LoadRoom(fixedRoomName);
-                break;
-
-            case DoorType.Secret:
-                LevelManager.instance.LoadRoom(LevelManager.instance.GetSecretRoom());
-                break;
-
-            case DoorType.Random:
-                LevelManager.instance.LoadRoom(LevelManager.instance.GetRandomRoom());
-                break;
-        }
+        if (isSecretDoor)
+            LevelManager.instance.LoadSecretRoom();
+        else
+            LevelManager.instance.LoadNextRoom();
     }
 }
+
+
+
 

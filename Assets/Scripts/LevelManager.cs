@@ -1,26 +1,20 @@
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections.Generic;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
-    [Header("Random Rooms (type scene names here)")]
-    public List<string> randomRooms = new List<string>();
+    [Header("Random Rooms (build indexes)")]
+    public List<int> randomRoomIndexes = new List<int>();  // Assign 26 rooms
 
     [Header("Secret Room (optional)")]
-    public string secretRoomName = "";
+    public int secretRoomIndex = -1;
 
-    [Header("Boss Room (final scene)")]
-    public string bossSceneName = "DV_Boss";
+    [Header("Boss Room")]
+    public int bossRoomIndex = -1;
 
-    private HashSet<string> usedRooms = new HashSet<string>();
-
-
-    // ------------------------------
-    //  Singleton Setup
-    // ------------------------------
     private void Awake()
     {
         if (instance == null)
@@ -34,66 +28,32 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-
-    // ------------------------------
-    //  Random Room Selection
-    // ------------------------------
-    public string GetNextRandomRoom()
+    // Called by Door.cs
+    public void LoadNextRoom()
     {
-        return GetRandomRoom();
-    }
-
-    public string GetRandomRoom()
-    {
-        List<string> availableRooms = new List<string>();
-
-        foreach (string room in randomRooms)
+        // If all rooms used → go to boss
+        if (randomRoomIndexes.Count == 0)
         {
-            if (!usedRooms.Contains(room))
-                availableRooms.Add(room);
+            SceneManager.LoadScene(bossRoomIndex);
+            return;
         }
 
-        // If out of random rooms, go to boss
-        if (availableRooms.Count == 0)
-        {
-            Debug.Log("No more random rooms. Sending to boss.");
-            return bossSceneName;
-        }
+        // Pick a random room
+        int randomIndex = Random.Range(0, randomRoomIndexes.Count);
+        int selectedRoom = randomRoomIndexes[randomIndex];
 
-        string chosen = availableRooms[Random.Range(0, availableRooms.Count)];
-        usedRooms.Add(chosen);
+        // Remove it so we never load it again
+        randomRoomIndexes.RemoveAt(randomIndex);
 
-        return chosen;
+        // Load the room
+        SceneManager.LoadScene(selectedRoom);
     }
 
-
-    // ------------------------------
-    //  Secret Room
-    // ------------------------------
-    public string GetSecretRoom()
+    public void LoadSecretRoom()
     {
-        if (!string.IsNullOrEmpty(secretRoomName))
-            return secretRoomName;
-
-        Debug.LogWarning("Secret room not set � returning random instead.");
-        return GetRandomRoom();
-    }
-
-
-    // ------------------------------
-    //  Load Room Wrapper
-    // ------------------------------
-    public void LoadRoom(string sceneName)
-    {
-        SceneManager.LoadScene(sceneName);
-    }
-
-
-    // ------------------------------
-    //  Reset Room History
-    // ------------------------------
-    public void ResetUsedRooms()
-    {
-        usedRooms.Clear();
+        if (secretRoomIndex >= 0)
+            SceneManager.LoadScene(secretRoomIndex);
+        else
+            Debug.LogWarning("Secret room index not set!");
     }
 }

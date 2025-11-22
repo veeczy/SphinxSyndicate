@@ -30840,33 +30840,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa553238edef8624e8138abf7a980ea8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  randomRooms:
-  - Cave_Room
-  - DV_Enemy1
-  - DV_Enemy2
-  - DV_Rest
-  - Ian_ConnectingRoom1
-  - Ian_ConnectingRoom2
-  - Ian_ConnectingRoom3
-  - Ian_ConnectingRoom4
-  - Ian_ConnectingRoom5
-  - Ian_EnemyRoom1
-  - Ian_EnemyRoom2
-  - Ian_EnemyRoom3
-  - Ian_EnemyRoom4
-  - Ian_EnemyRoom5
-  - Lesto_ConnectingRoom1
-  - Lesto_ConnectingRoom2
-  - Lesto_ConnectingRoom3
-  - Lesto_ConnectingRoom4
-  - Lesto_ConnectingRoom5
-  - Lesto_EnemyRoom1
-  - Lesto_EnemyRoom2
-  - Lesto_EnemyRoom3
-  - Lesto_EnemyRoom4
-  - Lesto_EnemyRoom5
-  secretRoomName: DV_Treasure
-  bossSceneName: DV_Boss
+  randomRoomIndexes: 0200000003000000040000000500000007000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d000000
+  secretRoomIndex: 6
+  bossRoomIndex: 8
+  lastSceneIndex: -1
 --- !u!4 &557075772
 Transform:
   m_ObjectHideFlags: 0
@@ -32688,14 +32665,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1526451713850021255, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2106544821}
+      addedObject: {fileID: 2106544825}
   m_SourcePrefab: {fileID: 100100000, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
 --- !u!4 &2106544817 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4802826403291225045, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
   m_PrefabInstance: {fileID: 2106544816}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2106544821
+--- !u!114 &2106544825
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -32704,12 +32681,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 199224699}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eea64f86b6c76c45b2c00098329b3a4, type: 3}
+  m_Script: {fileID: 11500000, guid: a35ea5839876db149a78ec3a625f6164, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RandomDoor
+  m_EditorClassIdentifier: Assembly-CSharp::Door
   onTrigger: 1
   useRandomRoom: 1
-  fixedSceneName: 
+  isSecretDoor: 0
+  isBacktrackingDoor: 0
+  fixedSceneIndex: -1
 --- !u!1001 &2106691446
 PrefabInstance:
   m_ObjectHideFlags: 0

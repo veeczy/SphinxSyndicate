@@ -3413,7 +3413,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 12
-      m_TileSpriteIndex: 12
+      m_TileSpriteIndex: 13
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -3713,7 +3713,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 3
-      m_TileSpriteIndex: 7
+      m_TileSpriteIndex: 12
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -5913,7 +5913,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 20
-      m_TileSpriteIndex: 3
+      m_TileSpriteIndex: 7
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -7618,8 +7618,8 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 1
-    m_Data: {fileID: -330880532, guid: 1a31fb64db0c48f4493369f6d652d60e, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 3
     m_Data: {fileID: -117459004, guid: b3693045e37dfbb43b659ff26accb802, type: 3}
   - m_RefCount: 3
@@ -7627,7 +7627,7 @@ Tilemap:
   - m_RefCount: 353
     m_Data: {fileID: -2082852382021932875, guid: b3693045e37dfbb43b659ff26accb802, type: 3}
   - m_RefCount: 1
-    m_Data: {fileID: 1890341507, guid: b3693045e37dfbb43b659ff26accb802, type: 3}
+    m_Data: {fileID: -330880532, guid: 1a31fb64db0c48f4493369f6d652d60e, type: 3}
   - m_RefCount: 16
     m_Data: {fileID: 523949714, guid: b3693045e37dfbb43b659ff26accb802, type: 3}
   - m_RefCount: 7
@@ -7637,9 +7637,9 @@ Tilemap:
   - m_RefCount: 10
     m_Data: {fileID: -993660062, guid: b3693045e37dfbb43b659ff26accb802, type: 3}
   - m_RefCount: 1
+    m_Data: {fileID: 1890341507, guid: b3693045e37dfbb43b659ff26accb802, type: 3}
+  - m_RefCount: 1
     m_Data: {fileID: -1906178488, guid: b3693045e37dfbb43b659ff26accb802, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 1960401718, guid: b3693045e37dfbb43b659ff26accb802, type: 3}
   - m_RefCount: 1
@@ -7906,6 +7906,23 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4802826403291225045, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
   m_PrefabInstance: {fileID: 7747412918040936157}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1569901672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680265525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35ea5839876db149a78ec3a625f6164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door
+  onTrigger: 1
+  useRandomRoom: 0
+  isSecretDoor: 0
+  isBacktrackingDoor: 1
+  fixedSceneIndex: -1
 --- !u!1 &1629745754
 GameObject:
   m_ObjectHideFlags: 0
@@ -21159,6 +21176,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2093423044}
     m_Modifications:
     - target: {fileID: 1028541545441344432, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028541545441344432, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
       propertyPath: sceneIndex
       value: 4
       objectReference: {fileID: 0}
@@ -21204,7 +21225,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4802826403291225045, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.53
+      value: 5.33
       objectReference: {fileID: 0}
     - target: {fileID: 4802826403291225045, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
       propertyPath: m_LocalPosition.y
@@ -21245,7 +21266,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1526451713850021255, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1569901672}
   m_SourcePrefab: {fileID: 100100000, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
 --- !u!4 &8446964270128181970
 Transform:
@@ -21291,6 +21315,3 @@ SceneRoots:
   - {fileID: 1629745756}
   - {fileID: 182396029}
   - {fileID: 391180238}
-  - {fileID: 5099754433171752126}
-  - {fileID: 4451633570027777673}
-  - {fileID: 1515969934708683593}
