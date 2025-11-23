@@ -30843,7 +30843,6 @@ MonoBehaviour:
   randomRoomIndexes: 0200000003000000040000000500000007000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b0000001c0000001d000000
   secretRoomIndex: 6
   bossRoomIndex: 8
-  lastSceneIndex: -1
 --- !u!4 &557075772
 Transform:
   m_ObjectHideFlags: 0
@@ -31827,7 +31826,7 @@ GameObject:
   - component: {fileID: 1005722562}
   - component: {fileID: 1005722566}
   - component: {fileID: 1005722567}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: NPCTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31978,7 +31977,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1.5, y: 2}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
 --- !u!114 &1005722567
 MonoBehaviour:
@@ -32220,11 +32219,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WeaponSwitch
   weaponHolder: {fileID: 738607166}
+  bulletSpawner: {fileID: 0}
   weaponPrefabs:
-  - {fileID: 1783867803}
-  - {fileID: 1783867803}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   switchCooldown: 0.1
+  pmScript: {fileID: 0}
 --- !u!1001 &1210026218
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32896,14 +32897,9 @@ MonoBehaviour:
   interactKey: 101
   npcLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 1024
   dialogueUI: {fileID: 957957515}
   dialogueText: {fileID: 1571519789}
---- !u!1 &1783867803 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6758893587999136879, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
-  m_PrefabInstance: {fileID: 1735457598}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1824904649
 GameObject:
   m_ObjectHideFlags: 0
@@ -33201,10 +33197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Door
   onTrigger: 1
-  useRandomRoom: 1
   isSecretDoor: 0
-  isBacktrackingDoor: 0
-  fixedSceneIndex: -1
 --- !u!1001 &2106691446
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33296,3 +33289,4 @@ SceneRoots:
   - {fileID: 34476752}
   - {fileID: 1735457598}
   - {fileID: 557075772}
+  - {fileID: 1005722565}
