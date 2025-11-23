@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4131928234258855427
+--- !u!1 &1803231637575374788
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,39 +8,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5075398437445478272}
-  - component: {fileID: 8657791880217399601}
-  - component: {fileID: 3076816928042717376}
-  - component: {fileID: 1130534500493977853}
+  - component: {fileID: 8730314209342417047}
+  - component: {fileID: 155157071166823999}
+  - component: {fileID: 301454460710164990}
+  - component: {fileID: 1139236369363584754}
   m_Layer: 9
-  m_Name: Revolver 2.0
+  m_Name: Shotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5075398437445478272
+--- !u!4 &8730314209342417047
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131928234258855427}
+  m_GameObject: {fileID: 1803231637575374788}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.89069957, y: 0.89069957, z: 0.89069957}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &8657791880217399601
+--- !u!212 &155157071166823999
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131928234258855427}
+  m_GameObject: {fileID: 1803231637575374788}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 00f2f13faaf36ae4f89a3621ec5570fb, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: -6074842687553318334, guid: 6eb4d623d41d7ba43b1c566a699a4a1b, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,13 +92,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3076816928042717376
+--- !u!114 &301454460710164990
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131928234258855427}
+  m_GameObject: {fileID: 1803231637575374788}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a57ad99183a05ce428f33e5c029c22bc, type: 3}
@@ -107,20 +107,21 @@ MonoBehaviour:
   bulletSpawn: {fileID: 0}
   bulletPrefab: {fileID: 914480110569371521, guid: 2c8f2b6b74ea96544971f04f066244e5, type: 3}
   playerObj: {fileID: 0}
-  gunSounds: {fileID: 1130534500493977853}
+  gunSounds: {fileID: 1139236369363584754}
   shootSound: {fileID: 8300000, guid: 12be6652e38f5f54089da82b59c232d2, type: 3}
-  shootDelay: 0.025
+  shootDelay: 0.5
   cooldown: 0
   velocityMultiplier: 50
   toggleFlash: 0
   muzzleFlash: {fileID: 0}
---- !u!82 &1130534500493977853
+  isShooting: 0
+--- !u!82 &1139236369363584754
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4131928234258855427}
+  m_GameObject: {fileID: 1803231637575374788}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}

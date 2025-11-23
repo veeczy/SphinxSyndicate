@@ -8,7 +8,8 @@ public class BossAI : MonoBehaviour
     protected Transform player;         // Reference to the player's position (made protected so child scripts can use it)
     public int damage = 1;              // How much damage the enemy does
     public Slider healthUI;
-    public int health = 3;
+    public float health = 0;
+    public float maxHealth = 150;
     public float minDistance = 0.0f;
     public float stalkMaxDistance = 10.0f;
     public float stalkMinDistance = 8.0f;
@@ -29,34 +30,47 @@ public class BossAI : MonoBehaviour
     private Vector2 direction;
     private float distance;
     public float stalkTimer;
+    private float healthPercent;
+    private float healthbarMax;
 
     void Start()
     {
         // Find the player by tag
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        health = maxHealth;
+        healthbarMax = healthUI.value;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // Measure distance to player
         distance = Vector2.Distance(transform.position, player.position);
         direction = (player.position - transform.position);//Target direction
-        healthUI.value = health;//Update health UI
+        healthPercent = health / maxHealth;
+        healthUI.value = healthbarMax * healthPercent;//Update health UI
         // If outside attack range, move toward player
-        if (distance > minDistance && !isAttacking && !stalkMode)
+        if (distance > minDistance && !isAttacking && !stalkMode && !attackCooldown)
         {
             StartCoroutine("closeAttack");//Follow player
         }
-        else if (isAttacking && !attackCooldown)
+        else if (distance > minDistance && isAttacking && !attackCooldown)
         {
             transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
         }
         else if (distance <= stalkMaxDistance && !isAttacking && !sheepAttacking && sheepCounter < 5)
         {
             transform.position -= (Vector3)direction * moveSpeed * Time.deltaTime;
-            //transform.rotation = Quaternion.LookRotation(direction);
             StartCoroutine("sheepAttack");
             StartCoroutine("stalk");
+        }
+        if (health <= (maxHealth / 2) && !phase2)//PHASE 2 BOSS BUFFS
+        {
+            phase2 = true;
+            attackTime *= 2f;
+            attackCooldownTime /= 2f;
+            sheepDelay /= 2f;
+            sheepVelocity *= 2.0f;
+            moveSpeed *= 2;
         }
         if (health <= 0 && phase2)
         {
@@ -77,8 +91,6 @@ public class BossAI : MonoBehaviour
     IEnumerator sheepAttack()
     {
         sheepAttacking = true;
-        //float angle = Mathf.Atan2(direction.x, direction.y) * Mathf.Rad2Deg;
-        //Quaternion targetRotation = Quaternion.Euler(0, 0, angle);
         Rigidbody2D sheep = Instantiate(sheepPrefab, transform.position, transform.rotation).GetComponent<Rigidbody2D>();
         sheep.AddForce(direction * sheepVelocity, ForceMode2D.Impulse);
         yield return new WaitForSeconds(sheepDelay);
@@ -94,11 +106,11 @@ public class BossAI : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.CompareTag("Bullet"))
+        if (col.CompareTag("Bullet"))
         {
             health -= col.GetComponent<BulletId>().dmg;
         }
-        else if(col.CompareTag("Player"))
+        else if (col.CompareTag("Player"))
         {
             player.GetComponent<PlayerHealth>().currentHealth -= contactDamage;
         }

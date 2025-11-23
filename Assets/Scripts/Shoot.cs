@@ -12,17 +12,17 @@ public class Shoot : MonoBehaviour
     public float velocityMultiplier = 10f;
     public bool toggleFlash = false;
     public Light muzzleFlash;
-    private bool isShooting = false;
+    public bool isShooting = false;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        playerObj = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButton(0) && !isShooting)
+        if (Input.GetMouseButton(0) && !isShooting)
         {
             StartCoroutine("shoot");
         }
