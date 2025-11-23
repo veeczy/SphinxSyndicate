@@ -4,8 +4,11 @@ public class EnemyAI : MonoBehaviour
 {
     public float moveSpeed = 3f;
     protected Transform player;
-    public int damage = 1;
-    public int health = 3;
+    public float damage = 1;
+    public float health = 3;
+    public float maxHealth = 3;
+    public SpriteRenderer healthBar;
+    private Vector2 hbScale;
 
     protected Rigidbody2D rb;
     protected SpriteRenderer sr;
@@ -14,7 +17,8 @@ public class EnemyAI : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
+        if (healthBar)
+            hbScale = healthBar.transform.localScale;
         player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
@@ -33,7 +37,7 @@ public class EnemyAI : MonoBehaviour
         // Move forward
         transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
 
-        // ONLY flip left/right — NO rotation
+        // ONLY flip left/right ï¿½ NO rotation
         if (direction.x > 0)
             sr.flipX = false;
         else if (direction.x < 0)
@@ -59,6 +63,8 @@ public class EnemyAI : MonoBehaviour
         if (bullet != null)
         {
             health -= bullet.dmg;
+            if (healthBar)
+                healthBar.transform.localScale = new Vector2(hbScale.x * (health / maxHealth), hbScale.y);
         }
     }
 }
