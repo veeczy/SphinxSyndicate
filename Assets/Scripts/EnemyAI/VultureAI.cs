@@ -8,6 +8,12 @@ public class VultureAI : EnemyAI
     public GameObject projectilePrefab;     // Assign in Inspector
 
     private float nextShootTime = 0f;
+    private SpriteRenderer sr;
+
+    void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();
+    }
 
     protected override void Update()
     {
@@ -15,9 +21,18 @@ public class VultureAI : EnemyAI
 
         float distance = Vector2.Distance(transform.position, player.position);
 
-        // Face the player
+        // Direction to player
         Vector2 direction = (player.position - transform.position).normalized;
-        transform.right = direction;
+
+        // REMOVE rotation:
+        // transform.right = direction;
+
+        // FLIP instead: right or left only
+        if (sr != null)
+        {
+            if (direction.x > 0) sr.flipX = false;
+            else if (direction.x < 0) sr.flipX = true;
+        }
 
         // Move away if too close, otherwise hover roughly in place
         if (distance < safeDistance * 0.8f)
@@ -38,6 +53,7 @@ public class VultureAI : EnemyAI
             Shoot();
             nextShootTime = Time.time + shootInterval;
         }
+
         CheckHealth();
     }
 

@@ -3,25 +3,40 @@ using UnityEngine;
 public class SpiderAI : EnemyAI
 {
     [Header("Spider Settings")]
-    public GameObject webProjectilePrefab;  // Assign in Inspector
-    public float shootCooldown = 2f;        // Delay between shots
+    public GameObject webProjectilePrefab;
+    public float shootCooldown = 2f;
     private float nextShootTime = 0f;
+
+    private SpriteRenderer sr;
+
+    void Awake()
+    {
+        sr = GetComponent<SpriteRenderer>();  // Cache the sprite renderer
+    }
 
     protected override void Update()
     {
         if (player == null) return;
 
-        // Rotate to face the player
+        // Direction to player
         Vector2 direction = (player.position - transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
-        // Shoot automatically on cooldown
+        // --- REMOVE ROTATION ---
+        // transform.rotation = Quaternion.Euler(0f, 0f, angle);
+
+        // --- ADD FLIP ONLY (left/right) ---
+        if (direction.x > 0)
+            sr.flipX = false;
+        else if (direction.x < 0)
+            sr.flipX = true;
+
+        // --- Shooting logic ---
         if (Time.time >= nextShootTime)
         {
             ShootWeb(direction);
             nextShootTime = Time.time + shootCooldown;
         }
+
         CheckHealth();
     }
 
@@ -29,12 +44,12 @@ public class SpiderAI : EnemyAI
     {
         if (webProjectilePrefab != null)
         {
-            GameObject web = Instantiate(webProjectilePrefab, transform.position, transform.rotation);
+            GameObject web = Instantiate(webProjectilePrefab, transform.position, Quaternion.identity);
+
             Rigidbody2D rb = web.GetComponent<Rigidbody2D>();
 
             if (rb != null)
             {
-                // Launch the projectile toward the player
                 rb.AddForce(direction * 10f, ForceMode2D.Impulse);
             }
         }

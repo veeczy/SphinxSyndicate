@@ -8,9 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6268209426472044086}
-  - component: {fileID: 822911441432635589}
-  m_Layer: 9
+
+  - component: {fileID: 4911129111909893766}
+  - component: {fileID: 8292426581788211767}
+  - component: {fileID: 543854623148036772}
+  m_Layer: 7
+
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,9 +140,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8399745640200758647}
-  m_Layer: 9
-  m_Name: WeaponHolder
+  - component: {fileID: 5407857172314083013}
+  - component: {fileID: 419302949574845969}
+  m_Layer: 7
+  m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -175,8 +179,7 @@ GameObject:
   - component: {fileID: 3797201481818275215}
   - component: {fileID: 4899432532245730738}
   - component: {fileID: 111781466897056157}
-  - component: {fileID: 2566705348305773587}
-  m_Layer: 9
+  m_Layer: 7
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -247,7 +250,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 6
   m_Sprite: {fileID: 21300000, guid: f2f80ebb8e8cbef4dbbaa2bf4c61ec39, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -482,10 +485,10 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5758200932863452207}
-  - component: {fileID: 8739746877226276939}
-  m_Layer: 9
-  m_Name: Arm
+  - component: {fileID: 1174426796528621958}
+  - component: {fileID: 5437091589516306715}
+  m_Layer: 7
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
