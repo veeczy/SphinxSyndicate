@@ -16,7 +16,7 @@ public class CameraMovement : MonoBehaviour
     public Vector3 offset; //vector that is the offset for the player's location and the camera's location
 
 
-    private void FixedUpdate() 
+    private void LateUpdate() 
     {
         //this is where we set offset to create the slow dampening area if we wanted there to be delay in camera following player
         //...

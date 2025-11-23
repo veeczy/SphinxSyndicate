@@ -9,8 +9,15 @@ public class BulletId : MonoBehaviour
     public bool simpleMode = false; //Script only returns sender
     public int dmg;
     public bool impactDestroy = true;
+    public bool timedDestroy = true;
+    public float destroyTime = 5f;
     public string[] surfaceTags;
     public GameObject[] impactPrefabs;
+    void Awake()
+    {
+        if(timedDestroy)
+        StartCoroutine("destroy");
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.gameObject != sender && !simpleMode)
@@ -25,10 +32,19 @@ public class BulletId : MonoBehaviour
 
                 }
                 if (impactDestroy)
+                {
+                    Debug.Log(col.gameObject);
                     Destroy(gameObject);
+                }
+                    
             }
 
         }
+    }
+    IEnumerator destroy()
+    {
+        yield return new WaitForSeconds(destroyTime);
+            Destroy(gameObject);
     }
 }
 

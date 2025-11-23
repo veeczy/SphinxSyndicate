@@ -17,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     private Sprite playerSprite;
     [Header("Player Objects")]
     public GameObject weaponObject;
-
     private bool isDodging = false;
     private bool canDodge = true;
     private Vector2 dodgeStart;
