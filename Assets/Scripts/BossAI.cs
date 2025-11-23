@@ -43,11 +43,11 @@ public class BossAI : MonoBehaviour
         direction = (player.position - transform.position);//Target direction
         healthUI.value = health;//Update health UI
         // If outside attack range, move toward player
-        if (distance > minDistance && !isAttacking && !stalkMode)
+        if (distance > minDistance && !isAttacking && !stalkMode && !attackCooldown)
         {
             StartCoroutine("closeAttack");//Follow player
         }
-        else if (isAttacking && !attackCooldown)
+        else if (distance > minDistance && isAttacking && !attackCooldown)
         {
             transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
         }
@@ -94,11 +94,11 @@ public class BossAI : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if(col.CompareTag("Bullet"))
+        if (col.CompareTag("Bullet"))
         {
             health -= col.GetComponent<BulletId>().dmg;
         }
-        else if(col.CompareTag("Player"))
+        else if (col.CompareTag("Player"))
         {
             player.GetComponent<PlayerHealth>().currentHealth -= contactDamage;
         }

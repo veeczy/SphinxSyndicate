@@ -17,6 +17,10 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(1);
         }
+        else if (collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(collision.gameObject.GetComponent<BulletId>().dmg);
+        }
     }
 
     public void TakeDamage(int damage)
