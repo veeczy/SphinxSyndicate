@@ -253,9 +253,9 @@ GameObject:
   - component: {fileID: 4736883666061568222}
   - component: {fileID: 7345569019691328946}
   - component: {fileID: 8943898560082112223}
+  - component: {fileID: 1419171099445873015}
   - component: {fileID: 7233425569726320240}
   - component: {fileID: 4340054961460727088}
-  - component: {fileID: 1419171099445873015}
   - component: {fileID: 111781466897056157}
   m_Layer: 0
   m_Name: Player
@@ -376,6 +376,20 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
+--- !u!114 &1419171099445873015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897928467854683093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8c353bf2486074a8dff8add9a1f5d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 3
+  currentHealth: 3
 --- !u!114 &7233425569726320240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,20 +439,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1419171099445873015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4897928467854683093}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe8c353bf2486074a8dff8add9a1f5d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 3
-  currentHealth: 0
 --- !u!82 &111781466897056157
 AudioSource:
   m_ObjectHideFlags: 0

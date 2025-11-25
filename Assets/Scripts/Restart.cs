@@ -18,6 +18,9 @@ public class Restart : MonoBehaviour
         // Get the currently active scene by its build index
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
 
+        // Reset Health on restart
+        PlayerPrefs.SetInt("health", 3); //at restart player prefs memory of health is reset to max health
+
         // Reload the scene using its index
         SceneManager.LoadScene(currentSceneIndex);
 
