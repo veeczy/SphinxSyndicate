@@ -10,7 +10,7 @@ public class Collectible_Health : MonoBehaviour
         if (col.CompareTag("Player") && col.GetComponent<PlayerHealth>())
         {
             healthScript = col.GetComponent<PlayerHealth>();
-            if (healthScript.currentHealth < healthScript.maxHealth)
+            if (healthScript.currentHealth <= (healthScript.maxHealth - healAmount))
             {
                 healthScript.currentHealth += healAmount;
                 Destroy(gameObject);

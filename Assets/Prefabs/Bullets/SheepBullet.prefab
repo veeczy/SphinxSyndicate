@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 1105905113286686343}
   - component: {fileID: -8511959862462222342}
   - component: {fileID: 2800958970744733581}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: SheepBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!61 &-4616611739296332196
 BoxCollider2D:
@@ -138,7 +138,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 8
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -201,10 +201,10 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: bec9042676c71534692c312692f82e7b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 136
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
