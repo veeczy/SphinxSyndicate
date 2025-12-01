@@ -35737,6 +35737,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4897928467854683093, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
   m_PrefabInstance: {fileID: 1153110555}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1153110557 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4899432532245730738, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+  m_PrefabInstance: {fileID: 1153110555}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1153110556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe8c353bf2486074a8dff8add9a1f5d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1181683020
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36370,7 +36381,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190c5ff3cdaa044479592e7923f9e5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 1153110557}
   hearts:
   - {fileID: 1293027296}
   - {fileID: 586419133}
@@ -37278,3 +37289,5 @@ SceneRoots:
   - {fileID: 1931390553}
   - {fileID: 981389849}
   - {fileID: 1212763361}
+  - {fileID: 888123578}
+  - {fileID: 1585893139}
