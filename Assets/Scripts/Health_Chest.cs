@@ -9,12 +9,13 @@ public class Health_Chest : MonoBehaviour
     public int healthBoost = 1;
     private bool canOpen;
     private PlayerHealth ph;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // void Start()
-  //  {
+
+     // Start is called once before the first execution of Update after the MonoBehaviour is created
+     void Start()
+    {
       //  interactUI.SetActive(false);
-       // ph = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
-    // }
+        ph = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+     }
     void Update()
     {
         if(Input.GetKey(KeyCode.E) && !isOpened && canOpen)//Press E to open health crate
