@@ -51,19 +51,19 @@ public class WeaponSwitch : MonoBehaviour
             if (Input.GetKeyDown((1)))
                 EquipWeapon(i);
         }*/
-        if (Input.GetKeyDown(KeyCode.Alpha1) && weaponInstances.Length > 0 && weaponInventory[0])
+        if (Input.GetKeyDown(KeyCode.Alpha1) && weaponInstances.Length > 0 && weaponInventory[0] && pmScript.weaponObject != weaponInstances[0])
         {
             EquipWeapon(0);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && weaponInstances.Length > 1 && weaponInventory[1])
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && weaponInstances.Length > 1 && weaponInventory[1] && pmScript.weaponObject != weaponInstances[1])
         {
             EquipWeapon(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponInstances.Length > 2 && weaponInventory[2])
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponInstances.Length > 2 && weaponInventory[2] && pmScript.weaponObject != weaponInstances[2])
         {
             EquipWeapon(2);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && weaponInstances.Length > 3 && weaponInventory[3])
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && weaponInstances.Length > 3 && weaponInventory[3] && pmScript.weaponObject != weaponInstances[3])
         {
             EquipWeapon(3);
         }

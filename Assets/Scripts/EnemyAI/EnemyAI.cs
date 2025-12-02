@@ -4,9 +4,9 @@ public class EnemyAI : MonoBehaviour
 {
     public float moveSpeed = 3f;
     protected Transform player;
-    public float damage = 1;
-    public float health = 3;
-    public float maxHealth = 3;
+    public int damage = 1;
+    public int health = 3;
+    public int maxHealth = 3;
     public SpriteRenderer healthBar;
     private Vector2 hbScale;
 
@@ -64,7 +64,7 @@ public class EnemyAI : MonoBehaviour
         {
             health -= bullet.dmg;
             if (healthBar)
-                healthBar.transform.localScale = new Vector2(hbScale.x * (health / maxHealth), hbScale.y);
+                healthBar.transform.localScale = new Vector2(hbScale.x * ((float)health / (float)maxHealth), hbScale.y);
         }
     }
 }
