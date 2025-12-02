@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -45,66 +45,59 @@ public class EnemySpawner : MonoBehaviour
 
     void AlignSpiderToWall(GameObject spider)
     {
-        // Always check a wide area, not just near the spawner
-        float maxSearchRadius = 50f; // Adjust to match your room size (works even for 10x10 rooms)
-        float step = 2f;
-        Collider2D closestWall = null;
+        Collider2D closestWall = FindClosestWall(spider.transform.position);
 
-        for (float radius = 1f; radius <= maxSearchRadius; radius += step)
+        if (closestWall == null)
+            return;
+
+        StickSpiderSafely(spider, closestWall);
+    }
+
+    Collider2D FindClosestWall(Vector2 origin)
+    {
+        float searchRadius = 40f;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, searchRadius, wallLayer);
+
+        if (hits.Length == 0) return null;
+
+        // Find nearest wall collider
+        Collider2D best = hits[0];
+        float bestDist = Vector2.Distance(origin, best.ClosestPoint(origin));
+
+        foreach (Collider2D h in hits)
         {
-            // Visual debug line to show search radius
-            Debug.DrawRay(spider.transform.position, Vector2.up * radius, Color.red, 1f);
-
-            Collider2D[] hits = Physics2D.OverlapCircleAll(spider.transform.position, radius, wallLayer);
-            if (hits.Length > 0)
+            float d = Vector2.Distance(origin, h.ClosestPoint(origin));
+            if (d < bestDist)
             {
-                // Find the nearest wall
-                closestWall = hits[0];
-                float closestDist = Vector2.Distance(spider.transform.position, hits[0].ClosestPoint(spider.transform.position));
-
-                foreach (Collider2D h in hits)
-                {
-                    float dist = Vector2.Distance(spider.transform.position, h.ClosestPoint(spider.transform.position));
-                    if (dist < closestDist)
-                    {
-                        closestDist = dist;
-                        closestWall = h;
-                    }
-                }
-                break;
+                best = h;
+                bestDist = d;
             }
         }
 
-        if (closestWall != null)
-        {
-            StickToWall(spider, closestWall);
-        }
-        else
-        {
-            // Fallback: pick a random direction toward the map edges if no wall detected
-            Vector2[] directions = { Vector2.up, Vector2.down, Vector2.left, Vector2.right };
-            Vector2 randomDir = directions[Random.Range(0, directions.Length)];
-            spider.transform.position += (Vector3)(randomDir * 8f);
-            Debug.LogWarning("Spider failed to find wall, moved randomly toward one side.");
-        }
+        return best;
     }
 
-    void StickToWall(GameObject spider, Collider2D wall)
+    void StickSpiderSafely(GameObject spider, Collider2D wall)
     {
-        // Calculate direction and rotation toward the wall
-        Vector2 dirToWall = (wall.ClosestPoint(spider.transform.position) - (Vector2)spider.transform.position).normalized;
-        float angle = Mathf.Atan2(dirToWall.y, dirToWall.x) * Mathf.Rad2Deg;
+        Vector2 spiderPos = spider.transform.position;
+        Vector2 wallPoint = wall.ClosestPoint(spiderPos);
 
-        // Rotate spider so it's properly aligned with the wall
-        spider.transform.rotation = Quaternion.Euler(0, 0, angle + 90);
+        // Direction pointing FROM wall → to spider
+        Vector2 dir = (spiderPos - wallPoint).normalized;
 
-        // Find the wall point and position spider slightly away from it
-        Vector2 wallPoint = wall.ClosestPoint(spider.transform.position);
-        float distanceToWall = Vector2.Distance(spider.transform.position, wallPoint);
+        // If spider spawned on exact wallPoint, push upward
+        if (dir == Vector2.zero)
+            dir = Vector2.up;
 
-        float spacing = 0.7f; // how far from the wall the spider should rest
-        spider.transform.position = wallPoint - (dirToWall * spacing);
+        // Push it 0.5 units OUTSIDE the wall (safe offset)
+        Vector2 safePosition = wallPoint + dir * 0.5f;
+
+        // Lock rotation facing AWAY from the wall
+        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg + 90f;
+
+        spider.transform.SetPositionAndRotation(safePosition, Quaternion.Euler(0, 0, angle));
     }
+
 
     void OnDrawGizmosSelected()
     {

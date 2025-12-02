@@ -17,9 +17,13 @@ public class PlayerHealth : MonoBehaviour
         {
             TakeDamage(1);
         }
+        else if (collision.gameObject.CompareTag("Bullet"))
+        {
+            TakeDamage(collision.gameObject.GetComponent<BulletId>().dmg);
+        }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
         PlayerPrefs.SetInt("health", currentHealth); //update health in playerprefs when damage is taken
@@ -31,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public int GetCurrentHealth()
+    public float GetCurrentHealth()
     {
         currentHealth = PlayerPrefs.GetInt("health"); //set health to whatever is saved in player prefs
         return currentHealth; //return updated health value when called

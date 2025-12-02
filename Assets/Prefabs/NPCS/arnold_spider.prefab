@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -7855662042886817914}
   - component: {fileID: -5616459729365989091}
   - component: {fileID: 6626693759431740}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: arnold_spider
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -33,7 +33,8 @@ Transform:
   m_LocalPosition: {x: -10.76, y: 4.62, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1292291108138570111}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &345897149035191785
@@ -83,7 +84,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: ce6093eaff9fcb645bea0e0da4942468, type: 3}
+  m_Sprite: {fileID: 9120398994905695709, guid: 41b8eeb04c7dbaa40958cae1fe81d20e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,6 +110,8 @@ MonoBehaviour:
   moveSpeed: 3
   damage: 1
   health: 3
+  maxHealth: 3
+  healthBar: {fileID: 8858737417704920071}
   webProjectilePrefab: {fileID: 3217030190005306906, guid: 786c685fa85e20947b80d2d11ecb3fc8, type: 3}
   shootCooldown: 2
 --- !u!61 &-7855662042886817914
@@ -149,7 +152,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.4117647, y: 1.4117647}
+    oldSize: {x: 0.53, y: 0.49}
     newSize: {x: 1.4117647, y: 1.4117647}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -182,8 +185,8 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
+  m_CollisionDetection: 1
+  m_Constraints: 4
 --- !u!95 &6626693759431740
 Animator:
   serializedVersion: 7
@@ -206,3 +209,78 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!1001 &2987601471808608352
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4491254121706488694}
+    m_Modifications:
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.80700016
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635943997853875820, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_Name
+      value: Healthbar
+      objectReference: {fileID: 0}
+    - target: {fileID: 6635943997853875820, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7189553807430500455, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+--- !u!4 &1292291108138570111 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4078348523801200927, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+  m_PrefabInstance: {fileID: 2987601471808608352}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8858737417704920071 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6018666225714154599, guid: 3ec030555c22dcc41b53322af1a68e1d, type: 3}
+  m_PrefabInstance: {fileID: 2987601471808608352}
+  m_PrefabAsset: {fileID: 0}
