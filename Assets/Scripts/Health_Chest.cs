@@ -3,18 +3,18 @@ using UnityEngine;
 public class Health_Chest : MonoBehaviour
 {
     public bool isOpened = false;
-    public GameObject interactUI;
+    // public GameObject interactUI;
     public SpriteRenderer crate;
     public Sprite openCrateSprite;
     public int healthBoost = 1;
     private bool canOpen;
     private PlayerHealth ph;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        interactUI.SetActive(false);
-        ph = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
-    }
+    // void Start()
+  //  {
+      //  interactUI.SetActive(false);
+       // ph = GameObject.FindWithTag("Player").GetComponent<PlayerHealth>();
+    // }
     void Update()
     {
         if(Input.GetKey(KeyCode.E) && !isOpened && canOpen)//Press E to open health crate
@@ -30,7 +30,7 @@ public class Health_Chest : MonoBehaviour
         {  
             if(!isOpened)
             {
-                interactUI.SetActive(true);
+              //  interactUI.SetActive(true);
                 canOpen = true;
             }
 
@@ -40,7 +40,7 @@ public class Health_Chest : MonoBehaviour
     {
         if (col.CompareTag("Player"))//IF PLAYER HITS TRIGGER COLLIDER
         {
-            interactUI.SetActive(false);
+           // interactUI.SetActive(false);
             canOpen = false;
         }
     }
