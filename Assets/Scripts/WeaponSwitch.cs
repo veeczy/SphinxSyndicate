@@ -8,15 +8,16 @@ public class WeaponSwitch : MonoBehaviour
     public GameObject[] weaponPrefabs; // Prefab assignment
     public float switchCooldown = 0.25f;
     public PlayerMovement pmScript;
-    private GameObject[] weaponInstances;
+    public GameObject[] weaponInstances;
+    public bool[] weaponInventory;
     private int currentIndex = 0;
     private float lastSwitchTime = 0f;
 
     void Start()
     {
         weaponInstances = new GameObject[weaponPrefabs.Length];
-
-        
+        weaponInventory = new bool[weaponPrefabs.Length];
+        currentIndex = -1;
         for (int i = 0; i < weaponPrefabs.Length; i++)
         {
             GameObject weapon = Instantiate(weaponPrefabs[i], weaponHolder);
@@ -28,6 +29,7 @@ public class WeaponSwitch : MonoBehaviour
         // First weapon equip!
         if (weaponInstances.Length > 0)
         {
+            pmScript.weaponObject = weaponInstances[0];
             EquipWeapon(0);
         }
     }
@@ -38,9 +40,9 @@ public class WeaponSwitch : MonoBehaviour
 
         // Switch via Scroll Wheel
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll > 0f)
+        if (scroll > 0f && weaponInventory[(currentIndex - 1 + weaponInstances.Length) % weaponInstances.Length])
             EquipWeapon((currentIndex - 1 + weaponInstances.Length) % weaponInstances.Length);
-        else if (scroll < 0f)
+        else if (scroll < 0f && weaponInventory[(currentIndex + 1) % weaponInstances.Length])
             EquipWeapon((currentIndex + 1) % weaponInstances.Length);
 
         // Switch via Numbers 1-9 (Will be fully fleshed out in final version)
@@ -49,35 +51,40 @@ public class WeaponSwitch : MonoBehaviour
             if (Input.GetKeyDown((1)))
                 EquipWeapon(i);
         }*/
-        if(Input.GetKeyDown(KeyCode.Alpha1) && weaponInstances.Length > 0)
+        if (Input.GetKeyDown(KeyCode.Alpha1) && weaponInstances.Length > 0 && weaponInventory[0])
         {
             EquipWeapon(0);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha2) && weaponInstances.Length > 1)
+        else if (Input.GetKeyDown(KeyCode.Alpha2) && weaponInstances.Length > 1 && weaponInventory[1])
         {
             EquipWeapon(1);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponInstances.Length > 2)
+        else if (Input.GetKeyDown(KeyCode.Alpha3) && weaponInstances.Length > 2 && weaponInventory[2])
         {
             EquipWeapon(2);
         }
-        else if (Input.GetKeyDown(KeyCode.Alpha4) && weaponInstances.Length > 3)
+        else if (Input.GetKeyDown(KeyCode.Alpha4) && weaponInstances.Length > 3 && weaponInventory[3])
         {
             EquipWeapon(3);
         }
     }
 
-    void EquipWeapon(int index)
+    public void EquipWeapon(int index)
     {
+        if (pmScript.weaponObject)
+        {
+            pmScript.weaponObject.GetComponent<Shoot>().isShooting = false;//Forcibly disables isShooting condition in shoot script before switching weapons
+        }
         pmScript.weaponObject = weaponInstances[index];
-        //if (Time.time - lastSwitchTime < switchCooldown) return;
-        //if (index == currentIndex) return;
+        if (Time.time - lastSwitchTime < switchCooldown) return;
+        if (index == currentIndex) return;
         // Disable all
         for (int i = 0; i < weaponInstances.Length; i++)
+        {
             weaponInstances[i].SetActive(i == index);
-
+        }
         currentIndex = index;
-        //lastSwitchTime = Time.time;
+        lastSwitchTime = Time.time;
     }
 
     public GameObject GetCurrentWeapon()
