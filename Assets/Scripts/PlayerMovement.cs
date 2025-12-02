@@ -39,6 +39,10 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip footstepAudio;
     private AudioSource playerAudio;
 
+    [Header("Dodge Audio")]
+    public AudioClip dodgeAudio;
+    public float dodgeVolume = 1f;
+
     [Header("Aim")]
     public Vector2 aimPos;
 
@@ -124,8 +128,12 @@ public class PlayerMovement : MonoBehaviour
         isDodging = true;
         canDodge = false;
         dodgeTimer = 0f;
+        
         dodgeStart = myPlayer.position;
         dodgeEnd = dodgeStart + dir * dodgeDistance;
+        
+         if (dodgeAudio != null)
+        playerAudio.PlayOneShot(dodgeAudio, dodgeVolume);
     }
 
     private IEnumerator DodgeCooldown()
