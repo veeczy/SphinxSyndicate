@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        currentHealth -= damage;
+        currentHealth -= Mathf.RoundToInt(damage);
         PlayerPrefs.SetInt("health", currentHealth); //update health in playerprefs when damage is taken
         Debug.Log("Player Health: " + currentHealth);
 
@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public float GetCurrentHealth()
+    public int GetCurrentHealth()
     {
         currentHealth = PlayerPrefs.GetInt("health"); //set health to whatever is saved in player prefs
         return currentHealth; //return updated health value when called
