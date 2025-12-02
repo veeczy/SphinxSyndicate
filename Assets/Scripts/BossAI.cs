@@ -5,6 +5,8 @@ using UnityEngine.UI;
 public class BossAI : MonoBehaviour
 {
     public float moveSpeed = 3f;        // How fast the enemy moves
+    public SpriteRenderer bossSprite;
+    public Animator bossAnimator;
     protected Transform player;         // Reference to the player's position (made protected so child scripts can use it)
     public int damage = 1;              // How much damage the enemy does
     public Slider healthUI;
@@ -27,7 +29,7 @@ public class BossAI : MonoBehaviour
     public float sheepVelocity;
     public float sheepDelay;
     public int sheepCounter = 0;
-    private Vector2 direction;
+    public Vector2 direction;
     private float distance;
     public float stalkTimer;
     private int healthPercent;
@@ -38,7 +40,8 @@ public class BossAI : MonoBehaviour
         // Find the player by tag
         player = GameObject.FindGameObjectWithTag("Player").transform;
         health = maxHealth;
-        healthbarMax = (int) healthUI.value;
+        healthUI.maxValue = maxHealth;
+        healthUI.value = maxHealth;
     }
 
     void FixedUpdate()
@@ -46,8 +49,14 @@ public class BossAI : MonoBehaviour
         // Measure distance to player
         distance = Vector2.Distance(transform.position, player.position);
         direction = (player.position - transform.position);//Target direction
-        healthPercent = (health)*100 / (maxHealth);
-        healthUI.value = healthbarMax * healthPercent;//Update health UI
+        if (direction.x < 0)
+        {
+            bossSprite.flipX = true;
+        }
+        else
+        {
+            bossSprite.flipX = false;
+        }
         // If outside attack range, move toward player
         if (distance > minDistance && !isAttacking && !stalkMode && !attackCooldown)
         {
@@ -55,11 +64,13 @@ public class BossAI : MonoBehaviour
         }
         else if (distance > minDistance && isAttacking && !attackCooldown)
         {
+            bossAnimator.SetBool("isWalking", true);
             transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
         }
         else if (distance <= stalkMaxDistance && !isAttacking && !sheepAttacking && sheepCounter < 5)
         {
-            transform.position -= (Vector3)direction * moveSpeed * Time.deltaTime;
+            //transform.position -= (Vector3)direction * moveSpeed * Time.deltaTime;
+            bossAnimator.SetBool("isWalking", false);
             StartCoroutine("sheepAttack");
             StartCoroutine("stalk");
         }
@@ -109,6 +120,8 @@ public class BossAI : MonoBehaviour
         if (col.CompareTag("Bullet"))
         {
             health -= col.GetComponent<BulletId>().dmg;
+            healthUI.value = health;//Update health UI
+            Debug.Log(health + ": HEALTH");
         }
         else if (col.CompareTag("Player"))
         {

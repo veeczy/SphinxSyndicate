@@ -25,7 +25,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        currentHealth -= Mathf.RoundToInt(damage);
+        currentHealth -= damage;
         PlayerPrefs.SetInt("health", currentHealth); //update health in playerprefs when damage is taken
         Debug.Log("Player Health: " + currentHealth);
 

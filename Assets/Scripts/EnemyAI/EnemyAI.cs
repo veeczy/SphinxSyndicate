@@ -64,7 +64,7 @@ public class EnemyAI : MonoBehaviour
         {
             health -= bullet.dmg;
             if (healthBar)
-                healthBar.transform.localScale = new Vector2(hbScale.x * (health / maxHealth), hbScale.y);
+                healthBar.transform.localScale = new Vector2(hbScale.x * ((float)health / (float)maxHealth), hbScale.y);
         }
     }
 }
