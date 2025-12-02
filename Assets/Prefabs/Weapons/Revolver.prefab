@@ -108,12 +108,13 @@ MonoBehaviour:
   bulletPrefab: {fileID: 914480110569371521, guid: 2c8f2b6b74ea96544971f04f066244e5, type: 3}
   playerObj: {fileID: 0}
   gunSounds: {fileID: 3811901851084903600}
-  shootSound: {fileID: 8300000, guid: 12be6652e38f5f54089da82b59c232d2, type: 3}
+  shootSound: {fileID: 8300000, guid: df919f90c01b9484695c62826d88277b, type: 3}
   shootDelay: 0.25
   cooldown: 0
   velocityMultiplier: 50
   toggleFlash: 0
   muzzleFlash: {fileID: 0}
+  isShooting: 0
 --- !u!82 &3811901851084903600
 AudioSource:
   m_ObjectHideFlags: 0
