@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= Mathf.RoundToInt(damage);
         PlayerPrefs.SetInt("health", currentHealth); //update health in playerprefs when damage is taken

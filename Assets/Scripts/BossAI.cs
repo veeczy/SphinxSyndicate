@@ -8,8 +8,8 @@ public class BossAI : MonoBehaviour
     protected Transform player;         // Reference to the player's position (made protected so child scripts can use it)
     public int damage = 1;              // How much damage the enemy does
     public Slider healthUI;
-    public float health = 0;
-    public float maxHealth = 150;
+    public int health = 0;
+    public int maxHealth = 150;
     public float minDistance = 0.0f;
     public float stalkMaxDistance = 10.0f;
     public float stalkMinDistance = 8.0f;
@@ -30,15 +30,15 @@ public class BossAI : MonoBehaviour
     private Vector2 direction;
     private float distance;
     public float stalkTimer;
-    private float healthPercent;
-    private float healthbarMax;
+    private int healthPercent;
+    private int healthbarMax;
 
     void Start()
     {
         // Find the player by tag
         player = GameObject.FindGameObjectWithTag("Player").transform;
         health = maxHealth;
-        healthbarMax = healthUI.value;
+        healthbarMax = (int) healthUI.value;
     }
 
     void FixedUpdate()
@@ -46,7 +46,7 @@ public class BossAI : MonoBehaviour
         // Measure distance to player
         distance = Vector2.Distance(transform.position, player.position);
         direction = (player.position - transform.position);//Target direction
-        healthPercent = health / maxHealth;
+        healthPercent = (health)*100 / (maxHealth);
         healthUI.value = healthbarMax * healthPercent;//Update health UI
         // If outside attack range, move toward player
         if (distance > minDistance && !isAttacking && !stalkMode && !attackCooldown)
