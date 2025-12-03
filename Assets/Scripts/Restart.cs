@@ -6,7 +6,7 @@ public class Restart : MonoBehaviour
     void Update()
     {
         // Check every frame if the player pressed the R key
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetButtonDown("Restart"))
         {
             RestartLevel();
         }

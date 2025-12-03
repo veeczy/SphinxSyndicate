@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Aim")]
     public Vector2 aimPos;
 
-    // NEW — animator reference
+    // NEW ï¿½ animator reference
     private Animator anim;
 
     void Start()
@@ -48,7 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        dodgekeypress = Input.GetKey("Dodge");
+        //the controller for xbox rt is an axis, not a button
+        dodgekeypress = Input.GetButton("Dodge");
     }
 
     void FixedUpdate()
@@ -60,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
             myPlayer.MovePosition(Vector2.Lerp(dodgeStart, dodgeEnd, t));
             GetComponent<SpriteRenderer>().sprite = dodgeSprite;
 
-            // NEW — during dodge, force idle animation
+            // NEW ï¿½ during dodge, force idle animation
             anim.SetBool("isWalking", false);
 
             if (t >= 1f)
@@ -77,7 +78,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         myPlayer.linearVelocity = direction * speed;
 
-        // NEW — walking animation toggle
+        // NEW ï¿½ walking animation toggle
         bool isMoving = direction.magnitude > 0.1f;
         anim.SetBool("isWalking", isMoving);
 
@@ -114,8 +115,8 @@ public class PlayerMovement : MonoBehaviour
         // Dodge input
         if (canDodge)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
-                StartDodge(direction);
+            if ((Input.GetButtonDown("Dodge")) || dodgecontrollerpress)
+                StartDodge(direction); // Dodge
         }
     }
 

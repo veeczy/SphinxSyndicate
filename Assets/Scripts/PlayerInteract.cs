@@ -26,7 +26,7 @@ public class PlayerInteraction : MonoBehaviour
             currentNPC = null;
 
         // Handle pressing E
-        if (Input.GetKeyDown(interactKey))
+        if (Input.GetButtonDown("Interact"))
         {
             if (currentNPC != null)
             {
