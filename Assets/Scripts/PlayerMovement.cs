@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public float dodgeCooldown = 0.6f;
     public Sprite dodgeSprite;
     private Sprite playerSprite;
+    public bool dodgekeypress = false;
+
     [Header("Player Objects")]
     public GameObject weaponObject;
     private bool isDodging = false;
@@ -22,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dodgeStart;
     private Vector2 dodgeEnd;
     private float dodgeTimer;
+    
 
     /* ----------------------------------------------
  * DESIGNERS:
@@ -49,6 +52,12 @@ public class PlayerMovement : MonoBehaviour
         playerSprite = GetComponent<SpriteRenderer>().sprite;
         playerAudio = GetComponent<AudioSource>();
         playerAudio.clip = footstepAudio;
+    }
+
+    private void Update()
+    {
+        //the controller for xbox rt is an axis, not a button
+        dodgekeypress = Input.GetKey("Dodge");
     }
 
     void FixedUpdate()
