@@ -22,7 +22,7 @@ public class Shoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0) && !isShooting)
+        if (Input.GetButton("Shoot") && !isShooting)
         {
             StartCoroutine("shoot");
         }

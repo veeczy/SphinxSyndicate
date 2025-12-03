@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         //the controller for xbox rt is an axis, not a button
-        dodgekeypress = Input.GetKey("Dodge");
+        dodgekeypress = Input.GetButton("Dodge");
         if (Input.GetAxis("Dodge Controller") != 0) dodgecontrollerpress = true;
         else dodgecontrollerpress = false;
     }
@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
         // Player presses shift to dodge towards mouse.
         if (canDodge)
         {
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+            if ((Input.GetButtonDown("Dodge")) || dodgecontrollerpress)
                 StartDodge(direction); // Dodge
         }
     }

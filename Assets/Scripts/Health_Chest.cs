@@ -18,7 +18,7 @@ public class Health_Chest : MonoBehaviour
      }
     void Update()
     {
-        if(Input.GetKey(KeyCode.E) && !isOpened && canOpen)//Press E to open health crate
+        if(Input.GetButton("Interact") && !isOpened && canOpen)//Press E to open health crate
         {
             ph.TakeDamage(-(healthBoost));
             crate.sprite = openCrateSprite;
