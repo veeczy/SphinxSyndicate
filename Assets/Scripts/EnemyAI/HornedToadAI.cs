@@ -9,11 +9,11 @@ public class HornedToadAI : EnemyAI
     private float nextAttackTime = 0f;
     private bool isAttacking = false;
 
-    private Animator anim;   // NEW
+    private Animator anim;
 
     void Awake()
     {
-        anim = GetComponent<Animator>();   // NEW
+        anim = GetComponent<Animator>();
     }
 
     protected override void Update()
@@ -23,22 +23,32 @@ public class HornedToadAI : EnemyAI
         float distance = Vector2.Distance(transform.position, player.position);
         Vector2 direction = (player.position - transform.position).normalized;
 
-        // Movement when not attacking
+        // --- MOVEMENT ---
         if (distance > attackRange && !isAttacking)
         {
-            // Keep old movement
+            // Move toward player
             transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
 
-            // Ensure idle animation plays
-            anim.SetBool("isAttacking", false);   // NEW
+            // NEW: walking animation on
+            anim.SetBool("isWalking", true);
+
+            // ensure attack animation stays off
+            anim.SetBool("isAttacking", false);
         }
         else if (distance <= attackRange)
         {
-            // Start the attack if ready
+            // NEW: stop walking when in attack range
+            anim.SetBool("isWalking", false);
+
             if (Time.time >= nextAttackTime && !isAttacking)
             {
                 StartCoroutine(Attack());
             }
+        }
+        else
+        {
+            // NEW: idle when not moving
+            anim.SetBool("isWalking", false);
         }
 
         CheckHealth();
@@ -47,9 +57,12 @@ public class HornedToadAI : EnemyAI
     private IEnumerator Attack()
     {
         isAttacking = true;
-        anim.SetBool("isAttacking", true);   // NEW → triggers HornedToad_Attack
 
-        // Play attack for a short time before applying damage
+        // Stop walking when attacking
+        anim.SetBool("isWalking", false); // NEW
+
+        anim.SetBool("isAttacking", true);
+
         yield return new WaitForSeconds(0.3f);
 
         float distance = Vector2.Distance(transform.position, player.position);
@@ -63,6 +76,10 @@ public class HornedToadAI : EnemyAI
         nextAttackTime = Time.time + attackCooldown;
 
         isAttacking = false;
-        anim.SetBool("isAttacking", false);   // NEW → returns to HornedToad_Idle
+        anim.SetBool("isAttacking", false);
+
+        // NEW: after attack, idle (walking will turn on next frame if moving)
+        anim.SetBool("isWalking", false);
     }
 }
+
