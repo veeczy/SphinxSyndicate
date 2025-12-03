@@ -35949,7 +35949,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -9095717837082945937, guid: 207ee8102dd4143d288186ef0be518ee, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0ac130aa59260d94484198da338e1187, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -35969,14 +35969,14 @@ RectTransform:
   m_GameObject: {fileID: 1005722561}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7857, y: 0.7261, z: 1}
+  m_LocalScale: {x: 1.3875, y: 1.508125, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.9, y: -0.12}
+  m_AnchoredPosition: {x: 4.93, y: -0.12}
   m_SizeDelta: {x: 1, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!61 &1005722566
@@ -36017,7 +36017,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 2}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 1, y: 2}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -36038,7 +36038,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   dialogueLines:
-  - Hello there, Sheriff Dillo! Lots of creeps ahead!
+  - Welcome, Bounty Hunter! I'll give you a rundown on how to play!
+  - W - Move Up, A - Move Left, S - Move Down, D - Move Right
+  - Press 'Shift' to initiate the dodge roll! Move your mouse around to aim at enemies.
+  - Once you are ready to shoot in a direct, use 'Left Mouse Click' to use your weapon!
+  - If you need a break, press 'Escape' to pause the game, good luck Bounty Hunter!
 --- !u!1 &1042637566
 GameObject:
   m_ObjectHideFlags: 0
@@ -36516,7 +36520,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504ddf3b394e0a748830b2238e5a13dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseManager
-  pauseMenuUI: {fileID: 1552755376}
   retrySceneName: Tavern Upstairs
 --- !u!4 &1261584054
 Transform:
@@ -36924,15 +36927,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 16
+  m_fontSizeBase: 16
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 14
+  m_fontSizeMax: 18
   m_fontStyle: 1
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -36940,7 +36943,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 0
+  m_TextWrappingMode: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -36985,15 +36988,15 @@ RectTransform:
   m_GameObject: {fileID: 1571519788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2.2359374, y: 1.6413852, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 957957516}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.13800001, y: 0.012363637}
-  m_AnchorMax: {x: 0.34100002, y: 0.11381818}
-  m_AnchoredPosition: {x: -3.4999237, y: -2}
-  m_SizeDelta: {x: -3, y: -5}
+  m_AnchorMin: {x: 0.22500001, y: 0.049000002}
+  m_AnchorMax: {x: 0.712, y: 0.354}
+  m_AnchoredPosition: {x: 8.799988, y: -18.9}
+  m_SizeDelta: {x: -283, y: -116}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1642603915
 GameObject:
