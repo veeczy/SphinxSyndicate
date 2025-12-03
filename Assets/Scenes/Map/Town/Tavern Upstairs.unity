@@ -26228,6 +26228,55 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &635853286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 635853288}
+  - component: {fileID: 635853287}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &635853287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635853286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa553238edef8624e8138abf7a980ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
+  randomRoomIndexes: 1c0000001d000000040000000500000007000000090000000a0000000b0000000c0000000d0000000e0000000f000000100000001100000012000000130000001400000015000000160000001700000018000000190000001a0000001b000000
+  secretRoomIndex: 6
+  bossRoomIndex: 8
+  maxRoomsBeforeBoss: 10
+  roomsCompleted: 0
+--- !u!4 &635853288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635853286}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5.73674, y: -9.24955, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &665488943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -28682,6 +28731,10 @@ PrefabInstance:
     - target: {fileID: 3722751783561827913, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3722751783561827913, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
+      propertyPath: forcedSceneIndex
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4151325868681887563, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
       propertyPath: m_Enabled
@@ -31504,7 +31557,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504ddf3b394e0a748830b2238e5a13dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pauseMenuUI: {fileID: 785697728}
   retrySceneName: Tavern Upstairs
 --- !u!4 &1815954760
 Transform:
@@ -32062,3 +32114,4 @@ SceneRoots:
   - {fileID: 234262827}
   - {fileID: 840827895}
   - {fileID: 115627887}
+  - {fileID: 635853288}
