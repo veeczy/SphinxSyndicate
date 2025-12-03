@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public Sprite dodgeSprite;
     private Sprite playerSprite;
     public bool dodgekeypress = false;
+    public bool dodgecontrollerpress = false;
 
     [Header("Player Objects")]
     public GameObject weaponObject;
@@ -58,6 +59,8 @@ public class PlayerMovement : MonoBehaviour
     {
         //the controller for xbox rt is an axis, not a button
         dodgekeypress = Input.GetKey("Dodge");
+        if (Input.GetAxis("Dodge Controller") != 0) dodgecontrollerpress = true;
+        else dodgecontrollerpress = false;
     }
 
     void FixedUpdate()
