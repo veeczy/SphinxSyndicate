@@ -13,8 +13,15 @@ public class EnemyAI : MonoBehaviour
     protected Rigidbody2D rb;
     protected SpriteRenderer sr;
 
+    [Header("Audio")]
+public AudioClip hurtSound;
+public float hurtVolume = 1f;
+
+private AudioSource audioSource;
+
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         if (healthBar)
@@ -58,6 +65,10 @@ public class EnemyAI : MonoBehaviour
             if (playerHealth != null)
                 playerHealth.TakeDamage(damage);
         }
+BulletId bullet = col.GetComponent<BulletId>();
+if (bullet != null)
+{
+    health -= bullet.dmg;
 
         BulletId bullet = col.GetComponent<BulletId>();
         if (bullet != null)
