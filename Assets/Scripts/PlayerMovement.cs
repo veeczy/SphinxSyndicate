@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
         // Dodge input
         if (canDodge)
         {
-            if ((Input.GetButtonDown("Dodge")) || dodgecontrollerpress)
+            if ((Input.GetButtonDown("Dodge")))
                 StartDodge(direction); // Dodge
         }
     }

@@ -14,10 +14,10 @@ public class EnemyAI : MonoBehaviour
     protected SpriteRenderer sr;
 
     [Header("Audio")]
-public AudioClip hurtSound;
-public float hurtVolume = 1f;
+    public AudioClip hurtSound;
+    public float hurtVolume = 1f;
 
-private AudioSource audioSource;
+    private AudioSource audioSource;
 
     void Start()
     {
@@ -65,11 +65,7 @@ private AudioSource audioSource;
             if (playerHealth != null)
                 playerHealth.TakeDamage(damage);
         }
-BulletId bullet = col.GetComponent<BulletId>();
-if (bullet != null)
-{
-    health -= bullet.dmg;
-
+        
         BulletId bullet = col.GetComponent<BulletId>();
         if (bullet != null)
         {
@@ -79,3 +75,4 @@ if (bullet != null)
         }
     }
 }
+
