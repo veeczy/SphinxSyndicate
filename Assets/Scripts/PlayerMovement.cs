@@ -116,8 +116,8 @@ public class PlayerMovement : MonoBehaviour
         // Player presses shift to dodge towards mouse.
         if (canDodge)
         {
-            if ((Input.GetButtonDown("Dodge")) || dodgecontrollerpress)
-                StartDodge(direction); // Dodge
+             if ((Input.GetButton("Dodge")))
+                  StartDodge(direction); // Dodge
         }
     }
 
