@@ -24,19 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dodgeStart;
     private Vector2 dodgeEnd;
     private float dodgeTimer;
-    
-
-    /* ----------------------------------------------
- * DESIGNERS:
- * To add walking sound effects:
- * 1. Select the Player in the Hierarchy.
- * 2. Find AudioSource component at the bottom.
- * 3. Assign a looping footstep clip in Audio Resource.
- * 4. Uncheck "Play On Awake" and check "Loop".
- * 5. Adjust volume and clip as needed.
- * The sound will play automatically when the player moves
- * and stop when idle or dodging.
- * ---------------------------------------------- */
 
     // Sound effects
     public AudioClip footstepAudio;
@@ -45,6 +32,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Aim")]
     public Vector2 aimPos;
 
+    // NEW � animator reference
+    private Animator anim;
+
     void Start()
     {
         myPlayer.linearDamping = stopSpeed;
@@ -52,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
         playerSprite = GetComponent<SpriteRenderer>().sprite;
         playerAudio = GetComponent<AudioSource>();
         playerAudio.clip = footstepAudio;
+
+        anim = GetComponent<Animator>(); // NEW
     }
 
     private void Update()
@@ -64,11 +56,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isDodging)
         {
-
             dodgeTimer += Time.fixedDeltaTime;
             float t = dodgeTimer / dodgeDuration;
             myPlayer.MovePosition(Vector2.Lerp(dodgeStart, dodgeEnd, t));
             GetComponent<SpriteRenderer>().sprite = dodgeSprite;
+
+            // NEW � during dodge, force idle animation
+            anim.SetBool("isWalking", false);
+
             if (t >= 1f)
             {
                 isDodging = false;
@@ -83,8 +78,12 @@ public class PlayerMovement : MonoBehaviour
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         myPlayer.linearVelocity = direction * speed;
 
+        // NEW � walking animation toggle
+        bool isMoving = direction.magnitude > 0.1f;
+        anim.SetBool("isWalking", isMoving);
+
         // Footstep SFX
-        if (!isDodging && direction.magnitude > 0.1f)
+        if (!isDodging && isMoving)
         {
             if (!playerAudio.isPlaying)
                 playerAudio.Play();
@@ -101,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 aimDir = mousePos - (Vector2)transform.position;
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
-        //Debug.Log(angle);
+
         if (angle > 90 || angle < -90)
         {
             GetComponent<SpriteRenderer>().flipY = true;
@@ -113,7 +112,7 @@ public class PlayerMovement : MonoBehaviour
             weaponObject.GetComponent<SpriteRenderer>().flipY = false;
         }
 
-        // Player presses shift to dodge towards mouse.
+        // Dodge input
         if (canDodge)
         {
              if ((Input.GetButton("Dodge")))
@@ -121,13 +120,6 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    /* Bewy Pwetty Funcshun. sowwy :,(
-    private Vector2 PerpendicularToFacing()
-    {
-        Vector2 facingDir = transform.right; 
-        return new Vector2(-facingDir.y, facingDir.x).normalized; 
-    }
-    */
     private void StartDodge(Vector2 dir)
     {
         isDodging = true;
