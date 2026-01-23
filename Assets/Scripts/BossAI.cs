@@ -90,6 +90,8 @@ public class BossAI : MonoBehaviour
     }
 
     IEnumerator closeAttack()
+
+    
     {
         isAttacking = true;
         Debug.Log("CLOSE ATTACKING!");

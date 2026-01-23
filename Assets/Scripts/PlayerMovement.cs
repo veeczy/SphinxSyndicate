@@ -95,11 +95,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Aim Rotation
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        aimPos = mousePos;
-        Vector2 aimDir = mousePos - (Vector2)transform.position;
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = -Camera.main.transform.position.z;
+        aimPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector2 aimDir = (Vector2)aimPos - (Vector2)transform.position;
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        //Debug.DrawLine(transform.position, aimPos, Color.red);
 
         if (angle > 90 || angle < -90)
         {
