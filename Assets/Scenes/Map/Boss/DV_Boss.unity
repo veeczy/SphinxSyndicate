@@ -555,12 +555,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397407229}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94feb0a9756596445b87cd91ffdfe099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinTrigger
+  enemyType: 1
   targetEnemy: {fileID: 0}
+  targetBoss: {fileID: 941395177}
   winSceneName: WinScene
 --- !u!4 &397407231
 Transform:
@@ -24911,6 +24913,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935534309}
   m_CullTransparentMesh: 1
+--- !u!114 &941395177 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+  m_PrefabInstance: {fileID: 8002804505711245917}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69afde39c212954d8c2214aaea85735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossAI
 --- !u!1 &975216482
 GameObject:
   m_ObjectHideFlags: 0
@@ -26881,7 +26894,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2566705348305773587, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: weaponInventory.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2566705348305773587, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: 'weaponPrefabs.Array.data[1]'
@@ -26897,7 +26910,7 @@ PrefabInstance:
       objectReference: {fileID: 4131928234258855427, guid: b7b8b8d5237cf19408e754a07fd0306d, type: 3}
     - target: {fileID: 2566705348305773587, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: 'weaponInventory.Array.data[0]'
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3844704270189968715, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_Name
@@ -26955,11 +26968,20 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4899432532245730738, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: currentHealth
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899432532245730738, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: bypassPlayerPrefs
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8399745640200758647, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1419171099445873015, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -27014,13 +27036,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
-      propertyPath: phase2
+      propertyPath: health
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      propertyPath: noAgro
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      propertyPath: phase2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 1726853481}
+    - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      propertyPath: maxHealth
+      value: 150
+      objectReference: {fileID: 0}
     - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: moveSpeed
       value: 1.5
@@ -27052,6 +27086,10 @@ PrefabInstance:
     - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: nextAttackTime
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      propertyPath: stalkMaxDistance
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: attackCooldownTime

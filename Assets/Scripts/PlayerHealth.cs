@@ -5,10 +5,14 @@ public class PlayerHealth : MonoBehaviour
 {
     public int maxHealth = 3;
     public int currentHealth = 3;
+    public bool bypassPlayerPrefs;//Allow bypass PlayerPrefs
 
     void Start()
     {
-        currentHealth = PlayerPrefs.GetInt("health"); //at start health is set to value, it cannot be set to max health here or it will overwrite health on 'start' of each new scene
+        if(!bypassPlayerPrefs)
+        {
+            currentHealth = PlayerPrefs.GetInt("health"); //at start health is set to value, it cannot be set to max health here or it will overwrite health on 'start' of each new scene
+        }
     }
 
     void OnCollisionEnter2D(Collision2D collision)
