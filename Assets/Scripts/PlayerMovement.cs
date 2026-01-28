@@ -34,6 +34,10 @@ public class PlayerMovement : MonoBehaviour
 
     // NEW � animator reference
     private Animator anim;
+    //INPUT
+    public bool controller = false;//true if controller input detected
+    public Vector2 deadzone = new Vector2(0.5f, 0.5f);
+    public Vector2 stickAxis;
 
     void Start()
     {
@@ -48,7 +52,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        //the controller for xbox rt is an axis, not a button
+        stickAxis = new Vector2(Input.GetAxis("Joystick Aim X"), Input.GetAxis("Joystick Aim Y"));
+        if(!controller && (stickAxis.sqrMagnitude > deadzone.sqrMagnitude || stickAxis.sqrMagnitude < -deadzone.sqrMagnitude))
+        {
+            controller = true;
+        }
+        else if(controller && (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
+        {
+            controller = false;
+        }
         dodgekeypress = Input.GetButton("Dodge");
     }
 
@@ -95,9 +107,18 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Aim Rotation
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = -Camera.main.transform.position.z;
-        aimPos = Camera.main.ScreenToWorldPoint(mousePos);
+        if(!controller)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = -Camera.main.transform.position.z;
+            aimPos = Camera.main.ScreenToWorldPoint(mousePos);
+        }
+        else
+        {
+            Vector3 mousePos = new Vector3(stickAxis.x, stickAxis.y, 0f);
+            mousePos.z = -Camera.main.transform.position.z;
+            aimPos = (Vector2)transform.position + stickAxis;
+        }
         Vector2 aimDir = (Vector2)aimPos - (Vector2)transform.position;
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
