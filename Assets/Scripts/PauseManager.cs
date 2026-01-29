@@ -10,6 +10,10 @@ public class PauseManager : MonoBehaviour
     public string retrySceneName = "Level1";
 
     private GameObject pauseMenuUI;
+    public GameObject howtoPlayUI; //added for the how to play button
+    public GameObject pausemenutext;
+    public GameObject retryquitbutton;
+    public bool ishowtoplay = false;
     private bool isPaused = false;
 
     private void Awake()
@@ -97,7 +101,14 @@ public class PauseManager : MonoBehaviour
         isPaused = true;
         Debug.Log("[PauseManager] Paused");
     }
-
+    //Function to open how to play screen
+    public void HowToPlay()
+    {
+        ishowtoplay = !ishowtoplay;
+        pausemenutext.SetActive(!ishowtoplay);
+        retryquitbutton.SetActive(!ishowtoplay);
+        howtoPlayUI.SetActive(ishowtoplay);
+    }
     public void Resume()
     {
         if (pauseMenuUI == null)
@@ -111,7 +122,7 @@ public class PauseManager : MonoBehaviour
         isPaused = false;
         Debug.Log("[PauseManager] Resumed");
     }
-
+    //Altered the retry button to work for all scenes
     public void RetryLevel()
     {
         var currentScene = SceneManager.GetActiveScene();
