@@ -20,6 +20,8 @@ public class PlayerMovement : MonoBehaviour
     public Sprite dodgeSprite;
     private Sprite playerSprite;
     public bool dodgekeypress = false;
+    public bool dodgeclick = false;
+    public bool chargeDodge = false;
 
     [Header("Player Objects")]
     public GameObject weaponObject;
@@ -28,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector2 dodgeStart;
     private Vector2 dodgeEnd;
     private float dodgeTimer;
+    public float chargeTimer;
 
     // Sound effects
     public AudioClip footstepAudio;
@@ -53,7 +56,13 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         //the controller for xbox rt is an axis, not a button
-        dodgekeypress = Input.GetButton("Dodge");
+        //dodgekeypress = Input.GetButton("Dodge");
+        if (Input.GetButtonDown("Dodge")) dodgekeypress = true;
+        if (Input.GetButtonUp("Dodge"))
+        {
+            dodgeclick = true;
+            dodgekeypress = false;
+        }
     }
 
     void FixedUpdate()
@@ -63,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
             dodgeTimer += Time.fixedDeltaTime;
             float t = dodgeTimer / dodgeDuration;
             myPlayer.MovePosition(Vector2.Lerp(dodgeStart, dodgeEnd, t));
-            GetComponent<SpriteRenderer>().sprite = dodgeSprite;
+            GetComponent<SpriteRenderer>().sprite = dodgeSprite; //need to change this to anim.setbool dodge state to work
 
             // NEW � during dodge, force idle animation
             anim.SetBool("isWalking", false);
@@ -76,6 +85,18 @@ public class PlayerMovement : MonoBehaviour
             }
 
             return;
+        }
+
+        //charge dodge stuff
+        if(dodgekeypress)
+        {
+            chargeTimer += Time.fixedDeltaTime;
+            if (chargeTimer > 2) chargeDodge = true;
+            else chargeDodge = false;
+        }
+        if(!dodgekeypress)
+        {
+            if (chargeTimer <= 2) chargeTimer = 0;
         }
 
         // Movement
@@ -121,8 +142,14 @@ public class PlayerMovement : MonoBehaviour
         // Dodge input
         if (canDodge)
         {
-             if ((Input.GetButton("Dodge")))
-                  StartDodge(aimDir); // Dodge
+            if ((dodgeclick) && !chargeDodge)
+            {
+                StartDodge(aimDir); // Dodge
+            }
+            if ((dodgeclick) && chargeDodge)
+            {
+                StartChargeRoll(aimDir); //Charge Roll
+            }
         }
     }
 
@@ -141,8 +168,17 @@ public class PlayerMovement : MonoBehaviour
         else { dodgeDistance = 1f; }
 
         dodgeEnd = dodgeStart + dir * dodgeDistance;
+        dodgeclick = false;
+        //Debug.Log("Dodged.");
     }
+    private void StartChargeRoll(Vector2 dir)
+    {
+        chargeTimer = 0;
+        //this is where we put script for charge dodge movement
 
+        //Debug.Log("Charge Dodged.");
+        dodgeclick = false;
+    }
     private IEnumerator DodgeCooldown()
     {
         yield return new WaitForSeconds(dodgeCooldown);
