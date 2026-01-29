@@ -114,10 +114,17 @@ public class PauseManager : MonoBehaviour
 
     public void RetryLevel()
     {
-        Debug.Log("[PauseManager] Retry pressed. Reloading scene: " + retrySceneName);
+        var currentScene = SceneManager.GetActiveScene();
+        Debug.Log("[PauseManager] Retry pressed. Reloading current scene: " + currentScene.name);
+
         Time.timeScale = 1f;
-        SceneManager.LoadScene(retrySceneName);
+        isPaused = false;
+
+        // Reload the scene you are currently in
+        SceneManager.LoadScene(currentScene.buildIndex);
+        // (Alternative: SceneManager.LoadScene(currentScene.name);)
     }
+
 
     public void QuitGame()
     {
