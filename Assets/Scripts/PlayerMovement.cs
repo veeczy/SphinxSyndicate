@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -10,7 +11,10 @@ public class PlayerMovement : MonoBehaviour
     private bool lookRight;
 
     [Header("Dodge Settings")]
-    public float dodgeDistance = 5f;
+    public float dodgeDistance = 1f;
+    public float dodgeDis;
+    private double disX;
+    private double disY;
     public float dodgeDuration = 0.15f;
     public float dodgeCooldown = 0.6f;
     public Sprite dodgeSprite;
@@ -118,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
         if (canDodge)
         {
              if ((Input.GetButton("Dodge")))
-                  StartDodge(direction); // Dodge
+                  StartDodge(aimDir); // Dodge
         }
     }
 
@@ -128,6 +132,14 @@ public class PlayerMovement : MonoBehaviour
         canDodge = false;
         dodgeTimer = 0f;
         dodgeStart = myPlayer.position;
+
+        //calculate distance between mouse aim (where you dodge towards) and player position 
+        dodgeDis = Vector3.Distance(dodgeStart, dir);
+
+        if (dodgeDis > 17) { dodgeDistance = .2f; } //if dodge is aimed really farm from arnold, dodge is lessened
+        if (dodgeDis < 5) { dodgeDistance = 1.1f; } //if dodge is aimed really close to arnold, dodge is amplified to be farther
+        else { dodgeDistance = 1f; }
+
         dodgeEnd = dodgeStart + dir * dodgeDistance;
     }
 
