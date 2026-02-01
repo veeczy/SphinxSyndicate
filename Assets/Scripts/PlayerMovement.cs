@@ -31,11 +31,13 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Aim")]
     public Vector2 aimPos;
+    public Vector2 lastStickPos;
 
     // NEW � animator reference
     private Animator anim;
     //INPUT
     public bool controller = false;//true if controller input detected
+    public float sensMult = 1f;
     public Vector2 deadzone = new Vector2(0.5f, 0.5f);
     public Vector2 stickAxis;
 
@@ -115,9 +117,17 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            Vector3 mousePos = new Vector3(stickAxis.x, stickAxis.y, 0f);
-            mousePos.z = -Camera.main.transform.position.z;
-            aimPos = (Vector2)transform.position + stickAxis;
+            if(stickAxis.sqrMagnitude  > deadzone.sqrMagnitude)
+            {
+                Vector2 stickPos = stickAxis * sensMult;
+                aimPos = (Vector2)transform.position + stickPos;
+                lastStickPos = stickPos;
+            }
+            else
+            {
+                aimPos = (Vector2)transform.position + lastStickPos;
+            }
+            
         }
         Vector2 aimDir = (Vector2)aimPos - (Vector2)transform.position;
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;

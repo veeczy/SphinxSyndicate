@@ -12,7 +12,6 @@ public class WeaponSwitch : MonoBehaviour
     public bool[] weaponInventory;
     private int currentIndex = 0;
     private float lastSwitchTime = 0f;
-
     void Start()
     {
         weaponInstances = new GameObject[weaponPrefabs.Length];
@@ -40,9 +39,9 @@ public class WeaponSwitch : MonoBehaviour
 
         // Switch via Scroll Wheel
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll > 0f && weaponInventory[(currentIndex - 1 + weaponInstances.Length) % weaponInstances.Length])
+        if ((scroll > 0f) || (Input.GetButtonDown("Next Weapon")) && weaponInventory[(currentIndex - 1 + weaponInstances.Length) % weaponInstances.Length])
             EquipWeapon((currentIndex - 1 + weaponInstances.Length) % weaponInstances.Length);
-        else if (scroll < 0f && weaponInventory[(currentIndex + 1) % weaponInstances.Length])
+        else if ((scroll < 0f) || (Input.GetButtonDown("Last Weapon"))  && weaponInventory[(currentIndex + 1) % weaponInstances.Length])
             EquipWeapon((currentIndex + 1) % weaponInstances.Length);
 
         // Switch via Numbers 1-9 (Will be fully fleshed out in final version)
