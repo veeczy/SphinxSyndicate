@@ -28163,8 +28163,32 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2519040835048067452, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1349734150}
   m_SourcePrefab: {fileID: 100100000, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
+--- !u!1 &1349734149 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2519040835048067452, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
+  m_PrefabInstance: {fileID: 1349734148}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1349734150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349734149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a4d961ccd1e00d4e8c638db3ed19807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BiomeDoor
+  onTrigger: 1
+  desertStartScene: DesertStart
+  cityStartScene: CityStart
+  swampStartScene: SwampStart
 --- !u!1 &1459378526
 GameObject:
   m_ObjectHideFlags: 0
@@ -33928,3 +33952,4 @@ SceneRoots:
   - {fileID: 234262827}
   - {fileID: 122224984}
   - {fileID: 1495213}
+  - {fileID: 905501476}

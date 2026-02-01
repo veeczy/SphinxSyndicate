@@ -6,19 +6,33 @@ public class LevelManager : MonoBehaviour
 {
     public static LevelManager instance;
 
+    public enum AreaType { Desert, City, Swamp }
+
+    [Header("Current Area (set by wanted board)")]
+    public AreaType currentArea = AreaType.Desert;
+
+    // ----------------------------
+    // RANDOM ROOMS BY AREA
+    // ----------------------------
     [Header("Random Rooms (build indexes)")]
-    public List<int> randomRoomIndexes = new List<int>();  // Assign rooms here
+    public List<int> desertRoomIndexes = new List<int>();
+    public List<int> cityRoomIndexes = new List<int>();
+    public List<int> swampRoomIndexes = new List<int>();
 
-    [Header("Secret Room (optional)")]
-    public int secretRoomIndex = -1;
+    [Header("Secret Rooms (optional)")]
+    public int desertSecretRoomIndex = -1;
+    public int citySecretRoomIndex = -1;
+    public int swampSecretRoomIndex = -1;
 
-    [Header("Boss Room")]
-    public int bossRoomIndex = -1;
+    [Header("Boss Rooms")]
+    public int desertBossRoomIndex = -1;
+    public int cityBossRoomIndex = -1;
+    public int swampBossRoomIndex = -1;
 
     [Header("Rooms Before Boss")]
-    public int maxRoomsBeforeBoss = 5;   // NEW: how many rooms before boss
+    public int maxRoomsBeforeBoss = 5;
 
-    public int roomsCompleted = 0;       // NEW: counter for completed rooms
+    public int roomsCompleted = 0;
 
     private void Awake()
     {
@@ -33,63 +47,91 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // NEW: lets doors force scene 1 or 2 instead of using random rooms
+    // unchanged override behavior
     public void LoadSceneByTrigger(int sceneIndex)
     {
-        // If sceneIndex is 1 or 2 → override everything
         if (sceneIndex == 1 || sceneIndex == 2)
         {
             SceneManager.LoadScene(sceneIndex);
             return;
         }
 
-        // Otherwise, follow normal progression rules
         LoadNextRoom();
     }
 
-    // Called by Door.cs
+    // ----------------------------
+    // CORE RANDOM LOGIC (same flow)
+    // ----------------------------
     public void LoadNextRoom()
     {
-        roomsCompleted++;  // NEW: count each completed room
+        roomsCompleted++;
 
-        // NEW: if we’ve reached the room limit, go to boss
         if (roomsCompleted >= maxRoomsBeforeBoss)
         {
-            SceneManager.LoadScene(bossRoomIndex);
+            SceneManager.LoadScene(GetBossRoom());
             return;
         }
 
-        // If all rooms used → go to boss
-        if (randomRoomIndexes.Count == 0)
+        List<int> pool = GetCurrentRoomPool();
+
+        if (pool.Count == 0)
         {
-            SceneManager.LoadScene(bossRoomIndex);
+            SceneManager.LoadScene(GetBossRoom());
             return;
         }
 
-        // Pick a random room
-        int randomIndex = Random.Range(0, randomRoomIndexes.Count);
-        int selectedRoom = randomRoomIndexes[randomIndex];
+        int randomIndex = Random.Range(0, pool.Count);
+        int selectedRoom = pool[randomIndex];
+        pool.RemoveAt(randomIndex);
 
-        // Remove it so we never load it again
-        randomRoomIndexes.RemoveAt(randomIndex);
-
-        // Load the room
         SceneManager.LoadScene(selectedRoom);
     }
 
-    // NEW: reset room progress for a new run
     public void ResetRun()
     {
         roomsCompleted = 0;
-        // you can also rebuild randomRoomIndexes here if you need to
+        // designer can repopulate lists if needed
     }
 
     public void LoadSecretRoom()
     {
-        if (secretRoomIndex >= 0)
-            SceneManager.LoadScene(secretRoomIndex);
+        int secret = GetSecretRoom();
+        if (secret >= 0)
+            SceneManager.LoadScene(secret);
         else
-            Debug.LogWarning("Secret room index not set!");
+            Debug.LogWarning("Secret room index not set for this area!");
+    }
+
+    // ----------------------------
+    // HELPERS (NEW, SIMPLE)
+    // ----------------------------
+    private List<int> GetCurrentRoomPool()
+    {
+        return currentArea switch
+        {
+            AreaType.City => cityRoomIndexes,
+            AreaType.Swamp => swampRoomIndexes,
+            _ => desertRoomIndexes,
+        };
+    }
+
+    private int GetBossRoom()
+    {
+        return currentArea switch
+        {
+            AreaType.City => cityBossRoomIndex,
+            AreaType.Swamp => swampBossRoomIndex,
+            _ => desertBossRoomIndex,
+        };
+    }
+
+    private int GetSecretRoom()
+    {
+        return currentArea switch
+        {
+            AreaType.City => citySecretRoomIndex,
+            AreaType.Swamp => swampSecretRoomIndex,
+            _ => desertSecretRoomIndex,
+        };
     }
 }
-
