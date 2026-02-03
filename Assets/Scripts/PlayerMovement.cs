@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
 
             // NEW � during dodge, force idle animation
             anim.SetBool("isWalking", false);
-
+            anim.SetBool("isDodging", true);
             if (t >= 1f)
             {
                 isDodging = false;
@@ -106,6 +106,7 @@ public class PlayerMovement : MonoBehaviour
         // NEW � walking animation toggle
         bool isMoving = direction.magnitude > 0.1f;
         anim.SetBool("isWalking", isMoving);
+        anim.SetBool("isDodging", isDodging);
 
         // Footstep SFX
         if (!isDodging && isMoving)
@@ -144,11 +145,15 @@ public class PlayerMovement : MonoBehaviour
         {
             if ((dodgeclick) && !chargeDodge)
             {
-                StartDodge(aimDir); // Dodge
+                //StartDodge(direction); // Dodge towards Keyboard Movement
+
+                StartDodge(aimDir); // Dodge towards Mouse Click
             }
             if ((dodgeclick) && chargeDodge)
             {
-                StartChargeRoll(aimDir); //Charge Roll
+                //StartChargeRoll(direction); //Charge Roll towards Keyboard Movement
+
+                StartChargeRoll(aimDir); //Charge Roll towards Mouse Click
             }
         }
     }
@@ -160,6 +165,8 @@ public class PlayerMovement : MonoBehaviour
         dodgeTimer = 0f;
         dodgeStart = myPlayer.position;
 
+        //* THIS IS STUFF FOR MOUSE AIM DODGE, DO NOT DELETE *//
+
         //calculate distance between mouse aim (where you dodge towards) and player position 
         dodgeDis = Vector3.Distance(dodgeStart, dir);
 
@@ -167,7 +174,11 @@ public class PlayerMovement : MonoBehaviour
         if (dodgeDis < 5) { dodgeDistance = 1.1f; } //if dodge is aimed really close to arnold, dodge is amplified to be farther
         else { dodgeDistance = 1f; }
 
+        //* END MOUSE AIM DODGE STUFF *//
+
+        
         dodgeEnd = dodgeStart + dir * dodgeDistance;
+
         dodgeclick = false;
         //Debug.Log("Dodged.");
     }
