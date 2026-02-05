@@ -427,14 +427,16 @@ public class BlackJack : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        playerNear = true;
+        if(other.CompareTag("Player"))
+            playerNear = true;
         Debug.Log("OnCollisionEnter2D");
         Debug.Log(other.gameObject.name + " : " + gameObject.name + " : " + Time.time);
     }
 
     public void OnTriggerExit2D(Collider2D other)
     {
-        playerNear = false;
+        if (other.CompareTag("Player"))
+            playerNear = false;
         Debug.Log("OnCollisionExit2D");
         Debug.Log(other.gameObject.name + " : " + gameObject.name + " : " + Time.time);
     }
