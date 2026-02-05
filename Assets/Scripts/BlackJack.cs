@@ -416,6 +416,7 @@ public class BlackJack : MonoBehaviour
     public void EndGame()
     {
         HideUI(blackJackScreen);
+        HideUI(dialogueUI);
         isTalking = false;
     }
 
