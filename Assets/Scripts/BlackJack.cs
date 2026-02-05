@@ -330,17 +330,17 @@ public class BlackJack : MonoBehaviour
         HideUI(button4);
 
         DealerTurn();
-        if ((playerHandValue < 21 && dealerHandValue < playerHandValue) || (playerHandValue == 21))
+        if ((playerHandValue < 21 && dealerHandValue < playerHandValue) || (playerHandValue == 21 && dealerHandValue != 21)) //if player is less than 21, dealer is less than 21, but dealer has less than player win ; if player gets to 21 and dealer did not win
         {
             //win the game
             WinGame();
         }
-        if (((playerHandValue < dealerHandValue) && dealerHandValue < 21) || (dealerHandValue == 21 && playerHandValue != 21))
+        if (((playerHandValue < dealerHandValue) && dealerHandValue < 21) || (dealerHandValue == 21 && playerHandValue != 21)) //if player has less than dealer, and dealer has less than 21 fail ; if dealer got to 21 and player did not fail
         {
             //lose the game
             LoseGame();
         }
-        if (playerHandValue == 21 && dealerHandValue == 21)
+        if ((dealerHandValue == playerHandValue)) //if both dealer and player end with same amount, draw
         {
             //tie
             DrawGame();
