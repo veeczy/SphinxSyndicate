@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +10,11 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 1.0f;
     public float stopSpeed = 1.0f;
     private bool lookRight;
+    public Vector2 direction;
+
+    // Reference to the BlackJack script on the BJ NPC object
+    public bool canMove = true;
+    private GameObject BlackJackObject;
 
     [Header("Dodge Settings")]
     public float dodgeDistance = 1f;
@@ -50,6 +56,12 @@ public class PlayerMovement : MonoBehaviour
         playerAudio = GetComponent<AudioSource>();
         playerAudio.clip = footstepAudio;
 
+        BlackJackObject = GameObject.Find("BJ-NPC-Test");
+        if(BlackJackObject != null)
+        {
+            canMove = BlackJackObject.GetComponent<BlackJack>().canMove;
+        }
+
         anim = GetComponent<Animator>(); // NEW
     }
 
@@ -62,6 +74,11 @@ public class PlayerMovement : MonoBehaviour
         {
             dodgeclick = true;
             dodgekeypress = false;
+        }
+
+        if (BlackJackObject != null)
+        {
+            canMove = BlackJackObject.GetComponent<BlackJack>().canMove;
         }
     }
 
@@ -99,10 +116,20 @@ public class PlayerMovement : MonoBehaviour
             if (chargeTimer <= 2) chargeTimer = 0;
         }
 
-        // Movement
-        Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
-        myPlayer.linearVelocity = direction * speed;
+        //detect if movement should be frozen
+        if(!canMove)
+        {
+            // stop ability to move
+            direction = Vector2.zero;
+        }
+        if(canMove)
+        {
+            // Movement
+            direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+            myPlayer.linearVelocity = direction * speed;
+        }
 
+        
         // NEW � walking animation toggle
         bool isMoving = direction.magnitude > 0.1f;
         anim.SetBool("isWalking", isMoving);
