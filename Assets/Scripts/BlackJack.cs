@@ -330,7 +330,7 @@ public class BlackJack : MonoBehaviour
         HideUI(button4);
 
         DealerTurn();
-        if ((playerHandValue < 21 && dealerHandValue < playerHandValue) || (playerHandValue == 21 && dealerHandValue != 21)) //if player is less than 21, dealer is less than 21, but dealer has less than player win ; if player gets to 21 and dealer did not win
+        if ((playerHandValue < 21 && dealerHandValue < playerHandValue) || (playerHandValue == 21 && dealerHandValue != 21) || (dealerHandValue > 21)) //if player is less than 21, dealer is less than 21, but dealer has less than player win ; if player gets to 21 and dealer did not win
         {
             //win the game
             WinGame();
