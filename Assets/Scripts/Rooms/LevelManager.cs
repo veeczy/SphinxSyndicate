@@ -11,18 +11,15 @@ public class LevelManager : MonoBehaviour
     [Header("Current Area (set by wanted board)")]
     public AreaType currentArea = AreaType.Desert;
 
-    // ----------------------------
-    // RANDOM ROOMS BY AREA
-    // ----------------------------
     [Header("Random Rooms (build indexes)")]
     public List<int> desertRoomIndexes = new List<int>();
     public List<int> cityRoomIndexes = new List<int>();
     public List<int> swampRoomIndexes = new List<int>();
 
     [Header("Secret Rooms (optional)")]
-    public int desertSecretRoomIndex = -1;
-    public int citySecretRoomIndex = -1;
-    public int swampSecretRoomIndex = -1;
+    public List<int> desertSecretRoomIndexes = new List<int>();
+    public List<int> citySecretRoomIndexes = new List<int>();
+    public List<int> swampSecretRoomIndexes = new List<int>();
 
     [Header("Boss Rooms")]
     public int desertBossRoomIndex = -1;
@@ -47,7 +44,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    // unchanged override behavior
     public void LoadSceneByTrigger(int sceneIndex)
     {
         if (sceneIndex == 1 || sceneIndex == 2)
@@ -59,9 +55,13 @@ public class LevelManager : MonoBehaviour
         LoadNextRoom();
     }
 
-    // ----------------------------
-    // CORE RANDOM LOGIC (same flow)
-    // ----------------------------
+    // NEW: call this from the door that exits the biome start zone
+    public void StartRunInCurrentArea()
+    {
+        roomsCompleted = 0;
+        LoadNextRoom();
+    }
+
     public void LoadNextRoom()
     {
         roomsCompleted++;
@@ -90,21 +90,22 @@ public class LevelManager : MonoBehaviour
     public void ResetRun()
     {
         roomsCompleted = 0;
-        // designer can repopulate lists if needed
     }
 
     public void LoadSecretRoom()
     {
-        int secret = GetSecretRoom();
-        if (secret >= 0)
-            SceneManager.LoadScene(secret);
-        else
-            Debug.LogWarning("Secret room index not set for this area!");
+        List<int> secrets = GetSecretRoomPool();
+
+        if (secrets.Count == 0)
+        {
+            Debug.LogWarning("No secret rooms set for this area!");
+            return;
+        }
+
+        int pick = Random.Range(0, secrets.Count);
+        SceneManager.LoadScene(secrets[pick]);
     }
 
-    // ----------------------------
-    // HELPERS (NEW, SIMPLE)
-    // ----------------------------
     private List<int> GetCurrentRoomPool()
     {
         return currentArea switch
@@ -125,13 +126,18 @@ public class LevelManager : MonoBehaviour
         };
     }
 
-    private int GetSecretRoom()
+    private List<int> GetSecretRoomPool()
     {
         return currentArea switch
         {
-            AreaType.City => citySecretRoomIndex,
-            AreaType.Swamp => swampSecretRoomIndex,
-            _ => desertSecretRoomIndex,
+            AreaType.City => citySecretRoomIndexes,
+            AreaType.Swamp => swampSecretRoomIndexes,
+            _ => desertSecretRoomIndexes,
         };
+    }
+
+    public void SetArea(AreaType area)
+    {
+        currentArea = area;
     }
 }

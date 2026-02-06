@@ -2570,7 +2570,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5606947235136161330, guid: aae1c78e75352524abf8a1f34f5cdeec, type: 3}
   m_PrefabInstance: {fileID: 216743793}
   m_PrefabAsset: {fileID: 0}
-
 --- !u!1 &234262826
 GameObject:
   m_ObjectHideFlags: 0
@@ -2638,7 +2637,6 @@ RectTransform:
   m_AnchoredPosition: {x: -22.007019, y: -183.07501}
   m_SizeDelta: {x: -632.771, y: -190.40125}
   m_Pivot: {x: 0.5, y: 0.5}
-
 --- !u!1001 &263061600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -71215,7 +71213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4151325868681887563, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4151325868681887563, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
       propertyPath: sceneIndex
@@ -71276,6 +71274,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2519040835048067452, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1349734150}
+    - targetCorrespondingSourceObject: {fileID: 2519040835048067452, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1349734151}
   m_SourcePrefab: {fileID: 100100000, guid: 01ed997a4ebd6c24195437e0640c5f06, type: 3}
 --- !u!1 &1349734149 stripped
 GameObject:
@@ -71295,9 +71296,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BiomeDoor
   onTrigger: 1
-  desertStartScene: DesertStart
+  forceBiome: 1
+  forcedBiome: 0
+  desertStartScene: Starting_Area
   cityStartScene: CityStart
   swampStartScene: SwampStart
+--- !u!114 &1349734151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349734149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8a24280aa8987e4e8feec157fb3570c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DoorLock
+  startLocked: 1
 --- !u!1 &1459378526
 GameObject:
   m_ObjectHideFlags: 0
@@ -77061,3 +77077,4 @@ SceneRoots:
   - {fileID: 1495213}
   - {fileID: 905501476}
   - {fileID: 725037100}
+  - {fileID: 234262827}

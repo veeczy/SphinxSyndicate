@@ -5,6 +5,11 @@ public class BiomeDoor : MonoBehaviour
 {
     public bool onTrigger = true;
 
+    [Header("Optional: force a biome (for testing / until wanted board exists)")]
+    public bool forceBiome = true;
+    public LevelManager.AreaType forcedBiome = LevelManager.AreaType.Desert;
+
+    [Header("Start Zone Scene Names")]
     public string desertStartScene = "DesertStart";
     public string cityStartScene = "CityStart";
     public string swampStartScene = "SwampStart";
@@ -20,6 +25,9 @@ public class BiomeDoor : MonoBehaviour
             return;
         }
 
+        if (forceBiome)
+            LevelManager.instance.currentArea = forcedBiome;
+
         switch (LevelManager.instance.currentArea)
         {
             case LevelManager.AreaType.City:
@@ -34,4 +42,3 @@ public class BiomeDoor : MonoBehaviour
         }
     }
 }
-
