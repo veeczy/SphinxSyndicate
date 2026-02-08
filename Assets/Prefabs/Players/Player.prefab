@@ -295,7 +295,9 @@ MonoBehaviour:
   dodgeSprite: {fileID: 21300000, guid: e90f2f4124786794287f351302b56678, type: 3}
   dodgekeypress: 0
   weaponObject: {fileID: 0}
-  footstepAudio: {fileID: 0}
+  footstepAudio: {fileID: 8300000, guid: 1c2b66209eb9c1c409957dc01142de20, type: 3}
+  dodgeAudio: {fileID: 8300000, guid: 35c848fcc4a8be54fb1c621a261bbf07, type: 3}
+  dodgeVolume: 0.5
   aimPos: {x: 0, y: 0}
 --- !u!82 &111781466897056157
 AudioSource:
@@ -308,11 +310,11 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_Resource: {fileID: 8300000, guid: 1c2b66209eb9c1c409957dc01142de20, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
