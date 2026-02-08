@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2278804738445514127}
   - component: {fileID: 3713142385151637316}
   - component: {fileID: 7174725410210936495}
-  - component: {fileID: 7127684373654103276}
   m_Layer: 0
   m_Name: Treasure
   m_TagString: Untagged
@@ -123,7 +122,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -137,7 +136,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2, y: 2}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &7174725410210936495
 Rigidbody2D:
@@ -165,20 +164,4 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
---- !u!114 &7127684373654103276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7617943829387161802}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdc23200fb6dd7c4aa291a4853be2813, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Health_Chest
-  isOpened: 0
-  crate: {fileID: 2278804738445514127}
-  openCrateSprite: {fileID: 21300000, guid: 91bf4f6ff7ed80b4baa091520f139de1, type: 3}
-  healthBoost: 3
+  m_Constraints: 0
