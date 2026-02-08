@@ -16,8 +16,9 @@ public class BiomeDoor : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("BiomeDoor triggered by: " + other.name + " tag=" + other.tag);
+
         if (!onTrigger) return;
-        if (!other.CompareTag("Player")) return;
 
         if (LevelManager.instance == null)
         {
@@ -28,17 +29,28 @@ public class BiomeDoor : MonoBehaviour
         if (forceBiome)
             LevelManager.instance.currentArea = forcedBiome;
 
+        Debug.Log("Current biome = " + LevelManager.instance.currentArea);
+
         switch (LevelManager.instance.currentArea)
         {
             case LevelManager.AreaType.City:
+                Debug.Log("Loading CityStart");
                 SceneManager.LoadScene(cityStartScene);
                 break;
             case LevelManager.AreaType.Swamp:
+                Debug.Log("Loading SwampStart");
                 SceneManager.LoadScene(swampStartScene);
                 break;
             default:
+                Debug.Log("Loading DesertStart");
                 SceneManager.LoadScene(desertStartScene);
                 break;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D col)
+    {
+        Debug.Log("COLLISION with: " + col.collider.name);
+    }
 }
+
