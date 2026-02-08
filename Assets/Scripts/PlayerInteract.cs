@@ -4,16 +4,15 @@ using TMPro;
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("Interaction Settings")]
-    public float interactRange = 2f;
-    public KeyCode interactKey = KeyCode.E;
-    public LayerMask npcLayer;
+    public float interactRange = 2f;        // How close player must be
+    public KeyCode interactKey = KeyCode.E; // Key to press for interaction
+    public LayerMask npcLayer;             // Layer of NPCs
 
     [Header("Dialogue UI")]
-    public GameObject dialogueUI;
+    public GameObject dialogueUI;      
     public TMP_Text dialogueText;
 
     private NPC currentNPC = null;
-    private NPC talkingToNPC = null;   
     private int dialogueIndex = 0;
     private bool isDialogueActive = false;
 
@@ -25,18 +24,6 @@ public class PlayerInteraction : MonoBehaviour
             currentNPC = hit.GetComponent<NPC>();
         else
             currentNPC = null;
-
-        //  Auto-end dialogue feature
-        if (isDialogueActive && talkingToNPC != null)
-        {
-            float distance = Vector2.Distance(transform.position, talkingToNPC.transform.position);
-            if (distance > interactRange * 4f) //Range at which dialogue ends
-
-            {
-                EndDialogue();
-                return;
-            }
-        }
 
         // Handle pressing E
         if (Input.GetButtonDown("Interact"))
@@ -58,7 +45,6 @@ public class PlayerInteraction : MonoBehaviour
 
         isDialogueActive = true;
         dialogueIndex = 0;
-        talkingToNPC = currentNPC;   
         dialogueUI.SetActive(true);
         dialogueText.text = currentNPC.dialogueLines[dialogueIndex];
     }
@@ -84,9 +70,9 @@ public class PlayerInteraction : MonoBehaviour
         dialogueUI.SetActive(false);
         isDialogueActive = false;
         dialogueIndex = 0;
-        talkingToNPC = null;   
     }
 
+    
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
