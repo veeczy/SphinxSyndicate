@@ -275,6 +275,8 @@ MonoBehaviour:
   maxHealth: 3
   currentHealth: 3
   bypassPlayerPrefs: 0
+  invincible: 0
+  Arnold: {fileID: 4897928467854683093}
 --- !u!114 &7233425569726320240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,7 +302,12 @@ MonoBehaviour:
   dodgekeypress: 0
   dodgeclick: 0
   chargeDodge: 0
+  chargeDodgeStart: 0
+  chargedodgeDuration: 0.5
+  hit: {fileID: 0}
+  offset: {fileID: 3844704270189968715}
   weaponObject: {fileID: 0}
+  isDodging: 0
   chargeTimer: 0
   footstepAudio: {fileID: 0}
   aimPos: {x: 0, y: 0}
@@ -502,6 +509,8 @@ MonoBehaviour:
   maxHealth: 3
   currentHealth: 0
   bypassPlayerPrefs: 0
+  invincible: 0
+  Arnold: {fileID: 0}
 --- !u!95 &6011222854516327287
 Animator:
   serializedVersion: 7
