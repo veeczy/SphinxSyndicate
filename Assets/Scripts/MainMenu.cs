@@ -17,6 +17,28 @@ public class MainMenu : MonoBehaviour
             Debug.LogError("No scene name set in MainMenu script!");
         }
     }
+    public void Settings()
+    {
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            SceneManager.LoadScene("Settings");
+        }
+        else
+        {
+            Debug.LogError("No scene name set in MainMenu script!");
+        }
+    }
+    public void HowToPlay()
+    {
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            SceneManager.LoadScene("HowToPlay");
+        }
+        else
+        {
+            Debug.LogError("No scene name set in MainMenu script!");
+        }
+    }
     public void QuitGame()
     {
         Debug.Log("Game is quitting...");
