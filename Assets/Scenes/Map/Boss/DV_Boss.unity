@@ -237,6 +237,8 @@ MonoBehaviour:
   sheepCounter: 0
   direction: {x: 0, y: 0}
   stalkTimer: 10
+  debugDamageKey: 56
+  debugDamageAmount: 50
 --- !u!61 &99095219
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -465,7 +467,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
 --- !u!114 &239859375
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,7 +499,6 @@ MonoBehaviour:
   m_InputActionsPerSecond: 10
   m_RepeatDelay: 0.5
   m_ForceModuleActive: 0
-
 --- !u!1 &250953676
 GameObject:
   m_ObjectHideFlags: 0
@@ -621,12 +621,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397407229}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94feb0a9756596445b87cd91ffdfe099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinTrigger
-  targetEnemy: {fileID: 0}
+  target: {fileID: 1531050451}
   winSceneName: WinScene
 --- !u!4 &397407231
 Transform:
@@ -51268,6 +51268,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: acca54ec889a35d40a04eb64ed5a15dd, type: 3}
+--- !u!4 &904686216 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4755310737655801534, guid: acca54ec889a35d40a04eb64ed5a15dd, type: 3}
+  m_PrefabInstance: {fileID: 904686215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &908230508
 GameObject:
   m_ObjectHideFlags: 0
@@ -52418,6 +52423,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445594292}
   m_CullTransparentMesh: 1
+--- !u!114 &1531050451 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+  m_PrefabInstance: {fileID: 8002804505711245917}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69afde39c212954d8c2214aaea85735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossAI
 --- !u!1 &1576134483
 GameObject:
   m_ObjectHideFlags: 0
@@ -52645,13 +52661,13 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 240115171}
   - {fileID: 1643556548}
   - {fileID: 916634791}
   - {fileID: 1711768283}
   - {fileID: 2088751271}
   - {fileID: 641607591}
   - {fileID: 659436}
+  - {fileID: 904686216}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1711768282
