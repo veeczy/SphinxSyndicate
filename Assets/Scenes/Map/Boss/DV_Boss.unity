@@ -237,6 +237,8 @@ MonoBehaviour:
   sheepCounter: 0
   direction: {x: 0, y: 0}
   stalkTimer: 10
+  debugDamageKey: 56
+  debugDamageAmount: 50
 --- !u!61 &99095219
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -619,12 +621,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 397407229}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94feb0a9756596445b87cd91ffdfe099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinTrigger
-  targetEnemy: {fileID: 0}
+  target: {fileID: 1531050451}
   winSceneName: WinScene
 --- !u!4 &397407231
 Transform:
@@ -52421,6 +52423,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1445594292}
   m_CullTransparentMesh: 1
+--- !u!114 &1531050451 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+  m_PrefabInstance: {fileID: 8002804505711245917}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d69afde39c212954d8c2214aaea85735, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BossAI
 --- !u!1 &1576134483
 GameObject:
   m_ObjectHideFlags: 0

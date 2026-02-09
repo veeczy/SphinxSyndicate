@@ -96,7 +96,7 @@ public class BossAI : MonoBehaviour
             sheepVelocity *= 2.0f;
             moveSpeed *= 2;
         }
-        if (health <= 0 && phase2)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
