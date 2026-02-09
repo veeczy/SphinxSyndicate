@@ -3396,10 +3396,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BiomeDoor
   onTrigger: 1
   forceBiome: 0
-  forcedBiome: 1
+  forcedBiome: 2
   desertStartScene: Starting_Area
   cityStartScene: Gas_Station_Exterior
-  swampStartScene: Swamp
+  swampStartScene: Swamp_Shop_Exterior
 --- !u!1001 &324804173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4363,7 +4363,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraMovement
   isPlayerStill: 0
-  player: {fileID: 0}
+  player: {fileID: 1611275734}
   mainCamera: {fileID: 469526839}
   offset: {x: 0, y: 0, z: 0}
 --- !u!114 &469526841
