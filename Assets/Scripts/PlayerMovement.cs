@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     //INPUT
     public bool controller = false;//true if controller input detected
-    public float sensMult = 1f;
+    public float controllerTurnSpeed = 15f;//Controller turn sensitivity
     public Vector2 deadzone = new Vector2(0.5f, 0.5f);
     public Vector2 stickAxis;
 
@@ -48,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         playerSprite = GetComponent<SpriteRenderer>().sprite;
         playerAudio = GetComponent<AudioSource>();
         playerAudio.clip = footstepAudio;
-
+        lastStickPos = Vector2.right;
         anim = GetComponent<Animator>(); // NEW
     }
 
@@ -119,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if(stickAxis.sqrMagnitude  > deadzone.sqrMagnitude)
             {
-                Vector2 stickPos = stickAxis * sensMult;
+                Vector2 stickPos = stickAxis.normalized;
                 aimPos = (Vector2)transform.position + stickPos;
                 lastStickPos = stickPos;
             }
@@ -131,7 +131,7 @@ public class PlayerMovement : MonoBehaviour
         }
         Vector2 aimDir = (Vector2)aimPos - (Vector2)transform.position;
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, angle), controllerTurnSpeed * Time.deltaTime);
         //Debug.DrawLine(transform.position, aimPos, Color.red);
 
         if (angle > 90 || angle < -90)
