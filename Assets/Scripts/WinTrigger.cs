@@ -3,16 +3,16 @@ using UnityEngine.SceneManagement;
 
 public class WinTrigger : MonoBehaviour
 {
-    public EnemyAI targetEnemy;  // Drag the enemy you must defeat
-    public string winSceneName;  // Type the name of your win scene here
+    public MonoBehaviour target;   // drag BossAI or any enemy script component
+    public string winSceneName;
 
     void Update()
     {
-        // When the target enemy is destroyed, load the win scene
-        if (targetEnemy == null)
+        if (target == null)
         {
             SceneManager.LoadScene(winSceneName);
         }
     }
 }
+
 

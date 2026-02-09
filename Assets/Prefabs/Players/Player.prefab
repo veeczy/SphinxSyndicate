@@ -274,6 +274,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 3
+  bypassPlayerPrefs: 0
+  invincible: 0
+  Arnold: {fileID: 4897928467854683093}
 --- !u!114 &7233425569726320240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,15 +292,26 @@ MonoBehaviour:
   myPlayer: {fileID: 3797201481818275215}
   speed: 15
   stopSpeed: 10
-  dodgeDistance: 5
+  direction: {x: 0, y: 0}
+  canMove: 1
+  dodgeDistance: 1
+  dodgeDis: 0
   dodgeDuration: 0.15
   dodgeCooldown: 0.3
   dodgeSprite: {fileID: 21300000, guid: e90f2f4124786794287f351302b56678, type: 3}
   dodgekeypress: 0
+  dodgeclick: 0
+  chargeDodge: 0
+  chargeDodgeStart: 0
+  chargedodgeDuration: 0.5
+  hit: {fileID: 0}
+  offset: {fileID: 3844704270189968715}
   weaponObject: {fileID: 0}
+
   footstepAudio: {fileID: 8300000, guid: 1c2b66209eb9c1c409957dc01142de20, type: 3}
   dodgeAudio: {fileID: 8300000, guid: 35c848fcc4a8be54fb1c621a261bbf07, type: 3}
   dodgeVolume: 0.5
+
   aimPos: {x: 0, y: 0}
 --- !u!82 &111781466897056157
 AudioSource:
@@ -481,7 +495,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.25
 --- !u!114 &4899432532245730738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +510,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
+  bypassPlayerPrefs: 0
+  invincible: 0
+  Arnold: {fileID: 0}
 --- !u!95 &6011222854516327287
 Animator:
   serializedVersion: 7
