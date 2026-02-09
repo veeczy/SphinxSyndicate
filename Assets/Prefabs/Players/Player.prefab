@@ -178,6 +178,7 @@ GameObject:
   - component: {fileID: 4926514013110605406}
   - component: {fileID: 4899432532245730738}
   - component: {fileID: 6011222854516327287}
+  - component: {fileID: 2536056011199687431}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -274,6 +275,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 3
+  bypassPlayerPrefs: 0
+  invincible: 0
+  Arnold: {fileID: 4897928467854683093}
 --- !u!114 &7233425569726320240
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,16 +293,32 @@ MonoBehaviour:
   myPlayer: {fileID: 3797201481818275215}
   speed: 15
   stopSpeed: 10
-  dodgeDistance: 5
+  direction: {x: 0, y: 0}
+  canMove: 1
+  dodgeDistance: 1
+  dodgeDis: 0
   dodgeDuration: 0.15
   dodgeCooldown: 0.3
   dodgeSprite: {fileID: 21300000, guid: e90f2f4124786794287f351302b56678, type: 3}
   dodgekeypress: 0
+  dodgeclick: 0
+  chargeDodge: 0
+  chargeDodgeStart: 0
+  chargedodgeDuration: 0.5
+  hit: {fileID: 0}
+  offset: {fileID: 3844704270189968715}
   weaponObject: {fileID: 0}
-  footstepAudio: {fileID: 8300000, guid: 1c2b66209eb9c1c409957dc01142de20, type: 3}
-  dodgeAudio: {fileID: 8300000, guid: 35c848fcc4a8be54fb1c621a261bbf07, type: 3}
-  dodgeVolume: 0.5
+  isDodging: 0
+  chargeTimer: 0
+  footstepAudio: {fileID: 0}
+  dodgeAudio: {fileID: 0}
+  dodgeVolume: 1
   aimPos: {x: 0, y: 0}
+  lastStickPos: {x: 0, y: 0}
+  controller: 0
+  controllerTurnSpeed: 15
+  deadzone: {x: 0.5, y: 0.5}
+  stickAxis: {x: 0, y: 0}
 --- !u!82 &111781466897056157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -481,7 +501,7 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.25
 --- !u!114 &4899432532245730738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,6 +516,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 3
   currentHealth: 0
+  bypassPlayerPrefs: 0
+  invincible: 0
+  Arnold: {fileID: 4897928467854683093}
 --- !u!95 &6011222854516327287
 Animator:
   serializedVersion: 7
@@ -518,3 +541,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2536056011199687431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4897928467854683093}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e620715ae8cb5ce4390e42244c8f9457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInteraction
+  interactRange: 2
+  interactKey: 101
+  npcLayer:
+    serializedVersion: 2
+    m_Bits: 1024
+  dialogueUI: {fileID: 0}
+  dialogueText: {fileID: 0}

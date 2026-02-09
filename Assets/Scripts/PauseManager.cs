@@ -88,7 +88,7 @@ public class PauseManager : MonoBehaviour
     {
         if (pauseMenuUI == null)
         {
-            Debug.LogError("[PauseManager] Cannot pause — PAUSED UI not found!");
+            Debug.LogError("[PauseManager] Cannot pause ï¿½ PAUSED UI not found!");
             return;
         }
 
@@ -102,7 +102,7 @@ public class PauseManager : MonoBehaviour
     {
         if (pauseMenuUI == null)
         {
-            Debug.LogError("[PauseManager] Cannot resume — PAUSED UI not found!");
+            Debug.LogError("[PauseManager] Cannot resume ï¿½ PAUSED UI not found!");
             return;
         }
 

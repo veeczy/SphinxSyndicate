@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: ProjectBrowser
+  m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -268,7 +268,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GridPaintPaletteWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -281,9 +281,10 @@ MonoBehaviour:
   m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 22}
   m_Panes:
+  - {fileID: 21}
   - {fileID: 22}
   m_Selected: 0
-  m_LastSelected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -1366,10 +1367,10 @@ MonoBehaviour:
     m_TextWithWhitespace: "Animator\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 217.6
-    y: 79.200005
-    width: 1011.6
-    height: 410.8
+    x: 273
+    y: 79
+    width: 1264
+    height: 571
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1389,21 +1390,15 @@ MonoBehaviour:
     - {fileID: 3727691647772332934, guid: 371fd19f30023c349a0b4f85a7524207, type: 2}
     - {fileID: -3290967695369273341, guid: 854c78483e64dee4a96ce4106844f651, type: 2}
     - {fileID: -3712587343364261836, guid: 6835d178e0e32e649906377479edc29a, type: 2}
-    - {fileID: 8760715134967683021, guid: 14312d33b1e79be49a64871b16895a56, type: 2}
-    - {fileID: 170755204163102935, guid: 782986e344a0cc549bb116f70e2586e9, type: 2}
-    - {fileID: 1754941587649846382, guid: 6ede6d675eae3874999c91ae0692e170, type: 2}
-    - {fileID: 1902680124001494790, guid: 48156e5a9fd467040960082712fd7747, type: 2}
-    - {fileID: -1266732615967676608, guid: fa9a6ce6e136b53479e982df26d6bae3, type: 2}
-    - {fileID: -6745682084743053209, guid: 5a60cd97df8fcd649a8c5e271827d0c5, type: 2}
     m_ValueSerializationHelper:
-    - e00: 0.87200004
+    - e00: 0.8711579
       e01: 0
       e02: 0
-      e03: -28.600006
+      e03: -28.557892
       e10: 0
-      e11: 0.87200004
+      e11: 0.8711579
       e12: 0
-      e13: 13.779999
+      e13: 53.058945
       e20: 0
       e21: 0
       e22: 1
@@ -1412,14 +1407,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.7986969
+    - e00: 0.8711579
       e01: 0
       e02: 0
-      e03: 1.344162
+      e03: -28.557892
       e10: 0
-      e11: 0.7986969
+      e11: 0.8711579
       e12: 0
-      e13: 13.870377
+      e13: 92.261055
       e20: 0
       e21: 0
       e22: 1
@@ -1476,110 +1471,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 0.8711579
+    - e00: 0.96955806
       e01: 0
       e02: 0
-      e03: -28.557892
+      e03: 50.46881
       e10: 0
-      e11: 0.8711579
+      e11: 0.96955806
       e12: 0
-      e13: 122.75158
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.87200004
-      e01: 0
-      e02: 0
-      e03: -28.600006
-      e10: 0
-      e11: 0.87200004
-      e12: 0
-      e13: 47.919983
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.87200004
-      e01: 0
-      e02: 0
-      e03: -28.600006
-      e10: 0
-      e11: 0.87200004
-      e12: 0
-      e13: 69.85999
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.87200004
-      e01: 0
-      e02: 0
-      e03: -28.600006
-      e10: 0
-      e11: 0.87200004
-      e12: 0
-      e13: 47.209976
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.87200004
-      e01: 0
-      e02: 0
-      e03: -28.600006
-      e10: 0
-      e11: 0.87200004
-      e12: 0
-      e13: 36.65999
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    - e00: 0.87200004
-      e01: 0
-      e02: 0
-      e03: -28.600006
-      e10: 0
-      e11: 0.87200004
-      e12: 0
-      e13: 55.199997
+      e13: 102.91664
       e20: 0
       e21: 0
       e22: 1
@@ -1589,9 +1488,9 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: fa9a6ce6e136b53479e982df26d6bae3, type: 2}
+  m_AnimatorController: {fileID: 9100000, guid: 6835d178e0e32e649906377479edc29a, type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: -1266732615967676608, guid: fa9a6ce6e136b53479e982df26d6bae3, type: 2}
+  - m_Target: {fileID: -3712587343364261836, guid: 6835d178e0e32e649906377479edc29a, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -1613,22 +1512,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 13855, guid: 0000000000000000e000000000000000, type: 0}
+  m_Script: {fileID: 12071, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
-  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.PreferenceSettingsWindow
-  m_MinSize: {x: 310, y: 200}
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.AnimationWindow
+  m_MinSize: {x: 50, y: 50}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Preferences
     m_Image: {fileID: -5712115415447495865, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
-    m_TextWithWhitespace: "Preferences\u200B"
+    m_TextWithWhitespace: "Animation\u200B"
   m_Pos:
     serializedVersion: 2
     x: 273
     y: 79
     width: 1264
-    height: 658
+    height: 571
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1677,22 +1576,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 13854, guid: 0000000000000000e000000000000000, type: 0}
+  m_Script: {fileID: 13855, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
-  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.ProjectSettingsWindow
+  m_EditorClassIdentifier: UnityEditor.dll::UnityEditor.PreferenceSettingsWindow
   m_MinSize: {x: 310, y: 200}
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Project Settings
     m_Image: {fileID: -5712115415447495865, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
-    m_TextWithWhitespace: "Project Settings\u200B"
+    m_TextWithWhitespace: "Preferences\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 217.6
-    y: 79.200005
-    width: 1011.6
-    height: 410.8
+    x: 273
+    y: 79
+    width: 1264
+    height: 658
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1705,15 +1604,15 @@ MonoBehaviour:
     m_ContainerData: []
     m_OverlaysVisible: 1
   m_PosLeft: {x: 0, y: 0}
-  m_PosRight: {x: 0, y: 614}
-  m_Scope: 1
-  m_SplitterPos: 224
+  m_PosRight: {x: 0, y: 0}
+  m_Scope: 0
+  m_SplitterPos: 150
   m_SearchText: 
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4dcf9b58
-    m_LastClickedID: 1486606157
-    m_ExpandedIDs: a01a5fa6000000007f0eae07e594f01ac53aba5a
+    m_SelectedIDs: ce3102cc
+    m_LastClickedID: -872271410
+    m_ExpandedIDs: 2956c29689577ec10000000001fecd11
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1816,6 +1715,7 @@ MonoBehaviour:
     m_SearchArea: 1
     m_Folders:
     - Assets/Scenes/Menus
+    - Assets/Scripts
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1835,6 +1735,16 @@ MonoBehaviour:
     m_SelectedIDs: 2eba0000
     m_LastClickedID: 47662
     m_ExpandedIDs: 00000000d2b90000
+  - Assets/Scripts
+  m_LastFoldersGridSize: -1
+  m_LastProjectPath: C:\Users\shape\Documents\GitHub\SphinxSyndicate
+  m_LockTracker:
+    m_IsLocked: 0
+  m_FolderTreeState:
+    scrollPos: {x: 0, y: 230}
+    m_SelectedIDs: 26c00000
+    m_LastClickedID: 49190
+    m_ExpandedIDs: 0000000054bb000056bb000058bb0000f2bf000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2006,3 +1916,67 @@ MonoBehaviour:
   m_LockTracker:
     m_IsLocked: 0
   m_PreviewWindow: {fileID: 0}
+--- !u!114 &22
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f683d99f24875748a6656966ca9cea0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.2D.Tilemap.Editor::UnityEditor.Tilemaps.GridPaintPaletteWindow
+  m_MinSize: {x: 356, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Tile Palette
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+    m_TextWithWhitespace: "Tile Palette\u200B"
+  m_Pos:
+    serializedVersion: 2
+    x: 1539
+    y: 79
+    width: 380
+    height: 907
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData:
+    - dockPosition: 1
+      containerId: overlay-container--left
+      displayed: 1
+      id: Overlays/OverlayMenu
+      index: 0
+      contents: '{"m_Layout":1,"m_Collapsed":false,"m_Folded":false,"m_Floating":false,"m_FloatingSnapOffset":{"x":24.0,"y":0.0},"m_SnapOffsetDelta":{"x":0.0,"y":0.0},"m_FloatingSnapCorner":0,"m_Size":{"x":0.0,"y":0.0},"m_SizeOverridden":false}'
+      floating: 0
+      collapsed: 0
+      snapOffset: {x: 24, y: 0}
+      snapOffsetDelta: {x: 0, y: 0}
+      snapCorner: 0
+      layout: 1
+      size: {x: 0, y: 0}
+      sizeOverridden: 0
+    m_ContainerData:
+    - containerId: overlay-toolbar__top
+      scrollOffset: 0
+    - containerId: overlay-toolbar__left
+      scrollOffset: 0
+    - containerId: overlay-container--left
+      scrollOffset: 0
+    - containerId: overlay-container--right
+      scrollOffset: 0
+    - containerId: overlay-toolbar__right
+      scrollOffset: 0
+    - containerId: overlay-toolbar__bottom
+      scrollOffset: 0
+    - containerId: Floating
+      scrollOffset: 0
+    m_OverlaysVisible: 1

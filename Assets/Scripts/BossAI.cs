@@ -35,6 +35,11 @@ public class BossAI : MonoBehaviour
     private int healthPercent;
     private int healthbarMax;
 
+
+    //testing
+    public KeyCode debugDamageKey = KeyCode.Alpha8;
+    public int debugDamageAmount = 50;
+
     void Start()
     {
         // Find the player by tag
@@ -46,6 +51,14 @@ public class BossAI : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if (Input.GetKeyDown(debugDamageKey))
+        {
+            health -= debugDamageAmount;
+            healthUI.value = health;
+            Debug.Log("DEBUG: Boss took " + debugDamageAmount + " damage. Health = " + health);
+        }
+
         // Measure distance to player
         distance = Vector2.Distance(transform.position, player.position);
         direction = (player.position - transform.position);//Target direction
@@ -83,7 +96,7 @@ public class BossAI : MonoBehaviour
             sheepVelocity *= 2.0f;
             moveSpeed *= 2;
         }
-        if (health <= 0 && phase2)
+        if (health <= 0)
         {
             Destroy(gameObject);
         }
