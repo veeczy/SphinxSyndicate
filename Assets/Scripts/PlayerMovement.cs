@@ -27,11 +27,19 @@ public class PlayerMovement : MonoBehaviour
     private Sprite playerSprite;
     public bool dodgekeypress = false;
     public bool dodgeclick = false;
+    [Header("Charge Dodge Settings")]
     public bool chargeDodge = false;
+    public bool chargeDodgeStart = false;
+    public float chargedodgeDuration = 0.5f;
+    public Collider2D hit;
+    ContactFilter2D contactFilter;
+    LayerMask mask;
+    Vector3 offsetPos;
+    public GameObject offset;
 
     [Header("Player Objects")]
     public GameObject weaponObject;
-    private bool isDodging = false;
+    public bool isDodging = false;
     private bool canDodge = true;
     private Vector2 dodgeStart;
     private Vector2 dodgeEnd;
@@ -63,6 +71,11 @@ public class PlayerMovement : MonoBehaviour
         }
 
         anim = GetComponent<Animator>(); // NEW
+
+        if(offset == null) //if offset not linked in inspector
+        {
+            offset = GameObject.Find("GunHolder"); //look for offset object in hierarchy and set it to that
+        }
     }
 
     private void Update()
@@ -89,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
             dodgeTimer += Time.fixedDeltaTime;
             float t = dodgeTimer / dodgeDuration;
             myPlayer.MovePosition(Vector2.Lerp(dodgeStart, dodgeEnd, t));
-            GetComponent<SpriteRenderer>().sprite = dodgeSprite; //need to change this to anim.setbool dodge state to work
+            //GetComponent<SpriteRenderer>().sprite = dodgeSprite; //OLD
 
             // NEW � during dodge, force idle animation
             anim.SetBool("isWalking", false);
@@ -97,23 +110,30 @@ public class PlayerMovement : MonoBehaviour
             if (t >= 1f)
             {
                 isDodging = false;
-                GetComponent<SpriteRenderer>().sprite = playerSprite;
+                //GetComponent<SpriteRenderer>().sprite = playerSprite; //OLD
                 StartCoroutine(DodgeCooldown());
             }
 
             return;
         }
 
+        //raycast stuff
+        mask = LayerMask.GetMask("Wall");
+        contactFilter.layerMask = mask;
+        offsetPos = offset.transform.position;
+
+        
+
         //charge dodge stuff
         if(dodgekeypress)
         {
             chargeTimer += Time.fixedDeltaTime;
-            if (chargeTimer > 2) chargeDodge = true;
+            if (chargeTimer > 1.5) chargeDodge = true;
             else chargeDodge = false;
         }
         if(!dodgekeypress)
         {
-            if (chargeTimer <= 2) chargeTimer = 0;
+            if (chargeTimer <= 1.5) chargeTimer = 0;
         }
 
         //detect if movement should be frozen
@@ -154,7 +174,33 @@ public class PlayerMovement : MonoBehaviour
         Vector2 aimDir = (Vector2)aimPos - (Vector2)transform.position;
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
-        //Debug.DrawLine(transform.position, aimPos, Color.red);
+
+        //more raycast stuff
+        //.DrawLine(transform.position, aimPos, Color.red);
+        hit = Physics2D.OverlapCircle(offsetPos, .5f, mask);
+
+        //charge dodge movement
+        if (chargeDodgeStart)
+        {
+            dodgeTimer += Time.fixedDeltaTime;
+
+            if (hit != null)
+            {
+                chargeDodgeStart = false; //stop charge dodge if hit wall
+                Debug.Log("Hit wall.");
+                anim.SetBool("isDodging", false);
+                StartCoroutine(DodgeCooldown());
+            }
+            if (hit == null)
+            {
+                myPlayer.position = myPlayer.position + aimDir * dodgeTimer;
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isDodging", true);
+            }
+
+            return;
+        }
+
 
         if (angle > 90 || angle < -90)
         {
@@ -211,11 +257,12 @@ public class PlayerMovement : MonoBehaviour
     }
     private void StartChargeRoll(Vector2 dir)
     {
-        chargeTimer = 0;
-        //this is where we put script for charge dodge movement
-
+        chargeTimer = 0; // reset timer of holding button
+        dodgeTimer = 0f;
+        chargeDodgeStart = true; //turn on charge dodge start
         //Debug.Log("Charge Dodged.");
-        dodgeclick = false;
+        dodgeclick = false; //reset clicking button
+        chargeDodge = false; //reset charge dodge from holding button being reached
     }
     private IEnumerator DodgeCooldown()
     {
