@@ -1,7 +1,8 @@
-using UnityEngine;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private Sprite playerSprite;
     public bool dodgekeypress = false;
     public bool dodgeclick = false;
+
     [Header("Charge Dodge Settings")]
     public bool chargeDodge = false;
     public bool chargeDodgeStart = false;
@@ -46,11 +48,10 @@ public class PlayerMovement : MonoBehaviour
     private float dodgeTimer;
     public float chargeTimer;
 
-    // Sound effects
-    public AudioClip footstepAudio;
-    private AudioSource playerAudio;
 
     [Header("Dodge Audio")]
+    public AudioClip footstepAudio;
+    private AudioSource playerAudio;
     public AudioClip dodgeAudio;
     public float dodgeVolume = 1f;
 
@@ -58,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     public Vector2 aimPos;
     public Vector2 lastStickPos;
 
-    // NEW � animator reference
+    // NEW   animator reference
     private Animator anim;
     //INPUT
     public bool controller = false;//true if controller input detected
@@ -76,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
 
         BlackJackObject = GameObject.Find("BJ-NPC-Test");
-        if(BlackJackObject != null)
+        if (BlackJackObject != null)
         {
             canMove = BlackJackObject.GetComponent<BlackJack>().canMove;
         }
@@ -84,7 +85,7 @@ public class PlayerMovement : MonoBehaviour
 
         anim = GetComponent<Animator>(); // NEW
 
-        if(offset == null) //if offset not linked in inspector
+        if (offset == null) //if offset not linked in inspector
         {
             offset = GameObject.Find("GunHolder"); //look for offset object in hierarchy and set it to that
         }
@@ -118,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
             myPlayer.MovePosition(Vector2.Lerp(dodgeStart, dodgeEnd, t));
             //GetComponent<SpriteRenderer>().sprite = dodgeSprite; //OLD
 
-            // NEW � during dodge, force idle animation
+            // NEW   during dodge, force idle animation
             anim.SetBool("isWalking", false);
             anim.SetBool("isDodging", true);
             if (t >= 1f)
@@ -136,35 +137,35 @@ public class PlayerMovement : MonoBehaviour
         contactFilter.layerMask = mask;
         offsetPos = offset.transform.position;
 
-        
+
 
         //charge dodge stuff
-        if(dodgekeypress)
+        if (dodgekeypress)
         {
             chargeTimer += Time.fixedDeltaTime;
             if (chargeTimer > 1.5) chargeDodge = true;
             else chargeDodge = false;
         }
-        if(!dodgekeypress)
+        if (!dodgekeypress)
         {
             if (chargeTimer <= 1.5) chargeTimer = 0;
         }
 
         //detect if movement should be frozen
-        if(!canMove)
+        if (!canMove)
         {
             // stop ability to move
             direction = Vector2.zero;
         }
-        if(canMove)
+        if (canMove)
         {
             // Movement
             direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
             myPlayer.linearVelocity = direction * speed;
         }
 
-        
-        // NEW � walking animation toggle
+
+        // NEW   walking animation toggle
         bool isMoving = direction.magnitude > 0.1f;
         anim.SetBool("isWalking", isMoving);
         anim.SetBool("isDodging", isDodging);
@@ -181,7 +182,13 @@ public class PlayerMovement : MonoBehaviour
                 playerAudio.Stop();
         }
 
- 
+        // Aim Rotation
+        Vector3 mousePos = Input.mousePosition;
+        mousePos.z = -Camera.main.transform.position.z;
+        aimPos = Camera.main.ScreenToWorldPoint(mousePos);
+        Vector2 aimDir = (Vector2)aimPos - (Vector2)transform.position;
+        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Euler(0f, 0f, angle);
 
         //more raycast stuff
         //.DrawLine(transform.position, aimPos, Color.red);
@@ -248,14 +255,10 @@ public class PlayerMovement : MonoBehaviour
         isDodging = true;
         canDodge = false;
         dodgeTimer = 0f;
-        
+
         dodgeStart = myPlayer.position;
 
-        dodgeEnd = dodgeStart + dir * dodgeDistance;
-        
-         if (dodgeAudio != null)
-        playerAudio.PlayOneShot(dodgeAudio, dodgeVolume);
-    }
+        if (dodgeAudio != null) { playerAudio.PlayOneShot(dodgeAudio, dodgeVolume); }
 
 
         //* THIS IS STUFF FOR MOUSE AIM DODGE, DO NOT DELETE *//
@@ -269,12 +272,13 @@ public class PlayerMovement : MonoBehaviour
 
         //* END MOUSE AIM DODGE STUFF *//
 
-        
+
         dodgeEnd = dodgeStart + dir * dodgeDistance;
 
         dodgeclick = false;
         //Debug.Log("Dodged.");
     }
+
     private void StartChargeRoll(Vector2 dir)
     {
         chargeTimer = 0; // reset timer of holding button

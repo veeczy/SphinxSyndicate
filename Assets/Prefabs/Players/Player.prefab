@@ -307,12 +307,17 @@ MonoBehaviour:
   hit: {fileID: 0}
   offset: {fileID: 3844704270189968715}
   weaponObject: {fileID: 0}
-
-  footstepAudio: {fileID: 8300000, guid: 1c2b66209eb9c1c409957dc01142de20, type: 3}
-  dodgeAudio: {fileID: 8300000, guid: 35c848fcc4a8be54fb1c621a261bbf07, type: 3}
-  dodgeVolume: 0.5
-
+  isDodging: 0
+  chargeTimer: 0
+  footstepAudio: {fileID: 0}
+  dodgeAudio: {fileID: 0}
+  dodgeVolume: 1
   aimPos: {x: 0, y: 0}
+  lastStickPos: {x: 0, y: 0}
+  controller: 0
+  controllerTurnSpeed: 15
+  deadzone: {x: 0.5, y: 0.5}
+  stickAxis: {x: 0, y: 0}
 --- !u!82 &111781466897056157
 AudioSource:
   m_ObjectHideFlags: 0
@@ -512,7 +517,7 @@ MonoBehaviour:
   currentHealth: 0
   bypassPlayerPrefs: 0
   invincible: 0
-  Arnold: {fileID: 0}
+  Arnold: {fileID: 4897928467854683093}
 --- !u!95 &6011222854516327287
 Animator:
   serializedVersion: 7
