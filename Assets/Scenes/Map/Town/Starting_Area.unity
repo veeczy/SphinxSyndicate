@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 103068518}
   - component: {fileID: 103068520}
   - component: {fileID: 103068519}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107578,6 +107578,7 @@ MonoBehaviour:
   swampBossRoomIndex: -1
   maxRoomsBeforeBoss: 10
   roomsCompleted: 0
+  resetSceneIndex: 0
 --- !u!4 &1728653935
 Transform:
   m_ObjectHideFlags: 0

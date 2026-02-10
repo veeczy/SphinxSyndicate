@@ -292,6 +292,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerPrefsManager
   playerHealth: 12
   playerMaxHealth: 12
+  bossCounter: 0
+  desertBoss: 0
+  cityBoss: 0
+  swampBoss: 0
 --- !u!4 &218798899
 Transform:
   m_ObjectHideFlags: 0
@@ -71840,8 +71844,8 @@ GameObject:
   - component: {fileID: 821235619}
   - component: {fileID: 821235621}
   - component: {fileID: 821235620}
-  m_Layer: 0
-  m_Name: Wall
+  m_Layer: 6
+  m_Name: Walls
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
