@@ -37,7 +37,7 @@ public class BossAI : MonoBehaviour
 
     //* NEW STUFF FOR SAVING AMOUNT OF TIMES BOSS COMPLETE*//
     public int bossCounter;
-    //public bool bossComplete = false;
+    public int bossLevel;
 
 
     //testing
@@ -107,6 +107,9 @@ public class BossAI : MonoBehaviour
             Destroy(gameObject);
             bossCounter++; //increase amount of boss' beaten 
             PlayerPrefs.SetInt("bossCounter", bossCounter); //set bossCounter to be the new value after boss is beaten
+            if (bossLevel == 0) { PlayerPrefs.SetInt("desertBoss", 1); }
+            if (bossLevel == 1) { PlayerPrefs.SetInt("cityBoss", 1); }
+            if (bossLevel == 2) { PlayerPrefs.SetInt("swampBoss", 1); }
         }
     }
 
