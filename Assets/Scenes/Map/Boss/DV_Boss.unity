@@ -303,7 +303,6 @@ MonoBehaviour:
   attackCooldown: 8
   contactDamage: 1
   isAttacking: 0
-  nextAttackTime: 1
   phase2: 1
   sheepPrefab: {fileID: 5157790400925086649, guid: ac45a699dee5bae4b9146bd26dfc6d0f, type: 3}
   sheepAttacking: 0
@@ -312,6 +311,7 @@ MonoBehaviour:
   sheepCounter: 0
   direction: {x: 0, y: 0}
   stalkTimer: 10
+  bossLevel: 0
   debugDamageKey: 56
   debugDamageAmount: 50
 --- !u!61 &99095219
@@ -863,60 +863,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 586613213}
   m_SourcePrefab: {fileID: 100100000, guid: a5333a06bc8c9be4dba998fd56e4944c, type: 3}
---- !u!1 &495770805
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 495770807}
-  - component: {fileID: 495770806}
-  m_Layer: 0
-  m_Name: UIManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &495770806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495770805}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 190c5ff3cdaa044479592e7923f9e5aa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerHealth: {fileID: 0}
-  hearts:
-  - {fileID: 975216484}
-  - {fileID: 935534311}
-  - {fileID: 673247343}
-  fullHeart: {fileID: 21300000, guid: d3d6b5730c1e24b4c9869ef8c4413cbb, type: 3}
-  threeQuarterHeart: {fileID: 0}
-  halfHeart: {fileID: 0}
-  quarterHeart: {fileID: 0}
-  emptyHeart: {fileID: 21300000, guid: 7e035e4c2c50a7041873bdd7d14bd9dc, type: 3}
---- !u!4 &495770807
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 495770805}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 257.8, y: 145, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &500284660
 GameObject:
   m_ObjectHideFlags: 0
@@ -54033,7 +53979,6 @@ SceneRoots:
   - {fileID: 1958186031}
   - {fileID: 1661909180}
   - {fileID: 1839316287}
-  - {fileID: 495770807}
   - {fileID: 1987468016}
   - {fileID: 1067862282}
   - {fileID: 8002804505711245917}
