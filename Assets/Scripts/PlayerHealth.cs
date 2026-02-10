@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public int maxHealth = 3;
-    public int currentHealth = 3;
+    public int maxHealth = 12;
+    public int currentHealth = 12;
 
     public bool bypassPlayerPrefs;//Allow bypass PlayerPrefs
     public bool invincible = false; //immune to damage

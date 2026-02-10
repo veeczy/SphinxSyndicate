@@ -4,7 +4,7 @@ public class PlayerPrefsManager : MonoBehaviour
 {
     //variables for updating player prefs at start
     public int playerHealth;
-    public int playerMaxHealth = 3;
+    public int playerMaxHealth = 12;
 
     //variables for updating progress in game
     public int bossCounter;
