@@ -35,6 +35,10 @@ public class BossAI : MonoBehaviour
     private int healthPercent;
     private int healthbarMax;
 
+    //* NEW STUFF FOR SAVING AMOUNT OF TIMES BOSS COMPLETE*//
+    public int bossCounter;
+    public int bossLevel;
+
 
     //testing
     public KeyCode debugDamageKey = KeyCode.Alpha8;
@@ -47,6 +51,8 @@ public class BossAI : MonoBehaviour
         health = maxHealth;
         healthUI.maxValue = maxHealth;
         healthUI.value = maxHealth;
+
+        bossCounter = PlayerPrefs.GetInt("bossCounter");
     }
 
     void FixedUpdate()
@@ -99,6 +105,11 @@ public class BossAI : MonoBehaviour
         if (health <= 0)
         {
             Destroy(gameObject);
+            bossCounter++; //increase amount of boss' beaten 
+            PlayerPrefs.SetInt("bossCounter", bossCounter); //set bossCounter to be the new value after boss is beaten
+            if (bossLevel == 0) { PlayerPrefs.SetInt("desertBoss", 1); }
+            if (bossLevel == 1) { PlayerPrefs.SetInt("cityBoss", 1); }
+            if (bossLevel == 2) { PlayerPrefs.SetInt("swampBoss", 1); }
         }
     }
 

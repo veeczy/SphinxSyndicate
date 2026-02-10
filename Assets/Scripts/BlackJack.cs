@@ -315,7 +315,7 @@ public class BlackJack : MonoBehaviour
     {
         HideUI(dealerHideCard);
         dealerHandValue = dealerHand.Sum(); //calculate sum of dealer hand
-        if (dealerHandValue < 17)
+        while (dealerHandValue < 17)
         {
             ShowDealerCards();
             dealerHandValue = dealerHand.Sum(); //calculate sum of dealer hand
