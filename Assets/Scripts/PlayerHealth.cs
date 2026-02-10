@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
     public bool invincible = false; //immune to damage
     public GameObject Arnold;
     PlayerMovement playerMovement;
+    private Animator anim;
 
     void Start()
     {
@@ -20,6 +21,7 @@ public class PlayerHealth : MonoBehaviour
         if(Arnold == null)  
             Arnold = GameObject.Find("Player");
         playerMovement = Arnold.GetComponent<PlayerMovement>();
+        anim = GetComponent<Animator>(); // NEW
     }
 
     private void Update()
@@ -45,6 +47,7 @@ public class PlayerHealth : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        anim.SetTrigger("damage"); //play hurt animation
         PlayerPrefs.SetInt("health", currentHealth); //update health in playerprefs when damage is taken
         Debug.Log("Player Health: " + currentHealth);
 
