@@ -153,8 +153,11 @@ MonoBehaviour:
   - {fileID: 1110526797}
   - {fileID: 1461117383}
   - {fileID: 1395697122}
-  fullHeart: {fileID: 21300000, guid: d3d6b5730c1e24b4c9869ef8c4413cbb, type: 3}
-  emptyHeart: {fileID: 21300000, guid: 7e035e4c2c50a7041873bdd7d14bd9dc, type: 3}
+  fullHeart: {fileID: -3723377149534344638, guid: 0a6720be41fd58f449ed03d7c28eecf0, type: 3}
+  threeQuarterHeart: {fileID: 6901401366174411213, guid: 51d438b7295d1ff4d9098d8b4a762588, type: 3}
+  halfHeart: {fileID: 7294242647285451956, guid: 7d4a7a4109edd6941a133edb96b21cbd, type: 3}
+  quarterHeart: {fileID: -4983048486054741218, guid: 7d132c160860e8146bee1d54d7269c09, type: 3}
+  emptyHeart: {fileID: 1945434853207596477, guid: e359f6db12192ab48ab88b3bc30c34e0, type: 3}
 --- !u!4 &10007899
 Transform:
   m_ObjectHideFlags: 0
@@ -106623,8 +106626,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -50, y: 50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -30.064, y: 30.7676}
+  m_SizeDelta: {x: 60.1279, y: 61.5351}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1110526797
 MonoBehaviour:
@@ -106646,7 +106649,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d3d6b5730c1e24b4c9869ef8c4413cbb, type: 3}
+  m_Sprite: {fileID: -3723377149534344638, guid: 0a6720be41fd58f449ed03d7c28eecf0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -106859,8 +106862,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -110, y: 50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -150.32, y: 30.7676}
+  m_SizeDelta: {x: 60.1279, y: 61.535}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1395697122
 MonoBehaviour:
@@ -106882,7 +106885,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d3d6b5730c1e24b4c9869ef8c4413cbb, type: 3}
+  m_Sprite: {fileID: -3723377149534344638, guid: 0a6720be41fd58f449ed03d7c28eecf0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -106934,8 +106937,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -80, y: 50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -90.191956, y: 30.767593}
+  m_SizeDelta: {x: 60.1279, y: 61.5351}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1461117383
 MonoBehaviour:
@@ -106957,7 +106960,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d3d6b5730c1e24b4c9869ef8c4413cbb, type: 3}
+  m_Sprite: {fileID: -3723377149534344638, guid: 0a6720be41fd58f449ed03d7c28eecf0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -107599,8 +107602,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1419171099445873015, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: maxHealth
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419171099445873015, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: currentHealth
-      value: 3
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 1419171099445873015, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: bypassPlayerPrefs
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4340054961460727088, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_Constraints
@@ -107657,6 +107668,14 @@ PrefabInstance:
     - target: {fileID: 4897928467854683093, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_Name
       value: Player (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899432532245730738, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: maxHealth
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4899432532245730738, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: currentHealth
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 5437091589516306715, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_SortingOrder
