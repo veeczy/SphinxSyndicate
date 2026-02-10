@@ -94,7 +94,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-
+        stickAxis = new Vector2(Input.GetAxis("Joystick Aim X"), Input.GetAxis("Joystick Aim Y"));
+        if(!controller && (stickAxis.sqrMagnitude > deadzone.sqrMagnitude || stickAxis.sqrMagnitude < -deadzone.sqrMagnitude))
+        {
+            controller = true;
+        }
+        else if(controller && (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
+        {
+            controller = false;
+        }
         //the controller for xbox rt is an axis, not a button
         //dodgekeypress = Input.GetButton("Dodge");
         if (Input.GetButtonDown("Dodge")) dodgekeypress = true;
@@ -192,12 +200,30 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Aim Rotation
-        Vector3 mousePos = Input.mousePosition;
-        mousePos.z = -Camera.main.transform.position.z;
-        aimPos = Camera.main.ScreenToWorldPoint(mousePos);
+        if(!controller)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = -Camera.main.transform.position.z;
+            aimPos = Camera.main.ScreenToWorldPoint(mousePos);
+        }
+        else
+        {
+            if(stickAxis.sqrMagnitude  > deadzone.sqrMagnitude)
+            {
+                Vector2 stickPos = stickAxis.normalized;
+                aimPos = (Vector2)transform.position + stickPos;
+                lastStickPos = stickPos;
+            }
+            else
+            {
+                aimPos = (Vector2)transform.position + lastStickPos;
+            }
+            
+        }
         Vector2 aimDir = (Vector2)aimPos - (Vector2)transform.position;
         float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, angle);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, angle), controllerTurnSpeed * Time.deltaTime);
+
 
         //more raycast stuff
         //.DrawLine(transform.position, aimPos, Color.red);
