@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
     public bool chargeDodge = false;
     public bool chargeDodgeStart = false;
     public float chargedodgeDuration = 0.5f;
+    public bool isCharging = false;
     public Collider2D hit;
     ContactFilter2D contactFilter;
     LayerMask mask;
@@ -143,12 +144,18 @@ public class PlayerMovement : MonoBehaviour
         if (dodgekeypress)
         {
             chargeTimer += Time.fixedDeltaTime;
+            if (chargeTimer > .3)
+            {
+                isCharging = true;
+                anim.SetBool("ischarging", isCharging);
+            }
             if (chargeTimer > 1.5) chargeDodge = true;
             else chargeDodge = false;
         }
         if (!dodgekeypress)
         {
             if (chargeTimer <= 1.5) chargeTimer = 0;
+            isCharging = false;
         }
 
         //detect if movement should be frozen
@@ -169,6 +176,8 @@ public class PlayerMovement : MonoBehaviour
         bool isMoving = direction.magnitude > 0.1f;
         anim.SetBool("isWalking", isMoving);
         anim.SetBool("isDodging", isDodging);
+        anim.SetBool("ischarging", isCharging);
+        anim.SetBool("chargeRoll", chargeDodge);
 
         // Footstep SFX
         if (!isDodging && isMoving)
@@ -199,7 +208,7 @@ public class PlayerMovement : MonoBehaviour
         {
             dodgeTimer += Time.fixedDeltaTime;
 
-            if (hit != null)
+            if (hit != null) 
             {
                 chargeDodgeStart = false; //stop charge dodge if hit wall
                 Debug.Log("Hit wall.");
@@ -211,6 +220,7 @@ public class PlayerMovement : MonoBehaviour
                 myPlayer.position = myPlayer.position + aimDir * dodgeTimer;
                 anim.SetBool("isWalking", false);
                 anim.SetBool("isDodging", true);
+                anim.SetBool("ischarging", false);
             }
 
             return;
