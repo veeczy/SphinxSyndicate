@@ -4,14 +4,18 @@ using UnityEngine.UI;
 
 public class BossAI : MonoBehaviour
 {
-    public float moveSpeed = 3f;        // How fast the enemy moves
+    public float moveSpeed = 3f;
     public SpriteRenderer bossSprite;
     public Animator bossAnimator;
-    protected Transform player;         // Reference to the player's position (made protected so child scripts can use it)
-    public int damage = 1;              // How much damage the enemy does
+    protected Transform player;
+    public int damage = 1;
+
+    [Header("Health")]
     public Slider healthUI;
-    public int health = 0;
+    public int health;
     public int maxHealth = 150;
+
+    [Header("Movement / Combat")]
     public float minDistance = 0.0f;
     public float stalkMaxDistance = 10.0f;
     public float stalkMinDistance = 8.0f;
@@ -22,42 +26,41 @@ public class BossAI : MonoBehaviour
     public bool attackCooldown;
     public int contactDamage = 1;
     public bool isAttacking;
-    public float nextAttackTime;
+
+    [Header("Phase 2")]
     public bool phase2 = false;
+
+    [Header("Sheep Attack")]
     public GameObject sheepPrefab;
     public bool sheepAttacking;
     public float sheepVelocity;
     public float sheepDelay;
     public int sheepCounter = 0;
+
     public Vector2 direction;
     private float distance;
     public float stalkTimer;
-    private int healthPercent;
-    private int healthbarMax;
 
-    //* NEW STUFF FOR SAVING AMOUNT OF TIMES BOSS COMPLETE*//
-    public int bossCounter;
-    public int bossLevel;
+    [Header("Boss Progress Tracking")]
+    public int bossLevel; // 0 = desert, 1 = city, 2 = swamp
+    private bool hasDied = false;
 
-
-    //testing
+    [Header("DEBUG")]
     public KeyCode debugDamageKey = KeyCode.Alpha8;
     public int debugDamageAmount = 50;
 
     void Start()
     {
-        // Find the player by tag
         player = GameObject.FindGameObjectWithTag("Player").transform;
+
         health = maxHealth;
         healthUI.maxValue = maxHealth;
         healthUI.value = maxHealth;
-
-        bossCounter = PlayerPrefs.GetInt("bossCounter");
     }
 
     void FixedUpdate()
     {
-
+        // DEBUG DAMAGE
         if (Input.GetKeyDown(debugDamageKey))
         {
             health -= debugDamageAmount;
@@ -65,21 +68,22 @@ public class BossAI : MonoBehaviour
             Debug.Log("DEBUG: Boss took " + debugDamageAmount + " damage. Health = " + health);
         }
 
-        // Measure distance to player
+        // DEATH CHECK (runs once)
+        if (health <= 0 && !hasDied)
+        {
+            hasDied = true;
+            HandleBossDefeated();
+            return;
+        }
+
         distance = Vector2.Distance(transform.position, player.position);
-        direction = (player.position - transform.position);//Target direction
-        if (direction.x < 0)
-        {
-            bossSprite.flipX = true;
-        }
-        else
-        {
-            bossSprite.flipX = false;
-        }
-        // If outside attack range, move toward player
+        direction = (player.position - transform.position);
+
+        bossSprite.flipX = direction.x < 0;
+
         if (distance > minDistance && !isAttacking && !stalkMode && !attackCooldown)
         {
-            StartCoroutine("closeAttack");//Follow player
+            StartCoroutine("closeAttack");
         }
         else if (distance > minDistance && isAttacking && !attackCooldown)
         {
@@ -88,41 +92,48 @@ public class BossAI : MonoBehaviour
         }
         else if (distance <= stalkMaxDistance && !isAttacking && !sheepAttacking && sheepCounter < 5)
         {
-            //transform.position -= (Vector3)direction * moveSpeed * Time.deltaTime;
             bossAnimator.SetBool("isWalking", false);
             StartCoroutine("sheepAttack");
             StartCoroutine("stalk");
         }
-        if (health <= (maxHealth / 2) && !phase2)//PHASE 2 BOSS BUFFS
+
+        if (health <= maxHealth / 2 && !phase2)
         {
             phase2 = true;
             attackTime *= 2f;
             attackCooldownTime /= 2f;
             sheepDelay /= 2f;
-            sheepVelocity *= 2.0f;
-            moveSpeed *= 2;
+            sheepVelocity *= 2f;
+            moveSpeed *= 2f;
         }
-        if (health <= 0)
+    }
+
+    void HandleBossDefeated()
+    {
+        string bossKey = "desertBoss";
+        if (bossLevel == 1) bossKey = "cityBoss";
+        if (bossLevel == 2) bossKey = "swampBoss";
+
+        if (PlayerPrefs.GetInt(bossKey, 0) == 0)
         {
-            Destroy(gameObject);
-            bossCounter++; //increase amount of boss' beaten 
-            PlayerPrefs.SetInt("bossCounter", bossCounter); //set bossCounter to be the new value after boss is beaten
-            if (bossLevel == 0) { PlayerPrefs.SetInt("desertBoss", 1); }
-            if (bossLevel == 1) { PlayerPrefs.SetInt("cityBoss", 1); }
-            if (bossLevel == 2) { PlayerPrefs.SetInt("swampBoss", 1); }
+            PlayerPrefs.SetInt(bossKey, 1);
+            PlayerPrefs.SetInt("bossCounter", PlayerPrefs.GetInt("bossCounter", 0) + 1);
         }
+
+        PlayerPrefs.Save();
+        Destroy(gameObject);
     }
 
     IEnumerator closeAttack()
     {
         isAttacking = true;
-        Debug.Log("CLOSE ATTACKING!");
         yield return new WaitForSeconds(attackTime);
         isAttacking = false;
         attackCooldown = true;
         yield return new WaitForSeconds(attackCooldownTime + Random.Range(-2.5f, 2.5f));
         attackCooldown = false;
     }
+
     IEnumerator sheepAttack()
     {
         sheepAttacking = true;
@@ -132,6 +143,7 @@ public class BossAI : MonoBehaviour
         sheepCounter++;
         sheepAttacking = false;
     }
+
     IEnumerator stalk()
     {
         stalkMode = true;
@@ -139,13 +151,13 @@ public class BossAI : MonoBehaviour
         yield return new WaitForSeconds(stalkTimer);
         stalkMode = false;
     }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         if (col.CompareTag("Bullet"))
         {
             health -= col.GetComponent<BulletId>().dmg;
-            healthUI.value = health;//Update health UI
-            Debug.Log(health + ": HEALTH");
+            healthUI.value = health;
         }
         else if (col.CompareTag("Player"))
         {

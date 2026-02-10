@@ -11,10 +11,16 @@ public class LevelManager : MonoBehaviour
     [Header("Current Area (set by wanted board)")]
     public AreaType currentArea = AreaType.Desert;
 
-    [Header("Random Rooms (build indexes)")]
+    // MASTER LISTS (edit in Inspector, never modified)
+    [Header("Random Rooms MASTER (build indexes)")]
     public List<int> desertRoomIndexes = new List<int>();
     public List<int> cityRoomIndexes = new List<int>();
     public List<int> swampRoomIndexes = new List<int>();
+
+    // RUNTIME POOLS (auto-built, these get modified)
+    private List<int> desertRoomPool = new List<int>();
+    private List<int> cityRoomPool = new List<int>();
+    private List<int> swampRoomPool = new List<int>();
 
     [Header("Secret Rooms (optional)")]
     public List<int> desertSecretRoomIndexes = new List<int>();
@@ -31,16 +37,40 @@ public class LevelManager : MonoBehaviour
 
     public int roomsCompleted = 0;
 
+    [Header("Reset when entering this scene index")]
+    public int resetSceneIndex = 0;
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+
+            RebuildAllRoomPools(); // build pools once at game start
         }
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (scene.buildIndex == resetSceneIndex)
+        {
+            roomsCompleted = 0;
+            RebuildAllRoomPools(); // KEY: restart random pools too
         }
     }
 
@@ -55,10 +85,11 @@ public class LevelManager : MonoBehaviour
         LoadNextRoom();
     }
 
-    // NEW: call this from the door that exits the biome start zone
+    // Call this when leaving the biome start zone
     public void StartRunInCurrentArea()
     {
         roomsCompleted = 0;
+        RebuildPoolForCurrentArea(); // fresh rooms for that biome
         LoadNextRoom();
     }
 
@@ -90,6 +121,7 @@ public class LevelManager : MonoBehaviour
     public void ResetRun()
     {
         roomsCompleted = 0;
+        RebuildAllRoomPools();
     }
 
     public void LoadSecretRoom()
@@ -106,13 +138,36 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(secrets[pick]);
     }
 
+    private void RebuildAllRoomPools()
+    {
+        desertRoomPool = new List<int>(desertRoomIndexes);
+        cityRoomPool = new List<int>(cityRoomIndexes);
+        swampRoomPool = new List<int>(swampRoomIndexes);
+    }
+
+    private void RebuildPoolForCurrentArea()
+    {
+        switch (currentArea)
+        {
+            case AreaType.City:
+                cityRoomPool = new List<int>(cityRoomIndexes);
+                break;
+            case AreaType.Swamp:
+                swampRoomPool = new List<int>(swampRoomIndexes);
+                break;
+            default:
+                desertRoomPool = new List<int>(desertRoomIndexes);
+                break;
+        }
+    }
+
     private List<int> GetCurrentRoomPool()
     {
         return currentArea switch
         {
-            AreaType.City => cityRoomIndexes,
-            AreaType.Swamp => swampRoomIndexes,
-            _ => desertRoomIndexes,
+            AreaType.City => cityRoomPool,
+            AreaType.Swamp => swampRoomPool,
+            _ => desertRoomPool,
         };
     }
 
