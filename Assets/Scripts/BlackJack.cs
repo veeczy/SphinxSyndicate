@@ -135,6 +135,7 @@ public class BlackJack : MonoBehaviour
             if(bust)
             {
                 //lose the game
+                HideUI(dealerHideCard);
                 LoseGame();
             }
 
@@ -379,6 +380,7 @@ public class BlackJack : MonoBehaviour
     public void WinGame()
     {
         //win the game
+        HideUI(dealerHideCard);
         dialogueIndex = 2;
         StartDialogue();
         ShowUI(dialogueUI);
@@ -395,7 +397,7 @@ public class BlackJack : MonoBehaviour
 
     public void DrawGame()
     {
-        dialogueIndex = 5;
+        dialogueIndex = 4;
         StartDialogue();
         ShowUI(dialogueUI);
         onWinLose = true;

@@ -14,6 +14,7 @@ public class PlayerHealthUI : MonoBehaviour
     public Sprite quarterHeart;     // 1/4
     public Sprite emptyHeart;       // 0/4
 
+
     void Update()
     {
         if (playerHealth == null) return;
