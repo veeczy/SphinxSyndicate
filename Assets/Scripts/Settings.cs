@@ -38,4 +38,9 @@ public class Settings : MonoBehaviour
         musicSlider.value = PlayerPrefs.GetFloat("MusicVolume");
         sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume");
     }
+
+    public void StopMusic()
+    {
+        MusicManager.Instance.PlayMusic("");
+    }
 }
