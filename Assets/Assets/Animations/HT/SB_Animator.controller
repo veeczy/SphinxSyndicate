@@ -72,7 +72,7 @@ AnimatorStateMachine:
     m_State: {fileID: 5334775108411848076}
     m_Position: {x: 225, y: 325, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -4017365859290602286}
+    m_State: {fileID: -2686398351817324647}
     m_Position: {x: 260, y: 390, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
@@ -84,14 +84,14 @@ AnimatorStateMachine:
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -74335714612928691}
---- !u!1102 &-4017365859290602286
+--- !u!1102 &-2686398351817324647
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: CityBossIdle
+  m_Name: SBIdleBoss
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -104,7 +104,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cf48dd60a8d55db4c8b9ca9b55ab9582, type: 2}
+  m_Motion: {fileID: 7400000, guid: e4b29621d61f90941b2e6d6446fda383, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -157,7 +157,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cf48dd60a8d55db4c8b9ca9b55ab9582, type: 2}
+  m_Motion: {fileID: 7400000, guid: e4b29621d61f90941b2e6d6446fda383, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -169,7 +169,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HornedToad_Animator
+  m_Name: SB_Animator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: isWalking
