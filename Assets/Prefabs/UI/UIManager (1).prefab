@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9036624114286174314}
   - component: {fileID: 1124194349868709185}
+  - component: {fileID: 8478549778527545330}
   m_Layer: 0
   m_Name: UIManager (1)
   m_TagString: Untagged
@@ -54,3 +55,17 @@ MonoBehaviour:
   halfHeart: {fileID: 7294242647285451956, guid: 7d4a7a4109edd6941a133edb96b21cbd, type: 3}
   quarterHeart: {fileID: -4983048486054741218, guid: 7d132c160860e8146bee1d54d7269c09, type: 3}
   emptyHeart: {fileID: 1945434853207596477, guid: e359f6db12192ab48ab88b3bc30c34e0, type: 3}
+--- !u!114 &8478549778527545330
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913225928956996752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfbbbf6fba9a2474a92b79f87966b5ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SetCursor
+  cursorPrefab: {fileID: 1856608281510726324, guid: 95463a8dc5b7bc646abbec06a7efe830, type: 3}
+  cursorCanvasPrefab: {fileID: 2729880573368582861, guid: 6992234d748679249bc5e5849b4d4e7a, type: 3}

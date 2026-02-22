@@ -58,7 +58,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Aim")]
     public Vector2 aimPos;
+    public float controllerAimDist = 5f;
     public Vector2 lastStickPos;
+    public bool useCursor = true;
 
     // NEW   animator reference
     private Animator anim;
@@ -67,6 +69,8 @@ public class PlayerMovement : MonoBehaviour
     public float controllerTurnSpeed = 15f;//Controller turn sensitivity
     public Vector2 deadzone = new Vector2(0.5f, 0.5f);
     public Vector2 stickAxis;
+    private float angle;
+    private Vector2 aimDir;
 
     void Start()
     {
@@ -75,8 +79,6 @@ public class PlayerMovement : MonoBehaviour
         playerSprite = GetComponent<SpriteRenderer>().sprite;
         playerAudio = GetComponent<AudioSource>();
         playerAudio.clip = footstepAudio;
-
-
         BlackJackObject = GameObject.Find("BJ-NPC-Test");
         if (BlackJackObject != null)
         {
@@ -116,7 +118,35 @@ public class PlayerMovement : MonoBehaviour
         {
             canMove = BlackJackObject.GetComponent<BlackJack>().canMove;
         }
-
+        //SET CURSOR
+        if(SetCursor.Instance != null)
+        {
+            SetCursor.Instance.SetCrosshair(aimPos);
+        }
+        // Aim Rotation
+        if(!controller)
+        {
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = -Camera.main.transform.position.z;
+            aimPos = Camera.main.ScreenToWorldPoint(mousePos);
+        }
+        else
+        {
+            if(stickAxis.sqrMagnitude  > deadzone.sqrMagnitude)
+            {
+                Vector2 stickPos = stickAxis.normalized;
+                aimPos = (Vector2)transform.position + stickPos * controllerAimDist;
+                lastStickPos = stickPos;
+            }
+            else
+            {
+                aimPos = (Vector2)transform.position + lastStickPos;
+            }
+            
+        }
+        aimDir = (Vector2)aimPos - (Vector2)transform.position;
+        angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, angle), controllerTurnSpeed * Time.deltaTime);
     }
 
     void FixedUpdate()
@@ -199,31 +229,6 @@ public class PlayerMovement : MonoBehaviour
                 playerAudio.Stop();
         }
 
-        // Aim Rotation
-        if(!controller)
-        {
-            Vector3 mousePos = Input.mousePosition;
-            mousePos.z = -Camera.main.transform.position.z;
-            aimPos = Camera.main.ScreenToWorldPoint(mousePos);
-        }
-        else
-        {
-            if(stickAxis.sqrMagnitude  > deadzone.sqrMagnitude)
-            {
-                Vector2 stickPos = stickAxis.normalized;
-                aimPos = (Vector2)transform.position + stickPos;
-                lastStickPos = stickPos;
-            }
-            else
-            {
-                aimPos = (Vector2)transform.position + lastStickPos;
-            }
-            
-        }
-        Vector2 aimDir = (Vector2)aimPos - (Vector2)transform.position;
-        float angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, angle), controllerTurnSpeed * Time.deltaTime);
-
 
         //more raycast stuff
         //.DrawLine(transform.position, aimPos, Color.red);
@@ -300,15 +305,16 @@ public class PlayerMovement : MonoBehaviour
         //* THIS IS STUFF FOR MOUSE AIM DODGE, DO NOT DELETE *//
 
         //calculate distance between mouse aim (where you dodge towards) and player position 
-        dodgeDis = Vector3.Distance(dodgeStart, dir);
+        /*
+        dodgeDis = Vector3.Distance(dodgeStart, aimPos);
 
         if (dodgeDis > 17) { dodgeDistance = .2f; } //if dodge is aimed really farm from arnold, dodge is lessened
         if (dodgeDis < 5) { dodgeDistance = 1.1f; } //if dodge is aimed really close to arnold, dodge is amplified to be farther
-        else { dodgeDistance = 1f; }
+        else { dodgeDistance = 1f; }*/
 
         //* END MOUSE AIM DODGE STUFF *//
 
-
+        dodgeDistance = 1f;
         dodgeEnd = dodgeStart + dir * dodgeDistance;
 
         dodgeclick = false;

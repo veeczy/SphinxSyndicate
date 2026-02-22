@@ -19,7 +19,7 @@ public class PlayerHealthUI : MonoBehaviour
     {
         if (playerHealth == null) return;
 
-        int hp = playerHealth.currentHealth; // now 0–12
+        int hp = playerHealth.currentHealth; // now 0ï¿½12
 
         for (int i = 0; i < hearts.Length; i++)
         {
