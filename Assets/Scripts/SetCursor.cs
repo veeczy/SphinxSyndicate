@@ -10,13 +10,13 @@ public class SetCursor : MonoBehaviour
 
     void Start()
     {
-        cursorCanvas = Instantiate(cursorCanvasPrefab, transform.position, transform.rotation);
-        cursorObj = Instantiate(cursorPrefab, cursorCanvas.transform);
         if(Instance != null)
         {
             Destroy(gameObject);
             return;
         }
+        cursorCanvas = Instantiate(cursorCanvasPrefab, transform.position, transform.rotation);
+        cursorObj = Instantiate(cursorPrefab, cursorCanvas.transform);
         Instance = this;
         DontDestroyOnLoad(cursorObj);
     }
