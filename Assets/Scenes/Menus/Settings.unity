@@ -2623,11 +2623,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4589214634927258669, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
   m_PrefabInstance: {fileID: 8978766121521160956}
   m_PrefabAsset: {fileID: 0}
---- !u!225 &925004890 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 929950059936028327, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
-  m_PrefabInstance: {fileID: 8978766121521160956}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &996664199
 GameObject:
   m_ObjectHideFlags: 0
@@ -3200,10 +3195,10 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 925004890}
-        m_TargetAssemblyTypeName: UnityEngine.CanvasGroup, UnityEngine
-        m_MethodName: set_alpha
-        m_Mode: 0
+      - m_Target: {fileID: 8978766121521160958}
+        m_TargetAssemblyTypeName: GammaSettings, Assembly-CSharp
+        m_MethodName: SetGammaFromSlider
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -5250,12 +5245,32 @@ PrefabInstance:
       propertyPath: gammaSlider
       value: 
       objectReference: {fileID: 1227465548}
-    m_RemovedComponents:
-    - {fileID: 6717274622277194228, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2035636210258417562, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8978766121521160958}
   m_SourcePrefab: {fileID: 100100000, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
+--- !u!1 &8978766121521160957 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2035636210258417562, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
+  m_PrefabInstance: {fileID: 8978766121521160956}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8978766121521160958
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8978766121521160957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3312cb6c77f7dc64c9745f3779f54782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GammaSettings
+  gammaSlider: {fileID: 1227465548}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

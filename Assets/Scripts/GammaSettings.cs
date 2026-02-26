@@ -7,13 +7,13 @@ public class GammaSettings : MonoBehaviour
 
     private void Start()
     {
-        SetGamma(PlayerPrefs.GetFloat("Alpha", 0.5f));
+        SetGamma(PlayerPrefs.GetFloat("gamma", 0.5f));
     }
 
     public void SetGamma(float _value)
     {
         RefreshSlider(_value);
-        PlayerPrefs.SetFloat("Alpha", _value);
+        PlayerPrefs.SetFloat("gamma", _value);
     }
 
     public void SetGammaFromSlider()
