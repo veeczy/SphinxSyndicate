@@ -2,36 +2,28 @@ using UnityEngine;
 
 public class SetCursor : MonoBehaviour
 {
-    public Texture2D cursorTexture;
-    public CursorMode cursorMode = CursorMode.Auto;
-    public Vector2 hotSpot = Vector2.zero;
-
-    public bool autoCenterHotSpot = false;
-    private float textureWidth;
-    private float textureHeight;
-    private Vector2 hotspotAuto;
+    public static SetCursor Instance;
+    public Transform cursorPrefab;
+    public Canvas cursorCanvasPrefab;
+    private Canvas cursorCanvas;
+    private Transform cursorObj;
 
     void Start()
     {
-        textureWidth = cursorTexture.width * 0.5f;
-        textureHeight = cursorTexture.height * 0.5f;
-
-        if(autoCenterHotSpot)
+        if(Instance != null)
         {
-            hotspotAuto = new Vector2 (textureWidth, textureHeight);
+            Destroy(gameObject);
+            return;
         }
-        else { hotspotAuto = hotSpot; }
-        
-        Cursor.SetCursor(cursorTexture, hotspotAuto, cursorMode);
+        cursorCanvas = Instantiate(cursorCanvasPrefab, transform.position, transform.rotation);
+        cursorObj = Instantiate(cursorPrefab, cursorCanvas.transform);
+        Instance = this;
+        DontDestroyOnLoad(cursorObj);
     }
-    void OnMouseEnter()
+    public void SetCrosshair(Vector2 pos)
     {
-        Cursor.SetCursor(cursorTexture, hotspotAuto, cursorMode);
+        RectTransform rt = cursorObj.GetComponent<RectTransform>();
+        rt.position = Camera.main.WorldToScreenPoint(pos);
     }
 
-    void OnMouseExit()
-    {
-        // Pass 'null' to the texture parameter to use the default system cursor.
-        //Cursor.SetCursor(null, Vector2.zero, cursorMode);
-    }
 }

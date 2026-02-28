@@ -305,6 +305,7 @@ MonoBehaviour:
   chargeDodge: 0
   chargeDodgeStart: 0
   chargedodgeDuration: 0.5
+  isCharging: 0
   hit: {fileID: 0}
   offset: {fileID: 3844704270189968715}
   weaponObject: {fileID: 0}
@@ -314,7 +315,9 @@ MonoBehaviour:
   dodgeAudio: {fileID: 0}
   dodgeVolume: 1
   aimPos: {x: 0, y: 0}
+  controllerAimDist: 5
   lastStickPos: {x: 0, y: 0}
+  useCursor: 1
   controller: 0
   controllerTurnSpeed: 15
   deadzone: {x: 0.5, y: 0.5}
