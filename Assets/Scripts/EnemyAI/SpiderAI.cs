@@ -1,78 +1,74 @@
 using UnityEngine;
+using System.Collections;
 
 public class SpiderAI : EnemyAI
 {
-    [Header("Spider Settings")]
-    public GameObject webProjectilePrefab;
-    public float shootCooldown = 2f;
-    private float nextShootTime = 0f;
+    [Header("Lunge Settings")]
+    public float detectionRadius = 4f;
+    public float lungeForce = 8f;
+    public float restTime = 2f;
 
-    private SpriteRenderer sr;
-
-    // NEW
+    private Rigidbody2D rb;
     private Animator anim;
-    private bool isAttacking = false;
+
+    private bool hasActivated = false;
+    private bool isResting = false;
 
     void Awake()
     {
-        sr = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>();   // NEW
+        rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     protected override void Update()
     {
         if (player == null) return;
 
-        // Direction to player
-        Vector2 direction = (player.position - transform.position).normalized;
+        float distance = Vector2.Distance(transform.position, player.position);
 
-        // Flip left/right only
-        if (direction.x > 0)
-            sr.flipX = false;
-        else if (direction.x < 0)
-            sr.flipX = true;
-
-        // Shooting logic with animation
-        if (Time.time >= nextShootTime && !isAttacking)
+        // Activate when player enters radius
+        if (!hasActivated && distance <= detectionRadius)
         {
-            StartCoroutine(ShootAnim(direction));   // NEW
-            nextShootTime = Time.time + shootCooldown;
+            hasActivated = true;
+            StartCoroutine(LungeLoop());
         }
 
-        // Make sure idle plays when not attacking
-        if (!isAttacking)
-            anim.SetBool("isAttacking", false);   // NEW
+        // Flip sprite
+        Vector2 direction = (player.position - transform.position).normalized;
+        if (direction.x > 0) sr.flipX = false;
+        else if (direction.x < 0) sr.flipX = true;
 
         CheckHealth();
     }
 
-    // NEW — attack animation coroutine
-    private System.Collections.IEnumerator ShootAnim(Vector2 direction)
+    private IEnumerator LungeLoop()
     {
-        isAttacking = true;
-        anim.SetBool("isAttacking", true);
-
-        // Small delay to sync with animation timing
-        yield return new WaitForSeconds(0.2f);
-
-        ShootWeb(direction);
-
-        // Allow animation to finish before returning to idle
-        yield return new WaitForSeconds(0.3f);
-
-        isAttacking = false;
-        anim.SetBool("isAttacking", false);
+        while (true)
+        {
+            if (!isResting)
+            {
+                yield return StartCoroutine(Lunge());
+                yield return new WaitForSeconds(restTime);
+            }
+        }
     }
 
-    void ShootWeb(Vector2 direction)
+    private IEnumerator Lunge()
     {
-        if (webProjectilePrefab != null)
-        {
-            GameObject web = Instantiate(webProjectilePrefab, transform.position, Quaternion.identity);
-            Rigidbody2D rb = web.GetComponent<Rigidbody2D>();
+        isResting = true;
 
-            if (rb != null)
-                rb.AddForce(direction * 10f, ForceMode2D.Impulse);
-        }
+        anim.SetTrigger("Lunge"); // Use trigger instead of bool
+
+        yield return new WaitForSeconds(0.15f); // windup timing
+
+        Vector2 direction = (player.position - transform.position).normalized;
+        rb.linearVelocity = Vector2.zero;
+        rb.AddForce(direction * lungeForce, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(0.3f); // movement time
+
+        rb.linearVelocity = Vector2.zero;
+
+        isResting = false;
     }
 }
