@@ -57,17 +57,22 @@ public class SpiderAI : EnemyAI
     {
         isResting = true;
 
-        anim.SetTrigger("Lunge"); // Use trigger instead of bool
+        // Play lunge animation
+        anim.SetBool("isLunging", true);
 
-        yield return new WaitForSeconds(0.15f); // windup timing
+        yield return new WaitForSeconds(0.15f); // windup
 
         Vector2 direction = (player.position - transform.position).normalized;
+
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(direction * lungeForce, ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(0.3f); // movement time
+        yield return new WaitForSeconds(0.3f); // lunge movement
 
         rb.linearVelocity = Vector2.zero;
+
+        // Return to idle
+        anim.SetBool("isLunging", false);
 
         isResting = false;
     }

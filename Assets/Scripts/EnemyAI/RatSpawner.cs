@@ -45,8 +45,7 @@ public class RatSpawner : MonoBehaviour
 
     private int CountAlive()
     {
-        // cheapest simple cap: count by tag (set Rat prefabs to tag "Enemy" or "Rat")
-        // If you don’t want a cap, set maxAlive to a huge number.
+        
         return GameObject.FindGameObjectsWithTag("Enemy").Length;
     }
 }
