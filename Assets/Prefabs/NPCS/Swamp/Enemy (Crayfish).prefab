@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 2613029401080032733}
   - component: {fileID: 2363260108604834814}
   - component: {fileID: 828932040006605284}
-  - component: {fileID: 1501993931422627603}
   - component: {fileID: 6708765776850106131}
   - component: {fileID: 2829178482405256515}
+  - component: {fileID: -669322391471822860}
   m_Layer: 3
   m_Name: Enemy (Crayfish)
   m_TagString: Untagged
@@ -169,27 +169,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &1501993931422627603
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1778543058888638391}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acdb098cb7cafc647832766c5ceab395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HornedToadAI
-  moveSpeed: 3
-  damage: 1
-  health: 3
-  maxHealth: 3
-  healthBar: {fileID: 4817686602745596351}
-  hurtSound: {fileID: 8300000, guid: 6d8876d6d6d96f94bb69ddd2731e1969, type: 3}
-  hurtVolume: 0.2
-  attackRange: 2
-  attackCooldown: 1.5
 --- !u!82 &6708765776850106131
 AudioSource:
   m_ObjectHideFlags: 0
@@ -309,6 +288,38 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-669322391471822860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1778543058888638391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b57b05e134f04f49b12fc7419869bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RedCrayfishAI
+  moveSpeed: 3
+  damage: 1
+  health: 3
+  maxHealth: 3
+  healthBar: {fileID: 0}
+  hurtSound: {fileID: 0}
+  hurtVolume: 1
+  shootRange: 20
+  meleeRange: 1.5
+  projectilePrefab: {fileID: 2464918242123611638, guid: 4393fd63653d4b948b473d5f91560a77, type: 3}
+  projectileForce: 8
+  burstCount: 3
+  timeBetweenShots: 0.2
+  burstCooldown: 2
+  meleeHoldTime: 1
+  meleeCooldown: 1.25
+  anim: {fileID: 0}
+  shootTrigger: Shoot
+  meleeTrigger: Melee
+  walkingBool: idle
 --- !u!1 &2194124563927727704
 GameObject:
   m_ObjectHideFlags: 0

@@ -70348,6 +70348,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &782440645
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.59
+      objectReference: {fileID: 0}
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 62.57
+      objectReference: {fileID: 0}
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 28905028968927756, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1435682591716577039, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
+      propertyPath: m_Name
+      value: RatSpawner
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0c2665d89bbfaa141ba262006e4b00e7, type: 3}
 --- !u!1001 &800054486
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -70550,6 +70607,10 @@ PrefabInstance:
     - target: {fileID: 7933114019837729915, guid: 16c92d5df1266914aa4554decab65a31, type: 3}
       propertyPath: m_Name
       value: Enemy (Rat)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7933114019837729915, guid: 16c92d5df1266914aa4554decab65a31, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -71425,6 +71486,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   retrySceneName: Tavern Upstairs
+  howtoPlayUI: {fileID: 0}
+  pausemenutext: {fileID: 0}
+  buttons: {fileID: 0}
+  retryquitbutton: {fileID: 0}
+  ishowtoplay: 0
 --- !u!4 &1221462093
 Transform:
   m_ObjectHideFlags: 0
@@ -72721,3 +72787,4 @@ SceneRoots:
   - {fileID: 537362498}
   - {fileID: 1107602755}
   - {fileID: 1425202942}
+  - {fileID: 782440645}
