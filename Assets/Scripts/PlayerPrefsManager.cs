@@ -18,13 +18,17 @@ public class PlayerPrefsManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        PlayerPrefs.SetInt("health", playerMaxHealth); //at start player prefs memory of health is reset to max health
-
-        PlayerPrefs.SetInt("desertBoss", 0);
-        PlayerPrefs.SetInt("cityBoss", 0);
-        PlayerPrefs.SetInt("swampBoss", 0);
-        PlayerPrefs.SetInt("bossCounter", 0); //reset amount of bosses beaten to 0
-        PlayerPrefs.SetFloat("gamma", 0.5f);
+        if (!UnityEditor.SessionState.GetBool("FirstInitDone", false))
+        {
+            Debug.Log("First Init.");
+            PlayerPrefs.SetInt("health", playerMaxHealth); //at start player prefs memory of health is reset to max health
+            PlayerPrefs.SetInt("desertBoss", 0);
+            PlayerPrefs.SetInt("cityBoss", 0);
+            PlayerPrefs.SetInt("swampBoss", 0);
+            PlayerPrefs.SetInt("bossCounter", 0); //reset amount of bosses beaten to 0
+            //PlayerPrefs.SetFloat("gamma", 0.5f);
+            UnityEditor.SessionState.SetBool("FirstInitDone", true);
+        }
     }
 
     // Update is called once per frame
