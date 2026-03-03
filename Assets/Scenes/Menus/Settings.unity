@@ -5153,10 +5153,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 884441221}
     m_Modifications:
-    - target: {fileID: 929950059936028327, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
-      propertyPath: m_Alpha
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2035636210258417562, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
       propertyPath: m_Name
       value: Brightness Panel
@@ -5241,43 +5237,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6717274622277194228, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
+    - target: {fileID: 7393319764765691871, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
       propertyPath: gammaSlider
       value: 
       objectReference: {fileID: 1227465548}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2035636210258417562, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 8978766121521160958}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
---- !u!1 &8978766121521160957 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2035636210258417562, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
+--- !u!114 &8978766121521160958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7393319764765691871, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
   m_PrefabInstance: {fileID: 8978766121521160956}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8978766121521160958
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8978766121521160957}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3312cb6c77f7dc64c9745f3779f54782, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GammaSettings
-  gammaSlider: {fileID: 1227465548}
-  gammaObject: {fileID: 0}
-  brightness: {fileID: 8978766121521160959}
---- !u!225 &8978766121521160959 stripped
-CanvasGroup:
-  m_CorrespondingSourceObject: {fileID: 929950059936028327, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
-  m_PrefabInstance: {fileID: 8978766121521160956}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
