@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class LevelManager : MonoBehaviour
 {
@@ -9,53 +11,132 @@ public class LevelManager : MonoBehaviour
     public enum AreaType { Desert, City, Swamp }
 
     [Header("Current Area (set by wanted board)")]
-    public AreaType currentArea = AreaType.Desert;
+    public AreaType currentArea = AreaType.Desert; //defaults to desert
 
-    // MASTER LISTS (edit in Inspector, never modified)
-    [Header("Random Rooms MASTER (build indexes)")]
-    public List<int> desertRoomIndexes = new List<int>();
-    public List<int> cityRoomIndexes = new List<int>();
-    public List<int> swampRoomIndexes = new List<int>();
+    // MASTER arrays (edit in Inspector, never modified)
+    [Header("Random Rooms MASTER (build indexes)")] 
+    public string[] desertRoomMaster;
+    public string[] cityRoomMaster;
+    public string[] swampRoomMaster;
 
-    // RUNTIME POOLS (auto-built, these get modified)
-    private List<int> desertRoomPool = new List<int>();
-    private List<int> cityRoomPool = new List<int>();
-    private List<int> swampRoomPool = new List<int>();
+    public string[] remainingdesertRoom;
+    public string[] remainingcityRoom;
+    public string[] remainingswampRoom;
 
-    [Header("Secret Rooms (optional)")]
-    public List<int> desertSecretRoomIndexes = new List<int>();
-    public List<int> citySecretRoomIndexes = new List<int>();
-    public List<int> swampSecretRoomIndexes = new List<int>();
+    [Header("Secret Rooms MASTER (optional)")]
+    public string[] desertSecretRooms;
+    public string[] citySecretRooms;
+    public string[] swampSecretRooms;
 
     [Header("Boss Rooms")]
-    public int desertBossRoomIndex = -1;
-    public int cityBossRoomIndex = -1;
-    public int swampBossRoomIndex = -1;
+    public string desertBossRoom;
+    public string cityBossRoom;
+    public string swampBossRoom;
+    public string bossScene;
 
-    [Header("Rooms Before Boss")]
-    public int maxRoomsBeforeBoss = 5;
+    [Header("Random Rooms (when you start Run)")]
+    // RUNTIME POOLS (auto-built, these get modified) 
+    public List<string> desertRoomPool = new List<string>();
+    public List<string> cityRoomPool = new List<string>();
+    public List<string> swampRoomPool = new List<string>();
+    public int randomRoomIndex;
+    public string randomRoomValue;
 
-    public int roomsCompleted = 0;
+    [Header("Rooms Before Boss / Progress")]
+    public int maxRoomsBeforeBoss; //set in inspector, defaulted to 5 before
+    public int roomsCompleted = 0; //measures rooms that enemies been defeated in
+    public string currentRoom; //records which room youre in by name
+    public int currentRoomIndex; //records which room youre in by index
 
     [Header("Reset when entering this scene index")]
-    public int resetSceneIndex = 0;
+    public string resetSceneName;
 
     private void Awake()
     {
-        if (instance == null)
+        if (instance == null) //if there is not an instance of level manager
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(gameObject); //bring level manager to next room
 
             RebuildAllRoomPools(); // build pools once at game start
         }
-        else
+        else //if there is an instance of level manager already
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //destroy duplicate
         }
     }
 
-    private void OnEnable()
+    public void LoadSceneByTrigger(string sceneName)
+    {
+        if (sceneName != "") //if sceneName is not empty
+        {
+            SceneManager.LoadScene(sceneName);
+            return;
+        }
+
+        LoadNextRoom(); //if sceneName is null just load next room
+    }
+
+    private void RebuildAllRoomPools()
+    {
+        //RESET ROOMS THAT YOU CAN PULL FROM TO MATCH THE MASTER ARRAYS
+        remainingdesertRoom = desertRoomMaster; 
+        remainingcityRoom = cityRoomMaster;
+        remainingswampRoom = swampRoomMaster;
+    }
+
+    private void AddRoomToList(List<string> list, string room)
+    {
+        list.Add(room); //add room to scene list
+    }
+
+    public void RandomRoom(string[] roomArray)
+    {
+        randomRoomIndex = Random.Range(0, roomArray.Length);
+    }
+
+    public void RollRooms(string[] remainingRooms, List<string> roomList)
+    {
+        RandomRoom(remainingRooms); //pick random room for master array that doesnt change
+        if (remainingRooms[randomRoomIndex] != "") //if remaining rooms array does not show that room taken
+        {
+            randomRoomValue = remainingRooms[randomRoomIndex]; //save value of room so it can be referenced
+            remainingRooms[randomRoomIndex] = ""; //null that room space so it can't be chosen again
+            AddRoomToList(roomList, randomRoomValue); //save value of room to list for player run
+        }
+        else RollRooms(remainingRooms, roomList); //if room was already chosen roll again for new room that wasn't chosen
+    }
+
+    private void RebuildPoolForCurrentArea() //this sets up your run
+    {
+        switch (currentArea)
+        {
+            case AreaType.City: //if city
+                while(cityRoomPool.Count < maxRoomsBeforeBoss) //while list of rooms picked are less than amount needed to get to boss
+                {
+                    RollRooms(remainingcityRoom, cityRoomPool); //add room
+                }
+                bossScene = cityBossRoom;
+                break;
+            case AreaType.Swamp: //if swamp
+                while (swampRoomPool.Count < maxRoomsBeforeBoss) //while list of rooms picked are less than amount needed to get to boss
+                {
+                    RollRooms(remainingswampRoom, swampRoomPool); //add room
+                }
+                bossScene = swampBossRoom;
+                break;
+            default: //if desert
+                while (desertRoomPool.Count < maxRoomsBeforeBoss) //while list of rooms picked are less than amount needed to get to boss
+                {
+                    RollRooms(remainingdesertRoom, desertRoomPool); //add room
+                }
+                bossScene = desertBossRoom;
+                break;
+        }
+    }
+
+    //*TRIGGERS WHEN SCENE IS LOADED*//
+    private void OnEnable() 
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -67,23 +148,14 @@ public class LevelManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.buildIndex == resetSceneIndex)
+        if (scene.name == resetSceneName)
         {
             roomsCompleted = 0;
             RebuildAllRoomPools(); // KEY: restart random pools too
         }
     }
+    //*END CHECK FOR RESET SCENE*//
 
-    public void LoadSceneByTrigger(int sceneIndex)
-    {
-        if (sceneIndex == 1 || sceneIndex == 2)
-        {
-            SceneManager.LoadScene(sceneIndex);
-            return;
-        }
-
-        LoadNextRoom();
-    }
 
     // Call this when leaving the biome start zone
     public void StartRunInCurrentArea()
@@ -93,29 +165,55 @@ public class LevelManager : MonoBehaviour
         LoadNextRoom();
     }
 
-    public void LoadNextRoom()
+    public void RoomCounter() //if condition met to proceed then room counter for completion goes up **WANT THIS CALLED IN TRAP SCRIPT**
     {
         roomsCompleted++;
+    }
 
-        if (roomsCompleted >= maxRoomsBeforeBoss)
+    public void LoadRoom() //loads scene for whichever room youre moving to
+    {
+        switch (currentArea)
         {
-            SceneManager.LoadScene(GetBossRoom());
+            case AreaType.City: //if city
+                SceneManager.LoadScene(cityRoomPool[currentRoomIndex]); //load next scene
+                break;
+            case AreaType.Swamp: //if swamp
+                SceneManager.LoadScene(swampRoomPool[currentRoomIndex]); //load next scene
+                break;
+            default: //if desert
+                SceneManager.LoadScene(desertRoomPool[currentRoomIndex]); //load next scene
+                break;
+        }
+    }
+
+    public void LoadNextRoom() //if progressing further
+    {
+        currentRoomIndex++;
+
+        if (roomsCompleted >= maxRoomsBeforeBoss) //if met condition to go to boss
+        {
+            SceneManager.LoadScene(bossScene); //load boss
             return;
         }
-
-        List<int> pool = GetCurrentRoomPool();
-
-        if (pool.Count == 0)
+        else //if not yet met boss condition
         {
-            SceneManager.LoadScene(GetBossRoom());
+            LoadRoom();
+        }
+    }
+
+    public void LoadPreviousRoom() //if backtracking
+    {
+        currentRoomIndex = currentRoomIndex - 1; //go to previous index
+
+        if (roomsCompleted >= maxRoomsBeforeBoss) //if met condition to go to boss
+        {
+            SceneManager.LoadScene(bossScene); //load boss
             return;
         }
-
-        int randomIndex = Random.Range(0, pool.Count);
-        int selectedRoom = pool[randomIndex];
-        pool.RemoveAt(randomIndex);
-
-        SceneManager.LoadScene(selectedRoom);
+        else //if not yet met boss condition
+        {
+            LoadRoom();
+        }
     }
 
     public void ResetRun()
@@ -124,71 +222,69 @@ public class LevelManager : MonoBehaviour
         RebuildAllRoomPools();
     }
 
-    public void LoadSecretRoom()
-    {
-        List<int> secrets = GetSecretRoomPool();
-
-        if (secrets.Count == 0)
-        {
-            Debug.LogWarning("No secret rooms set for this area!");
-            return;
-        }
-
-        int pick = Random.Range(0, secrets.Count);
-        SceneManager.LoadScene(secrets[pick]);
-    }
-
-    private void RebuildAllRoomPools()
-    {
-        desertRoomPool = new List<int>(desertRoomIndexes);
-        cityRoomPool = new List<int>(cityRoomIndexes);
-        swampRoomPool = new List<int>(swampRoomIndexes);
-    }
-
-    private void RebuildPoolForCurrentArea()
+    private string GetSecretRoomPool() //retrieve secret room
     {
         switch (currentArea)
         {
-            case AreaType.City:
-                cityRoomPool = new List<int>(cityRoomIndexes);
-                break;
-            case AreaType.Swamp:
-                swampRoomPool = new List<int>(swampRoomIndexes);
-                break;
-            default:
-                desertRoomPool = new List<int>(desertRoomIndexes);
-                break;
+            case AreaType.City: //if city
+                if (citySecretRooms.Length == 0)
+                {
+                    Debug.LogWarning("No secret rooms set for this area!");
+                    randomRoomValue = null;
+                }
+                else
+                {
+                    RandomRoom(citySecretRooms); //retrieve randomroomIndex for secret rooms
+                    randomRoomValue = citySecretRooms[randomRoomIndex];
+                }
+                return randomRoomValue;
+            case AreaType.Swamp: //if swamp
+                if (swampSecretRooms.Length == 0)
+                {
+                    Debug.LogWarning("No secret rooms set for this area!");
+                    randomRoomValue = null;
+                }
+                else
+                {
+                    RandomRoom(swampSecretRooms); //retrieve randomroomIndex for secret rooms
+                    randomRoomValue = swampSecretRooms[randomRoomIndex];
+                }
+                return randomRoomValue;
+            default: //if desert
+                if (desertSecretRooms.Length == 0)
+                {
+                    Debug.LogWarning("No secret rooms set for this area!");
+                    randomRoomValue = null;
+                }
+                else
+                {
+                    RandomRoom(desertSecretRooms); //retrieve randomroomIndex for secret rooms
+                    randomRoomValue = desertSecretRooms[randomRoomIndex];
+                }
+                return randomRoomValue;
         }
     }
 
-    private List<int> GetCurrentRoomPool()
+    public void LoadSecretRoom()
     {
-        return currentArea switch
+        randomRoomValue = GetSecretRoomPool(); //retrieve random secret room
+        if (randomRoomValue != null) //if secret room is picked, next room is then set to secret area
         {
-            AreaType.City => cityRoomPool,
-            AreaType.Swamp => swampRoomPool,
-            _ => desertRoomPool,
-        };
-    }
+            switch (currentArea)
+            {
+                case AreaType.City:
+                    cityRoomPool[currentRoomIndex + 1] = randomRoomValue;
+                    break;
+                case AreaType.Swamp:
+                    swampRoomPool[currentRoomIndex + 1] = randomRoomValue;
+                    break;
+                default:
+                    desertRoomPool[currentRoomIndex + 1] = randomRoomValue;
+                    break;
+            }
+        }
 
-    private int GetBossRoom()
-    {
-        return currentArea switch
-        {
-            AreaType.City => cityBossRoomIndex,
-            AreaType.Swamp => swampBossRoomIndex,
-            _ => desertBossRoomIndex,
-        };
-    }
-
-    private List<int> GetSecretRoomPool()
-    {
-        return currentArea switch
-        {
-            AreaType.City => citySecretRoomIndexes,
-            AreaType.Swamp => swampSecretRoomIndexes,
-            _ => desertSecretRoomIndexes,
-        };
+        LoadNextRoom(); //move to next room, if secret room was added it will be the scene you go to
     }
 
     public void SetArea(AreaType area)

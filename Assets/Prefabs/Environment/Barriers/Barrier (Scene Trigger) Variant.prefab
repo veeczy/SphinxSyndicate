@@ -75,14 +75,14 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1893757426016782432, guid: aae1c78e75352524abf8a1f34f5cdeec, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1028541545441344432}
+      addedObject: {fileID: 142954195939458352}
   m_SourcePrefab: {fileID: 100100000, guid: aae1c78e75352524abf8a1f34f5cdeec, type: 3}
 --- !u!1 &1526451713850021255 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1893757426016782432, guid: aae1c78e75352524abf8a1f34f5cdeec, type: 3}
   m_PrefabInstance: {fileID: 1110403284309122535}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1028541545441344432
+--- !u!114 &142954195939458352
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -91,8 +91,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1526451713850021255}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfcc0b132e538c443b0d8422effe1191, type: 3}
+  m_Script: {fileID: 11500000, guid: a35ea5839876db149a78ec3a625f6164, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
+  m_EditorClassIdentifier: Assembly-CSharp::Door
   onTrigger: 1
-  sceneIndex: 0
+  isSecretDoor: 0
+  forcedSceneIndex: -1

@@ -8,20 +8,22 @@ public class Trap : MonoBehaviour
     public GameObject[] enemies;
     public int enemyCount;
 
+    public int roomIndex;
+    public int roomsCompleted;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        armed = true;
-        // NEW: trap is now armed instantly when scene loads
+        //retrieve variables from level manager
+        roomIndex = LevelManager.instance.currentRoomIndex; 
+        roomsCompleted = LevelManager.instance.roomsCompleted;
 
-        trapWall.SetActive(true);
-        // NEW: trap wall closes immediately when scene loads
+        if(roomIndex < roomsCompleted) //if the room youre in is less than total rooms completed (checking if you are backtracking
+        {  armed = false; }
+        else { armed = true; } //if not backtracking, then arm the traps
 
-        // OLD (removed): trap started deactivated
-        // trapWall.SetActive(false);
-
-        sceneTrigger.SetActive(false);
-        // unchanged
+        trapWall.SetActive(armed); //trap wall set to status of if armed
+        sceneTrigger.SetActive(!armed); 
     }
 
     void Update()
@@ -29,33 +31,19 @@ public class Trap : MonoBehaviour
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         enemyCount = enemies.Length;
 
-        if (enemyCount <= 0)
+        if (enemyCount <= 0 && armed)
         {
-            trapWall.SetActive(false);
-            sceneTrigger.SetActive(true);
+            LevelManager.instance.RoomCounter();
+            armed = false;
         }
+
+        trapWall.SetActive(armed);
+        sceneTrigger.SetActive(!armed);
     }
 
-    /*
-    REMOVED: No longer needed because trap arms instantly in Start()
-    void OnTriggerStay2D(Collider2D col)
+    public void ConditionMet() //for if you want to leave room after a different condition is met, seperate from killing enemies, you can call this
     {
-        if (col.CompareTag("Player"))
-        {
-            armed = true;
-        }
+        LevelManager.instance.RoomCounter();
     }
-    */
-
-    /*
-    REMOVED: Player leaving the trigger no longer controls trap activation
-    void OnTriggerExit2D(Collider2D col)
-    {
-        if (col.CompareTag("Player") && armed)
-        {
-            trapWall.SetActive(true);
-        }
-    }
-    */
 }
 

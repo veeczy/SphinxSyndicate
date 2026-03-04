@@ -8,24 +8,29 @@ public class Door : MonoBehaviour
     [Header("Is this a secret door?")]
     public bool isSecretDoor = false;
 
-    [Header("Force Scene Index (1 or 2 overrides randomizer)")]
-    public int forcedSceneIndex = -1;  // NEW
+    [Header("Backwards or Forwards (is this where you entered)")]
+    public bool isEntry = true;
+
+    [Header("Force Scene Name (filling this overrides randomizer)")]
+    public string sceneName;  // NEW
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!onTrigger) return;
         if (!other.CompareTag("Player")) return;
 
-        // NEW: if this door should send player to scene 1 or 2
-        if (forcedSceneIndex == 1 || forcedSceneIndex == 2)
+        if (sceneName != "")
         {
-            LevelManager.instance.LoadSceneByTrigger(forcedSceneIndex);
+            LevelManager.instance.LoadSceneByTrigger(sceneName);
             return;
         }
-
-        if (isSecretDoor)
+        else if (isSecretDoor)
         {
             LevelManager.instance.LoadSecretRoom();
+        }
+        else if (isEntry)
+        {
+            LevelManager.instance.LoadPreviousRoom();
         }
         else
         {

@@ -14,20 +14,15 @@ public class BiomeDoor : MonoBehaviour
     public string cityStartScene = "CityStart";
     public string swampStartScene = "SwampStart";
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void Start()
     {
-        Debug.Log("BiomeDoor triggered by: " + other.name + " tag=" + other.tag);
-
-        if (!onTrigger) return;
-
         if (LevelManager.instance == null)
         {
             Debug.LogError("LevelManager not found!");
             return;
         }
 
-        if (forceBiome)
-            LevelManager.instance.currentArea = forcedBiome;
+        if (forceBiome) { LevelManager.instance.currentArea = forcedBiome; }
 
         Debug.Log("Current biome = " + LevelManager.instance.currentArea);
 
@@ -46,11 +41,6 @@ public class BiomeDoor : MonoBehaviour
                 SceneManager.LoadScene(desertStartScene);
                 break;
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        Debug.Log("COLLISION with: " + col.collider.name);
     }
 }
 

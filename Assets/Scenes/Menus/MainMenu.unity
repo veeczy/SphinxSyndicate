@@ -1357,7 +1357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbf0475d7f7ae494a90e08d824655fe6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu
-  sceneToLoad: Starting_Area
+  sceneToLoad: Tavern Upstairs
 --- !u!4 &1452319350
 Transform:
   m_ObjectHideFlags: 0
@@ -1645,63 +1645,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1695107075}
   m_CullTransparentMesh: 1
---- !u!1 &1831634116
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1831634118}
-  - component: {fileID: 1831634117}
-  m_Layer: 0
-  m_Name: LevelManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1831634117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831634116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa553238edef8624e8138abf7a980ea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::LevelManager
-  currentArea: 0
-  desertRoomIndexes: 0600000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000110000001000000012000000130000001400000015000000160000001700000018000000190000001a0000001b000000
-  cityRoomIndexes: 22000000230000002400000025000000260000002700000028000000290000002a0000002b000000
-  swampRoomIndexes: 2f000000300000003100000032000000330000003400000035000000360000003700000038000000
-  desertSecretRoomIndexes: 050000001e0000001f000000
-  citySecretRoomIndexes: 
-  swampSecretRoomIndexes: 
-  desertBossRoomIndex: 7
-  cityBossRoomIndex: 60
-  swampBossRoomIndex: 57
-  maxRoomsBeforeBoss: 10
-  roomsCompleted: 0
-  resetSceneIndex: 2
---- !u!4 &1831634118
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1831634116}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.73674, y: -9.24955, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1870617058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2325,4 +2268,3 @@ SceneRoots:
   - {fileID: 977064275}
   - {fileID: 1216860217}
   - {fileID: 1452319350}
-  - {fileID: 1831634118}
