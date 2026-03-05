@@ -9,7 +9,7 @@ public class Door : MonoBehaviour
     public bool isSecretDoor = false;
 
     [Header("Backwards or Forwards (is this where you entered)")]
-    public bool isEntry = true;
+    public bool isEntry;
 
     [Header("Force Scene Name (filling this overrides randomizer)")]
     public string sceneName;  // NEW
