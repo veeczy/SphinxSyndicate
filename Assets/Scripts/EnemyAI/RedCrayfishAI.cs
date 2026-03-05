@@ -3,6 +3,10 @@ using System.Collections;
 
 public class RedCrayfishAI : EnemyAI
 {
+    [Header("Activation")]
+    public float detectionRadius = 8f;
+    private bool hasActivated = false;
+
     [Header("Ranges")]
     public float shootRange = 6f;
     public float meleeRange = 1.5f;
@@ -41,6 +45,20 @@ public class RedCrayfishAI : EnemyAI
     protected override void Update()
     {
         if (player == null) return;
+
+        // Activate when player enters radius (like SpiderAI)
+        if (!hasActivated)
+        {
+            float activateDist = Vector2.Distance(transform.position, player.position);
+            if (activateDist > detectionRadius)
+            {
+                // stay idle until activated
+                SetWalkingAnim(false);
+                return;
+            }
+
+            hasActivated = true;
+        }
 
         float distance = Vector2.Distance(transform.position, player.position);
 
@@ -152,10 +170,8 @@ public class RedCrayfishAI : EnemyAI
 
         Vector2 toPlayer = player.position - transform.position;
 
-        if (toPlayer.x > 0)
-            sr.flipX = false;
-        else if (toPlayer.x < 0)
-            sr.flipX = true;
+        if (toPlayer.x > 0) sr.flipX = false;
+        else if (toPlayer.x < 0) sr.flipX = true;
     }
 
     private void SetWalkingAnim(bool walking)

@@ -35813,16 +35813,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7731259079038447895, guid: 6ccf65c9105df1241a2badfa632fefc1, type: 3}
       propertyPath: enemyPrefabs.Array.size
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7731259079038447895, guid: 6ccf65c9105df1241a2badfa632fefc1, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
+      objectReference: {fileID: 5247528024108967568, guid: 1419b7e58c448ea4ba81248d23f37d6b, type: 3}
     - target: {fileID: 7731259079038447895, guid: 6ccf65c9105df1241a2badfa632fefc1, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[1]'
       value: 
-      objectReference: {fileID: 4917675550121240032, guid: 3e1ca7e493b917645a29a332c6baacf8, type: 3}
+      objectReference: {fileID: 1445585701349679366, guid: 57a388a64082bf84c9772735bf7c07ca, type: 3}
     - target: {fileID: 7731259079038447895, guid: 6ccf65c9105df1241a2badfa632fefc1, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[2]'
       value: 
@@ -39291,6 +39291,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5606947235136161330, guid: aae1c78e75352524abf8a1f34f5cdeec, type: 3}
   m_PrefabInstance: {fileID: 1240426403}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1260237943
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -669322391471822860, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: detectionRadius
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778543058888638391, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_Name
+      value: Enemy (Crayfish)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1778543058888638391, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.64
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 25.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7400013493702466416, guid: ff581405b95844c4b98bada548b54166, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ff581405b95844c4b98bada548b54166, type: 3}
 --- !u!1 &1296360420
 GameObject:
   m_ObjectHideFlags: 0
@@ -39743,11 +39808,11 @@ PrefabInstance:
     - target: {fileID: 7731259079038447895, guid: 6ccf65c9105df1241a2badfa632fefc1, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[0]'
       value: 
-      objectReference: {fileID: 2794270143789028901, guid: 37441ab4235c48a40ba9d8cffc8cad74, type: 3}
+      objectReference: {fileID: 5247528024108967568, guid: 1419b7e58c448ea4ba81248d23f37d6b, type: 3}
     - target: {fileID: 7731259079038447895, guid: 6ccf65c9105df1241a2badfa632fefc1, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[1]'
       value: 
-      objectReference: {fileID: 4917675550121240032, guid: 3e1ca7e493b917645a29a332c6baacf8, type: 3}
+      objectReference: {fileID: 1445585701349679366, guid: 57a388a64082bf84c9772735bf7c07ca, type: 3}
     - target: {fileID: 7731259079038447895, guid: 6ccf65c9105df1241a2badfa632fefc1, type: 3}
       propertyPath: 'enemyPrefabs.Array.data[2]'
       value: 
@@ -43163,6 +43228,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   retrySceneName: Tavern Upstairs
+  howtoPlayUI: {fileID: 0}
+  pausemenutext: {fileID: 0}
+  buttons: {fileID: 0}
+  retryquitbutton: {fileID: 0}
+  ishowtoplay: 0
 --- !u!4 &2024070502
 Transform:
   m_ObjectHideFlags: 0
@@ -43223,6 +43293,7 @@ SceneRoots:
   - {fileID: 2112177921}
   - {fileID: 407080242}
   - {fileID: 1442814570}
+  - {fileID: 1260237943}
   - {fileID: 886731875}
   - {fileID: 1573516315}
   - {fileID: 1098780136}
