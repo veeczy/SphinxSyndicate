@@ -6,16 +6,10 @@ public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance;
 
-    [Header("Scene to Load When Retry is Pressed")]
-    public string retrySceneName = "Level1";
-
     private GameObject pauseMenuUI;
-    public GameObject howtoPlayUI; //added for the how to play button
-    public GameObject pausemenutext;
-    public GameObject buttons; // parent object containing HowToPlay + RetryQuitButtons
-    public GameObject retryquitbutton;
-    public bool ishowtoplay = false;
     private bool isPaused = false;
+
+    private string lastGameplayScene;
 
     private void Awake()
     {
@@ -25,12 +19,11 @@ public class PauseManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
             SceneManager.sceneLoaded += OnSceneLoaded;
         }
-        else if (Instance != this)
+        else
         {
             Destroy(gameObject);
             return;
         }
-        Debug.Log("[PauseManager] Awake called");
     }
 
     private void OnDestroy()
@@ -40,45 +33,51 @@ public class PauseManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Find the PAUSED UI in the new scene (active or inactive)
+        // Store gameplay scenes so Back button knows where to return
+        if (scene.name != "Settings" && scene.name != "HowToPlay" && scene.name != "MainMenu")
+        {
+            lastGameplayScene = scene.name;
+        }
+
         pauseMenuUI = FindInactiveObjectByName("PAUSED");
 
-        if (pauseMenuUI == null)
-        {
-            Debug.LogWarning("[PauseManager] No PAUSED UI found in scene: " + scene.name);
-        }
-        else
+        if (pauseMenuUI != null)
         {
             pauseMenuUI.SetActive(false);
 
-            // Assign buttons dynamically every time scene loads
             Button[] buttons = pauseMenuUI.GetComponentsInChildren<Button>(true);
+
             foreach (Button btn in buttons)
             {
                 btn.onClick.RemoveAllListeners();
 
                 if (btn.name.ToLower().Contains("resume"))
                     btn.onClick.AddListener(Resume);
+
                 else if (btn.name.ToLower().Contains("retry"))
                     btn.onClick.AddListener(RetryLevel);
+
                 else if (btn.name.ToLower().Contains("quit"))
-                    btn.onClick.AddListener(QuitGame);
+                    btn.onClick.AddListener(QuitToMenu);
+
                 else if (btn.name.ToLower().Contains("howtoplay"))
-                    btn.onClick.AddListener(HowToPlay);
-                else if (btn.name.ToLower().Contains("back"))
-                    btn.onClick.AddListener(BackToPause);  // This wires the back button
+                    btn.onClick.AddListener(OpenHowToPlay);
+
+                else if (btn.name.ToLower().Contains("settings"))
+                    btn.onClick.AddListener(OpenSettings);
             }
-
-
-            Debug.Log("[PauseManager] Buttons reassigned in scene: " + scene.name);
         }
 
-        // Ensure EventSystem exists
-        if (FindObjectOfType<UnityEngine.EventSystems.EventSystem>() == null)
+        // Back buttons in other scenes
+        Button[] allButtons = FindObjectsOfType<Button>(true);
+
+        foreach (Button btn in allButtons)
         {
-            GameObject es = new GameObject("EventSystem");
-            es.AddComponent<UnityEngine.EventSystems.EventSystem>();
-            es.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();
+            if (btn.name.ToLower().Contains("back"))
+            {
+                btn.onClick.RemoveAllListeners();
+                btn.onClick.AddListener(BackToGame);
+            }
         }
 
         Time.timeScale = 1f;
@@ -90,102 +89,71 @@ public class PauseManager : MonoBehaviour
         if (Input.GetButtonDown("Cancel"))
         {
             if (isPaused)
-            {
-                if (ishowtoplay)      // check if HowToPlay panel is active
-                    BackToPause();    // go back to main pause menu
-                else
-                    Resume();          // otherwise, resume the game
-            }
+                Resume();
             else
-            {
                 Pause();
-            }
         }
     }
 
-
     public void Pause()
     {
-        if (pauseMenuUI == null)
-        {
-            Debug.LogError("[PauseManager] Cannot pause � PAUSED UI not found!");
-            return;
-        }
+        if (pauseMenuUI == null) return;
 
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
-        Debug.Log("[PauseManager] Paused");
-    }
-    //Function for back button in How To Play Panel
-    public void BackToPause()
-    {
-        ishowtoplay = false;
-
-        howtoPlayUI.SetActive(false);
-        pausemenutext.SetActive(true);
-        buttons.SetActive(true);
     }
 
-    //Function to open how to play screen
-    public void HowToPlay()
-    {
-        ishowtoplay = true;
-
-        pausemenutext.SetActive(false);
-        buttons.SetActive(false);
-        howtoPlayUI.SetActive(true);
-    }
     public void Resume()
     {
-        if (pauseMenuUI == null)
-        {
-            Debug.LogError("[PauseManager] Cannot resume � PAUSED UI not found!");
-            return;
-        }
+        if (pauseMenuUI == null) return;
 
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
-        Debug.Log("[PauseManager] Resumed");
     }
-    //Altered the retry button to work for all scenes
+
     public void RetryLevel()
     {
-        var currentScene = SceneManager.GetActiveScene();
-        Debug.Log("[PauseManager] Retry pressed. Reloading current scene: " + currentScene.name);
-
+        Scene currentScene = SceneManager.GetActiveScene();
         Time.timeScale = 1f;
-        isPaused = false;
-
-        // Reload the scene you are currently in
-        SceneManager.LoadScene(currentScene.buildIndex);
-        // (Alternative: SceneManager.LoadScene(currentScene.name);)
+        SceneManager.LoadScene(currentScene.name);
     }
 
-
-    public void QuitGame()
+    public void QuitToMenu()
     {
-        Debug.Log("[PauseManager] Quit pressed.");
-
-#if UNITY_EDITOR
-        Debug.Log("[PauseManager] Application.Quit() would run in build.");
-#else
-        Application.Quit();
-#endif
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
     }
 
-    // Finds active or inactive object anywhere in scene
+    public void OpenHowToPlay()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("HowToPlay");
+    }
+
+    public void OpenSettings()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Settings");
+    }
+
+    public void BackToGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(lastGameplayScene);
+    }
+
     private GameObject FindInactiveObjectByName(string name)
     {
-        GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
-        foreach (GameObject obj in allObjects)
+        GameObject[] objects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+        foreach (GameObject obj in objects)
         {
             if (obj.name == name && obj.scene.isLoaded)
-            {
                 return obj;
-            }
         }
+
         return null;
     }
 }
