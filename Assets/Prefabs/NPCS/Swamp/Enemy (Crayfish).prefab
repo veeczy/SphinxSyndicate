@@ -276,7 +276,7 @@ Animator:
   m_GameObject: {fileID: 1778543058888638391}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 48156e5a9fd467040960082712fd7747, type: 2}
+  m_Controller: {fileID: 9100000, guid: 70a5bf88a7fea564e80fecfa0fa4496f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -307,6 +307,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   hurtSound: {fileID: 0}
   hurtVolume: 1
+  detectionRadius: 8
   shootRange: 20
   meleeRange: 1.5
   projectilePrefab: {fileID: 2464918242123611638, guid: 4393fd63653d4b948b473d5f91560a77, type: 3}
