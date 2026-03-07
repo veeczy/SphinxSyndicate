@@ -322,6 +322,7 @@ MonoBehaviour:
   enemyCount: 0
   roomIndex: 0
   roomsCompleted: 0
+  enemiesDefeated: 0
 --- !u!4 &250762855
 Transform:
   m_ObjectHideFlags: 0
@@ -66492,6 +66493,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5606947235136161330, guid: aae1c78e75352524abf8a1f34f5cdeec, type: 3}
   m_PrefabInstance: {fileID: 889170637}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &894866694
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 894866695}
+  m_Layer: 0
+  m_Name: ==========UI=========
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &894866695
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894866694}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.05087, y: -3.86369, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &927462004
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -67931,6 +67963,8 @@ SceneRoots:
   - {fileID: 1296360421}
   - {fileID: 619394802}
   - {fileID: 1245698089}
+  - {fileID: 1580631961}
+  - {fileID: 1047745116}
   - {fileID: 1659260807}
   - {fileID: 1153110555}
   - {fileID: 2112177921}
@@ -67940,9 +67974,8 @@ SceneRoots:
   - {fileID: 1098780136}
   - {fileID: 1931390553}
   - {fileID: 250762855}
-  - {fileID: 981389849}
   - {fileID: 5189247}
-  - {fileID: 1580631961}
-  - {fileID: 1047745116}
+  - {fileID: 894866695}
   - {fileID: 2104841157}
   - {fileID: 422350823}
+  - {fileID: 981389849}

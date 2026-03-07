@@ -47470,7 +47470,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Door
   onTrigger: 1
   isSecretDoor: 0
-  forcedSceneIndex: -1
+  isEntry: 0
+  sceneName: 
 --- !u!1001 &569588182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -47535,7 +47536,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 142954195939458352, guid: 1bb4cd5e7f0705b4b9f6cf666e7acf60, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -47562,12 +47564,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 569588184}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a35ea5839876db149a78ec3a625f6164, type: 3}
+  m_Script: {fileID: 11500000, guid: e2177e2c4c18b9f40b15d22f44acaa5f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Door
+  m_EditorClassIdentifier: Assembly-CSharp::StartRunDoor
   onTrigger: 1
-  isSecretDoor: 0
-  forcedSceneIndex: -1
 --- !u!1001 &572182641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49996,7 +49996,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7616165524256399325, guid: 737450a9706c7f44d88e40101f8d58e9, type: 3}
   m_PrefabInstance: {fileID: 1533018530}
   m_PrefabAsset: {fileID: 0}
-
 --- !u!1 &1533677732
 GameObject:
   m_ObjectHideFlags: 0
@@ -50026,7 +50025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 190c5ff3cdaa044479592e7923f9e5aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerHealth: {fileID: 1153110557}
+  playerHealth: {fileID: 0}
   hearts:
   - {fileID: 0}
   - {fileID: 0}
@@ -50051,7 +50050,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
 --- !u!1 &1573516313
 GameObject:
   m_ObjectHideFlags: 0
@@ -50979,3 +50977,4 @@ SceneRoots:
   - {fileID: 2024070502}
   - {fileID: 517569223}
   - {fileID: 1977597720}
+  - {fileID: 1533677734}
