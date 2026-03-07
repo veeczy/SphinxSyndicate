@@ -7,6 +7,7 @@ public class SpiderAI : EnemyAI
     public float detectionRadius = 4f;
     public float lungeForce = 8f;
     public float restTime = 2f;
+    public float damageRadius = 1.2f; // how close player must be to take damage
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -35,8 +36,11 @@ public class SpiderAI : EnemyAI
 
         // Flip sprite
         Vector2 direction = (player.position - transform.position).normalized;
-        if (direction.x > 0) sr.flipX = false;
-        else if (direction.x < 0) sr.flipX = true;
+
+        if (direction.x > 0)
+            sr.flipX = false;
+        else if (direction.x < 0)
+            sr.flipX = true;
 
         CheckHealth();
     }
@@ -62,16 +66,30 @@ public class SpiderAI : EnemyAI
 
         yield return new WaitForSeconds(0.15f); // windup
 
+        // Direction toward player
         Vector2 direction = (player.position - transform.position).normalized;
 
+        // Apply lunge force
         rb.linearVelocity = Vector2.zero;
         rb.AddForce(direction * lungeForce, ForceMode2D.Impulse);
 
-        yield return new WaitForSeconds(0.3f); // lunge movement
+        yield return new WaitForSeconds(0.15f);
 
+        // Damage player if close enough during lunge
+        float distance = Vector2.Distance(transform.position, player.position);
+        if (distance <= damageRadius)
+        {
+            PlayerHealth ph = player.GetComponent<PlayerHealth>();
+            if (ph != null)
+                ph.TakeDamage(damage);
+        }
+
+        yield return new WaitForSeconds(0.15f); // finish movement
+
+        // Stop movement
         rb.linearVelocity = Vector2.zero;
 
-        // Return to idle
+        // Return to idle animation
         anim.SetBool("isLunging", false);
 
         isResting = false;
