@@ -14,20 +14,22 @@ public class PlayerPrefsManager : MonoBehaviour
     public int cityBoss;
     public int swampBoss;
 
+    //variable for gamma
+    public float gamma;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //Initialize all variables
         PlayerPrefs.SetInt("health", playerMaxHealth); //at start player prefs memory of health is reset to max health
-
         PlayerPrefs.SetInt("desertBoss", 0);
         PlayerPrefs.SetInt("cityBoss", 0);
         PlayerPrefs.SetInt("swampBoss", 0);
         PlayerPrefs.SetInt("bossCounter", 0); //reset amount of bosses beaten to 0
 
+        PlayerPrefs.SetFloat("gamma", 0.5f);
 
-        //After initializing, move to Main Menu
         SceneManager.LoadScene("MainMenu");
+
     }
 
     // Update is called once per frame
@@ -39,5 +41,6 @@ public class PlayerPrefsManager : MonoBehaviour
         desertBoss = PlayerPrefs.GetInt("desertBoss");
         cityBoss = PlayerPrefs.GetInt("cityBoss");
         swampBoss = PlayerPrefs.GetInt("swampBoss");
+        gamma = PlayerPrefs.GetFloat("gamma");
     }
 }
