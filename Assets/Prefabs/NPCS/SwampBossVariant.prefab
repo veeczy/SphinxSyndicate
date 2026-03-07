@@ -90,11 +90,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.31
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -14.992276
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalPosition.z
@@ -128,10 +128,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1321163794364074081}
   m_SourcePrefab: {fileID: 100100000, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
 --- !u!212 &4322245081710271823 stripped
 SpriteRenderer:
@@ -143,3 +147,56 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4195240358146315197, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
   m_PrefabInstance: {fileID: 389866903822168128}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8623732951457362645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+  m_PrefabInstance: {fileID: 389866903822168128}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1321163794364074081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623732951457362645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8f1a8e0077f7804fa71e02ccb563f80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwampBossAI
+  moveSpeed: 3
+  bossSprite: {fileID: 4322245081710271823}
+  bossAnimator: {fileID: 4562543358952727549}
+  damage: 1
+  healthUI: {fileID: 0}
+  health: 150
+  maxHealth: 150
+  minDistance: 1
+  attackRange: 2
+  attackTime: 10
+  meleeCooldownTime: 10
+  meleeCooldown: 0
+  contactDamage: 1
+  onLand: 1
+  isGrounded: 1
+  meleeMode: 0
+  waterJumpPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  landJumpPos:
+  - {fileID: 0}
+  jumpPos: {x: 0, y: 0, z: 0}
+  jumpSpeed: 3
+  phase2: 0
+  sheepPrefab: {fileID: 872868850083306992, guid: 982713bda7157f04a8c9abaf0edb87a2, type: 3}
+  waterAttacking: 0
+  projectileVelocity: 1
+  projectileDelay: 0.5
+  projectileCounter: 0
+  direction: {x: 0, y: 0}
+  jumpTimer: 3
+  bossLevel: 2
+  debugDamageKey: 56
+  debugDamageAmount: 50

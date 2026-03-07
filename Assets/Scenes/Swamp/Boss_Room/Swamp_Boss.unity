@@ -70553,11 +70553,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4755310737655801534, guid: acca54ec889a35d40a04eb64ed5a15dd, type: 3}
   m_PrefabInstance: {fileID: 397704681}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &404655517 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8623732951457362645, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
-  m_PrefabInstance: {fileID: 1809628737}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &407080242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74512,10 +74507,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3349042503946671983, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: healthUI
+      value: 
+      objectReference: {fileID: 74741099}
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: attackTime
+      value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: 'landJumpPos.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1036650481}
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: 'waterJumpPos.Array.data[0]'
+      value: 
+      objectReference: {fileID: 498104896}
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: 'waterJumpPos.Array.data[1]'
+      value: 
+      objectReference: {fileID: 242763511}
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: 'waterJumpPos.Array.data[2]'
+      value: 
+      objectReference: {fileID: 947908037}
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: 'waterJumpPos.Array.data[3]'
+      value: 
+      objectReference: {fileID: 1679823018}
     - target: {fileID: 8531131444231487957, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.31
@@ -74560,71 +74579,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: SwampBossVariant
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 3349042503946671983, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8623732951457362645, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1809628746}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
---- !u!95 &1809628742 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 4562543358952727549, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
-  m_PrefabInstance: {fileID: 1809628737}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1809628744 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 4322245081710271823, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
-  m_PrefabInstance: {fileID: 1809628737}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1809628746
+--- !u!114 &1809628746 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+  m_PrefabInstance: {fileID: 1809628737}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 404655517}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8f1a8e0077f7804fa71e02ccb563f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwampBossAI
-  moveSpeed: 3
-  bossSprite: {fileID: 1809628744}
-  bossAnimator: {fileID: 1809628742}
-  damage: 1
-  healthUI: {fileID: 74741099}
-  health: 150
-  maxHealth: 150
-  minDistance: 1
-  attackRange: 2
-  attackTime: 5
-  meleeCooldownTime: 10
-  meleeCooldown: 0
-  contactDamage: 1
-  onLand: 1
-  isGrounded: 1
-  meleeMode: 0
-  waterJumpPos:
-  - {fileID: 498104896}
-  - {fileID: 242763511}
-  - {fileID: 947908037}
-  - {fileID: 1679823018}
-  landJumpPos:
-  - {fileID: 1036650481}
-  phase2: 0
-  sheepPrefab: {fileID: 872868850083306992, guid: 982713bda7157f04a8c9abaf0edb87a2, type: 3}
-  waterAttacking: 0
-  projectileVelocity: 5
-  projectileDelay: 1
-  projectileCounter: 0
-  direction: {x: 0, y: 0}
-  jumpTimer: 0
-  bossLevel: 2
-  debugDamageKey: 56
-  debugDamageAmount: 50
 --- !u!1001 &1830335984
 PrefabInstance:
   m_ObjectHideFlags: 0

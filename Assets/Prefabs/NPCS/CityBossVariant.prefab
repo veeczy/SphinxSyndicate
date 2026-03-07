@@ -30,27 +30,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904209916246519186, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5904209916246519186, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6958221027935080175, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6958221027935080175, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8092182550609763393, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8092182550609763393, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_Name
@@ -99,7 +99,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5042418881093023709}
   m_SourcePrefab: {fileID: 100100000, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
 --- !u!212 &1398526345286004789 stripped
 SpriteRenderer:
@@ -111,3 +114,31 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4195240358146315197, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
   m_PrefabInstance: {fileID: 3313020602948345146}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6863068157502513071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+  m_PrefabInstance: {fileID: 3313020602948345146}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &5042418881093023709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863068157502513071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323502b65891f5447a6fc33b9bedfeb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DogEnemyAI
+  moveSpeed: 3
+  owner: {fileID: 0}
+  damage: 1
+  health: 3
+  maxHealth: 3
+  healthBar: {fileID: 0}
+  retreatTimer: 10
+  stunTimer: 5
+  playerRb: {fileID: 0}
+  hurtSound: {fileID: 0}
+  hurtVolume: 1
