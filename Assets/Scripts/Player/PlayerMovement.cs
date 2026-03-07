@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     LayerMask mask;
     Vector3 offsetPos;
     public GameObject offset;
+    bool isSwamp;
 
     [Header("Player Objects")]
     public GameObject weaponObject;
@@ -96,6 +97,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (LevelManager.instance.currentArea == LevelManager.AreaType.Swamp) { isSwamp = true; }
+        else { isSwamp = false; }
+
         stickAxis = new Vector2(Input.GetAxis("Joystick Aim X"), Input.GetAxis("Joystick Aim Y"));
         if(!controller && (stickAxis.sqrMagnitude > deadzone.sqrMagnitude || stickAxis.sqrMagnitude < -deadzone.sqrMagnitude))
         {
@@ -172,7 +176,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //raycast stuff
-        mask = LayerMask.GetMask("Wall");
+        if(isSwamp) { mask = LayerMask.GetMask("SwampWall"); } //if swamp, wall layer is swamp wall
+        if(!isSwamp) { mask = LayerMask.GetMask("Wall"); } //if not, normal wall
         contactFilter.layerMask = mask;
         offsetPos = offset.transform.position;
 

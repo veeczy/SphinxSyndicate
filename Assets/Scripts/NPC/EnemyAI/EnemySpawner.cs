@@ -12,10 +12,12 @@ public class EnemySpawner : MonoBehaviour
     public LayerMask wallLayer; // Assign the "Walls" layer in the Inspector
 
     private bool hasSpawned = false;
+    public bool enemiesDefeated;
 
     void Start()
     {
-        SpawnEnemiesOnce();
+        enemiesDefeated = LevelManager.instance.enemiesDefeated;
+        if(!enemiesDefeated) { SpawnEnemiesOnce(); } //if enemies were not previously defeated, spawn the enemies
     }
 
     void SpawnEnemiesOnce()

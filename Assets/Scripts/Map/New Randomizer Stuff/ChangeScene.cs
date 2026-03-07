@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 public class ChangeScene : MonoBehaviour
 {
     public bool onTrigger = false;
-    public int sceneIndex = 0;
+    public string sceneName;
 
     void OnTriggerEnter2D(Collider2D other)
     {
         if(other.CompareTag("Player") && onTrigger)
-        changeScene(sceneIndex);
+        changeScene(sceneName);
     }
-    void changeScene(int index)
+    void changeScene(string name)
     {
-        SceneManager.LoadScene(index);
+        SceneManager.LoadScene(name);
     }
 }

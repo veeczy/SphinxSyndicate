@@ -1,5 +1,6 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class BossAI : MonoBehaviour
@@ -44,6 +45,7 @@ public class BossAI : MonoBehaviour
     [Header("Boss Progress Tracking")]
     public int bossLevel; // 0 = desert, 1 = city, 2 = swamp
     private bool hasDied = false;
+    public string bossKey;
 
     [Header("DEBUG")]
     public KeyCode debugDamageKey = KeyCode.Alpha8;
@@ -60,6 +62,19 @@ public class BossAI : MonoBehaviour
 
     void FixedUpdate()
     {
+        switch (LevelManager.instance.currentArea)
+        {
+            case LevelManager.AreaType.City:
+                bossKey = "cityBoss";
+                break;
+            case LevelManager.AreaType.Swamp:
+                bossKey = "swampBoss";
+                break;
+            case LevelManager.AreaType.Desert:
+                bossKey = "desertBoss";
+                break;
+        }
+
         // DEBUG DAMAGE
         if (Input.GetKeyDown(debugDamageKey))
         {
@@ -110,10 +125,6 @@ public class BossAI : MonoBehaviour
 
     void HandleBossDefeated()
     {
-        string bossKey = "desertBoss";
-        if (bossLevel == 1) bossKey = "cityBoss";
-        if (bossLevel == 2) bossKey = "swampBoss";
-
         if (PlayerPrefs.GetInt(bossKey, 0) == 0)
         {
             PlayerPrefs.SetInt(bossKey, 1);
@@ -121,6 +132,7 @@ public class BossAI : MonoBehaviour
         }
 
         PlayerPrefs.Save();
+        LevelManager.instance.ResetRun();
         Destroy(gameObject);
     }
 

@@ -10,7 +10,7 @@ public class MainMenu : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneToLoad))
         {
-            SceneManager.LoadScene("Tavern Upstairs");
+            SceneManager.LoadScene(sceneToLoad);
         }
         else
         {
