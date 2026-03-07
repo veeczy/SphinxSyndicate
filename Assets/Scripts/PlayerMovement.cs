@@ -39,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
     LayerMask mask;
     Vector3 offsetPos;
     public GameObject offset;
+    bool isSwamp;
 
     [Header("Player Objects")]
     public GameObject weaponObject;
@@ -96,12 +97,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (LevelManager.instance.currentArea == LevelManager.AreaType.Swamp) { isSwamp = true; }
+        else { isSwamp = false; }
+
         stickAxis = new Vector2(Input.GetAxis("Joystick Aim X"), Input.GetAxis("Joystick Aim Y"));
-        if(!controller && (stickAxis.sqrMagnitude > deadzone.sqrMagnitude || stickAxis.sqrMagnitude < -deadzone.sqrMagnitude))
+        if (!controller && (stickAxis.sqrMagnitude > deadzone.sqrMagnitude || stickAxis.sqrMagnitude < -deadzone.sqrMagnitude))
         {
             controller = true;
         }
-        else if(controller && (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
+        else if (controller && (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)))
         {
             controller = false;
         }
@@ -119,12 +123,12 @@ public class PlayerMovement : MonoBehaviour
             canMove = BlackJackObject.GetComponent<BlackJack>().canMove;
         }
         //SET CURSOR
-        if(SetCursor.Instance != null)
+        if (SetCursor.Instance != null)
         {
             SetCursor.Instance.SetCrosshair(aimPos);
         }
         // Aim Rotation
-        if(!controller)
+        if (!controller)
         {
             Vector3 mousePos = Input.mousePosition;
             mousePos.z = -Camera.main.transform.position.z;
@@ -132,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if(stickAxis.sqrMagnitude  > deadzone.sqrMagnitude)
+            if (stickAxis.sqrMagnitude > deadzone.sqrMagnitude)
             {
                 Vector2 stickPos = stickAxis.normalized;
                 aimPos = (Vector2)transform.position + stickPos * controllerAimDist;
@@ -142,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 aimPos = (Vector2)transform.position + lastStickPos;
             }
-            
+
         }
         aimDir = (Vector2)aimPos - (Vector2)transform.position;
         angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
@@ -172,7 +176,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //raycast stuff
-        mask = LayerMask.GetMask("Wall");
+        if (isSwamp) { mask = LayerMask.GetMask("SwampWall"); } //if swamp, wall layer is swamp wall
+        if (!isSwamp) { mask = LayerMask.GetMask("Wall"); } //if not, normal wall
         contactFilter.layerMask = mask;
         offsetPos = offset.transform.position;
 
@@ -239,7 +244,7 @@ public class PlayerMovement : MonoBehaviour
         {
             dodgeTimer += Time.fixedDeltaTime;
 
-            if (hit != null) 
+            if (hit != null)
             {
                 chargeDodgeStart = false; //stop charge dodge if hit wall
                 Debug.Log("Hit wall.");
