@@ -75,7 +75,7 @@ public class BiomeDoor : MonoBehaviour
                 if(cityBoss == 1 && desertBoss == 1 && swampBoss == 1)
                 {
                     Debug.Log("You beat every run, just go to win screen for now.");
-                    SceneManager.LoadScene("winScreen");
+                    SceneManager.LoadScene("WinScene");
                 }
                 break;
             case LevelManager.AreaType.Swamp:
@@ -93,7 +93,7 @@ public class BiomeDoor : MonoBehaviour
                 if (cityBoss == 1 && desertBoss == 1 && swampBoss == 1)
                 {
                     Debug.Log("You beat every run, just go to win screen for now.");
-                    SceneManager.LoadScene("winScreen");
+                    SceneManager.LoadScene("WinScene");
                 }
                 break;
             case LevelManager.AreaType.Desert:
@@ -111,7 +111,7 @@ public class BiomeDoor : MonoBehaviour
                 if (desertBoss == 1 && swampBoss == 1 && cityBoss == 1)
                 {
                     Debug.Log("You beat every run, just go to win screen for now.");
-                    SceneManager.LoadScene("winScreen");
+                    SceneManager.LoadScene("WinScene");
                 }
                 break;
         }
