@@ -10,6 +10,7 @@ public class Door : MonoBehaviour
 
     [Header("Backwards or Forwards (is this where you entered)")]
     public bool isEntry;
+    private int roomIndex;
 
     [Header("Force Scene Name (filling this overrides randomizer)")]
     public string sceneName;  // NEW
@@ -18,6 +19,7 @@ public class Door : MonoBehaviour
     {
         if (!onTrigger) return;
         if (!other.CompareTag("Player")) return;
+        roomIndex = LevelManager.instance.currentRoomIndex;
 
         if (sceneName != "")
         {
@@ -30,7 +32,8 @@ public class Door : MonoBehaviour
         }
         else if (isEntry)
         {
-            LevelManager.instance.LoadPreviousRoom();
+            if(roomIndex > 0) { LevelManager.instance.LoadPreviousRoom(); }
+            if(roomIndex <= 0) { LevelManager.instance.ReturnToTown(); }
         }
         else
         {

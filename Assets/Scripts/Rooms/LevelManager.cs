@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
+using UnityEngine.LightTransport.PostProcessing;
 
 public class LevelManager : MonoBehaviour
 {
@@ -47,6 +48,12 @@ public class LevelManager : MonoBehaviour
     public int roomsCompleted = 0; //measures rooms that enemies been defeated in
     public string currentRoom; //records which room youre in by name
     public int currentRoomIndex; //records which room youre in by index
+    public bool firstRoom;
+    bool runStarted;
+
+    [Header("Enemies Defeated / Progress")]
+    public bool enemiesDefeated;
+    public bool[] roomsCleared;
 
     [Header("Reset when entering this scene index")]
     public string resetSceneName;
@@ -66,6 +73,14 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(runStarted) // if in current run check if enemies defeated
+        {
+            enemiesDefeated = roomsCleared[currentRoomIndex]; //enemies defeated is whatever the state of the bool says currently
+        }
+    }
+
     public void LoadSceneByTrigger(string sceneName)
     {
         if (sceneName != "") //if sceneName is not empty
@@ -75,6 +90,11 @@ public class LevelManager : MonoBehaviour
         }
 
         LoadNextRoom(); //if sceneName is null just load next room
+    }
+
+    public void ReturnToTown()
+    {
+        SceneManager.LoadScene("LoadingScreen"); //will go to biomedoor on loading screen and return to whatever town is starting area
     }
 
     private void RebuildAllRoomPools()
@@ -117,6 +137,7 @@ public class LevelManager : MonoBehaviour
                     RollRooms(remainingcityRoom, cityRoomPool); //add room
                 }
                 bossScene = cityBossRoom;
+                ResetRoomClear(cityRoomPool);
                 break;
             case AreaType.Swamp: //if swamp
                 while (swampRoomPool.Count < maxRoomsBeforeBoss) //while list of rooms picked are less than amount needed to get to boss
@@ -124,6 +145,7 @@ public class LevelManager : MonoBehaviour
                     RollRooms(remainingswampRoom, swampRoomPool); //add room
                 }
                 bossScene = swampBossRoom;
+                ResetRoomClear(swampRoomPool);
                 break;
             default: //if desert
                 while (desertRoomPool.Count < maxRoomsBeforeBoss) //while list of rooms picked are less than amount needed to get to boss
@@ -131,6 +153,7 @@ public class LevelManager : MonoBehaviour
                     RollRooms(remainingdesertRoom, desertRoomPool); //add room
                 }
                 bossScene = desertBossRoom;
+                ResetRoomClear(desertRoomPool);
                 break;
         }
     }
@@ -160,9 +183,18 @@ public class LevelManager : MonoBehaviour
     // Call this when leaving the biome start zone
     public void StartRunInCurrentArea()
     {
-        roomsCompleted = 0;
-        RebuildPoolForCurrentArea(); // fresh rooms for that biome
-        LoadNextRoom();
+        currentRoomIndex = 0;
+        if(!runStarted) //if run was not already started
+        {
+            roomsCompleted = 0;
+            RebuildPoolForCurrentArea(); // fresh rooms for that biome
+            runStarted = true;
+            LoadRoom();
+        }
+        if(runStarted)
+        {
+            LoadRoom();
+        }
     }
 
     public void RoomCounter() //if condition met to proceed then room counter for completion goes up **WANT THIS CALLED IN TRAP SCRIPT**
@@ -170,8 +202,28 @@ public class LevelManager : MonoBehaviour
         roomsCompleted++;
     }
 
+    public void ResetRoomClear(List<string> currentRoomPool) //creates array for current run, and initializes it
+    {
+        roomsCleared = new bool[currentRoomPool.Count]; //new array to count how many enemies are defeated, matches the length of the run rooms
+
+        for (int i = 0; i < roomsCleared.Length; i++) //initialize array to say every room is not cleared yet
+        {
+            roomsCleared[i] = false;
+        }
+    }
+
+    public void EnemiesDefeated() //called when all enemies are defeated, updates state of room to be cleared
+    {
+        roomsCleared[currentRoomIndex] = true;
+    }
+
     public void LoadRoom() //loads scene for whichever room youre moving to
     {
+        if (roomsCompleted >= maxRoomsBeforeBoss) //if met condition to go to boss
+        {
+            SceneManager.LoadScene(bossScene); //load boss
+            return;
+        }
         switch (currentArea)
         {
             case AreaType.City: //if city
@@ -188,8 +240,6 @@ public class LevelManager : MonoBehaviour
 
     public void LoadNextRoom() //if progressing further
     {
-        currentRoomIndex++;
-
         if (roomsCompleted >= maxRoomsBeforeBoss) //if met condition to go to boss
         {
             SceneManager.LoadScene(bossScene); //load boss
@@ -197,6 +247,7 @@ public class LevelManager : MonoBehaviour
         }
         else //if not yet met boss condition
         {
+            currentRoomIndex++;
             LoadRoom();
         }
     }

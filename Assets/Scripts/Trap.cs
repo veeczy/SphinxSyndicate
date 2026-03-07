@@ -10,6 +10,7 @@ public class Trap : MonoBehaviour
 
     public int roomIndex;
     public int roomsCompleted;
+    public bool enemiesDefeated;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -17,13 +18,14 @@ public class Trap : MonoBehaviour
         //retrieve variables from level manager
         roomIndex = LevelManager.instance.currentRoomIndex; 
         roomsCompleted = LevelManager.instance.roomsCompleted;
+        enemiesDefeated = LevelManager.instance.enemiesDefeated;
 
-        if(roomIndex < roomsCompleted) //if the room youre in is less than total rooms completed (checking if you are backtracking
+        if(enemiesDefeated) //if the enemies are previously defeated, disarm traps
         {  armed = false; }
-        else { armed = true; } //if not backtracking, then arm the traps
+        else { armed = true; } //if ehnemies were not previously defeated, arm traps
 
         trapWall.SetActive(armed); //trap wall set to status of if armed
-        sceneTrigger.SetActive(!armed); 
+        sceneTrigger.SetActive(!armed); //doors status set opposite of armed, if trapped then doors should not be present and vice versa
     }
 
     void Update()
@@ -33,7 +35,8 @@ public class Trap : MonoBehaviour
 
         if (enemyCount <= 0 && armed)
         {
-            LevelManager.instance.RoomCounter();
+            LevelManager.instance.RoomCounter(); //increase counter for rooms cleared
+            LevelManager.instance.EnemiesDefeated(); //update the state of enemies being defeated for the room
             armed = false;
         }
 
