@@ -115,8 +115,10 @@ MonoBehaviour:
   healthBar: {fileID: 8858737417704920071}
   hurtSound: {fileID: 8300000, guid: 1f1568ae620295a468996b224ba7acee, type: 3}
   hurtVolume: 0.2
-  webProjectilePrefab: {fileID: 3217030190005306906, guid: 786c685fa85e20947b80d2d11ecb3fc8, type: 3}
-  shootCooldown: 2
+  detectionRadius: 10
+  lungeForce: 15
+  restTime: 2
+  damageRadius: 2
 --- !u!61 &-7855662042886817914
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -147,7 +149,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3315563662065394446}
   - component: {fileID: 7025947830599295230}
   - component: {fileID: 2053763057115585674}
-  - component: {fileID: -7679034788966404198}
   - component: {fileID: -636699169311878750}
   - component: {fileID: -5323287211296973594}
+  - component: {fileID: -6071112458782380840}
   m_Layer: 3
   m_Name: Enemy (Toad)
   m_TagString: Untagged
@@ -169,27 +169,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &-7679034788966404198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2794270143789028901}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acdb098cb7cafc647832766c5ceab395, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HornedToadAI
-  moveSpeed: 3
-  damage: 1
-  health: 3
-  maxHealth: 3
-  healthBar: {fileID: 5934562707753541566}
-  hurtSound: {fileID: 8300000, guid: 1f1568ae620295a468996b224ba7acee, type: 3}
-  hurtVolume: 0.2
-  attackRange: 2
-  attackCooldown: 1.5
 --- !u!95 &-636699169311878750
 Animator:
   serializedVersion: 7
@@ -309,6 +288,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-6071112458782380840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2794270143789028901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cbfffe017197f841a54e78eb7f3c554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VultureAI
+  moveSpeed: 3
+  damage: 1
+  health: 3
+  maxHealth: 3
+  healthBar: {fileID: 5934562707753541566}
+  hurtSound: {fileID: 8300000, guid: 1f1568ae620295a468996b224ba7acee, type: 3}
+  hurtVolume: 1
+  safeDistance: 6
+  shootInterval: 2
+  projectilePrefab: {fileID: 3217030190005306906, guid: 786c685fa85e20947b80d2d11ecb3fc8, type: 3}
 --- !u!1001 &134356319241720793
 PrefabInstance:
   m_ObjectHideFlags: 0
