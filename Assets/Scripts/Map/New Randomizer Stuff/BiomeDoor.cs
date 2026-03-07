@@ -41,18 +41,21 @@ public class BiomeDoor : MonoBehaviour
     public void DesertLoad()
     {
         Debug.Log("Loading DesertStart");
+        LevelManager.instance.currentArea = LevelManager.AreaType.Desert;
         SceneManager.LoadScene(desertStartScene);
     }
 
     public void CityLoad()
     {
         Debug.Log("Loading CityStart");
+        LevelManager.instance.currentArea = LevelManager.AreaType.City;
         SceneManager.LoadScene(cityStartScene);
     }
 
     public void SwampLoad()
     {
         Debug.Log("Loading SwampStart");
+        LevelManager.instance.currentArea = LevelManager.AreaType.Swamp;
         SceneManager.LoadScene(swampStartScene);
     }
 
