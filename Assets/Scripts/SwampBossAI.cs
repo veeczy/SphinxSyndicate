@@ -50,6 +50,14 @@ public class SwampBossAI : MonoBehaviour
     [Header("DEBUG")]
     public KeyCode debugDamageKey = KeyCode.Alpha8;
     public int debugDamageAmount = 50;
+    [Header("Melee")]
+    private bool isMelee = false;
+
+    private float nextBurstTime = 0f;
+    private float nextMeleeTime = 0f;
+
+    private float meleeTimer = 0f;
+    public float meleeRange = 1.5f;
 
     void Start()
     {
@@ -129,10 +137,40 @@ public class SwampBossAI : MonoBehaviour
         PlayerPrefs.Save();
         Destroy(gameObject);
     }
+   private IEnumerator MeleeAttack()
+    {
+        isMelee = true;
 
+        yield return new WaitForSeconds(0.15f);
+
+        float distance = Vector2.Distance(transform.position, player.position);
+        if (distance <= meleeRange)
+        {
+            PlayerHealth ph = player.GetComponent<PlayerHealth>();
+            if (ph != null)
+                ph.TakeDamage(damage);
+        }
+
+        nextMeleeTime = Time.time + meleeCooldownTime;
+        isMelee = false;
+    }
     IEnumerator closeAttack()
     {
         meleeMode = true;
+        if (distance <= meleeRange && Time.time >= nextMeleeTime)
+        {
+            meleeTimer += Time.deltaTime;
+
+            if (meleeTimer >= meleeCooldownTime)
+            {
+                StartCoroutine(MeleeAttack());
+                meleeTimer = 0f;
+            }
+        }
+        else
+        {
+            meleeTimer = 0f;
+        }
         yield return new WaitForSeconds(attackTime);
         meleeMode = false;
         meleeCooldown = true;
@@ -179,7 +217,7 @@ public class SwampBossAI : MonoBehaviour
         }
         else if (col.CompareTag("Player"))
         {
-            player.GetComponent<PlayerHealth>().currentHealth -= contactDamage;
+            player.GetComponent<PlayerHealth>().TakeDamage(contactDamage);
         }
     }
 }

@@ -11,7 +11,7 @@ public class DogEnemyAI : MonoBehaviour
     public int maxHealth = 3;
     public SpriteRenderer healthBar;
     private Vector2 hbScale;
-    private bool isRetreating = false;
+    public bool isRetreating = false;
     public float retreatTimer;
     public float stunTimer = 5f;//Time which player is stunned after contact
     protected Rigidbody2D rb;
@@ -23,6 +23,7 @@ public class DogEnemyAI : MonoBehaviour
     public float hurtVolume = 1f;
 
     private AudioSource audioSource;
+    public bool canRun = true;
 
     // PUSH ZONE
     private bool inPushZone = false;
@@ -40,12 +41,16 @@ public class DogEnemyAI : MonoBehaviour
 
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         if (p != null) player = p.transform;
+        canRun = true;
     }
 
     protected virtual void Update()
     {
-        HandleMovement();
         CheckHealth();
+    }
+    void FixedUpdate()
+    {
+        HandleMovement();
     }
 
     protected void HandleMovement()
@@ -67,7 +72,7 @@ public class DogEnemyAI : MonoBehaviour
         {
             direction = ((Vector2)player.position - (Vector2)transform.position).normalized;
         }
-        transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+        rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);
 
         // Flip left/right only
         if (direction.x > 0) sr.flipX = false;
@@ -94,16 +99,6 @@ public class DogEnemyAI : MonoBehaviour
             pushStrength = Mathf.Max(0.01f, zone.strength);
             return; // zone only
         }
-
-        // Player damage
-        bool canRun = true;
-        if (col.CompareTag("Player") && canRun)
-        {
-            canRun = false;
-            playerRb = col.GetComponent<Rigidbody2D>();
-            StartCoroutine("dogAttack");
-        }
-
         // Bullet damage
         BulletId bullet = col.GetComponent<BulletId>();
         if (bullet != null)
@@ -124,6 +119,27 @@ public class DogEnemyAI : MonoBehaviour
             pushDir = zone.pushDirection;
             pushStrength = Mathf.Max(0.01f, zone.strength);
         }
+        
+        // Player damage
+        if (col.CompareTag("Player") && canRun && !isRetreating)
+        {
+            playerRb = col.GetComponent<Rigidbody2D>();
+            StartCoroutine("dogAttack");
+        }
+        if(col.CompareTag("Boss") && isRetreating)
+        {
+            if(canRun)
+            {
+                Destroy(gameObject);
+                playerRb.simulated = true;
+                owner.GetComponent<CityBossAI>().dogReleased = false;
+            }
+            else
+            {
+                healthBar.gameObject.SetActive(false);
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
+        }
     }
 
     void OnTriggerExit2D(Collider2D col)
@@ -138,16 +154,19 @@ public class DogEnemyAI : MonoBehaviour
     }
     IEnumerator dogAttack()
     {
-        Debug.Log("AAAAAAAAA");
         if (playerRb != null)
         {
-            Debug.Log("AAAAAAAAA");
             playerRb.simulated = false;
+            isRetreating = true;
+            canRun = false;
             yield return new WaitForSeconds(stunTimer);
+            canRun = true;
             playerRb.simulated = true;
         }
         isRetreating = true;
         yield return new WaitForSeconds(retreatTimer);
+        owner.GetComponent<CityBossAI>().dogReleased = false;
+        playerRb.simulated = true;
         Destroy(gameObject);
     }
 }

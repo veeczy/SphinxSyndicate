@@ -6,6 +6,7 @@ public class CityBossAI : MonoBehaviour
 {
     public float moveSpeed = 3f;
     public SpriteRenderer bossSprite;
+    public Rigidbody2D rb;
     public Animator bossAnimator;
     protected Transform player;
     public int damage = 1;
@@ -28,6 +29,8 @@ public class CityBossAI : MonoBehaviour
 
     [Header("Phases")]
     public int phase = 1;
+    public int phase2Health = 100;
+    public int phase3Health = 50;
 
 
     [Header("Smite Attack")]
@@ -45,6 +48,7 @@ public class CityBossAI : MonoBehaviour
     public float dogTimer = 7.5f;
     public float dogCooldownTime = 10f;
     public bool dogAttacking = false;
+    public bool dogCooldown = false;
 
     public Vector2 direction;
     private float distance;
@@ -89,8 +93,8 @@ public class CityBossAI : MonoBehaviour
         {
             if(allowSmite)
                 smiteTarget = player.position;//ONLY RECORD PLAYER POSITION WHEN NOT ABOUT TO SMITE
-            transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;//MOVE TOWARD PLAYER
-            if(!dogAttacking && !dogReleased && phase >= 2)
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);//MOVE TOWARD PLAYER
+            if(!dogAttacking && !dogReleased && spawnDog && !dogCooldown)
             {
                 StartCoroutine("dogAttack");//BEGIN DOG ATTACK
                 if(allowSmite && !smiteCooldown)
@@ -100,12 +104,12 @@ public class CityBossAI : MonoBehaviour
             }
         }
 //START HANDLE BOSS PHASES
-        if (health <= maxHealth * 0.66f && phase < 2)
+        if (health <= phase2Health && phase < 2)
         {
             phase = 2;
             moveSpeed *= 2f;
         }
-        else if(health <= maxHealth * 0.33f && phase < 3)
+        else if(health <= phase3Health * 0.33f && phase < 3)
         {
             phase = 3;
             spawnDog = true;
@@ -142,18 +146,19 @@ public class CityBossAI : MonoBehaviour
             smiteCooldown = true;
             yield return new WaitForSeconds(smiteCooldownTime + Random.Range(-2.5f, 2.5f));
             smiteCooldown = false;
+            smiteCounter = 0;
         }
     }
 
     IEnumerator dogAttack()
     {
-        dogAttacking = true;
-        Rigidbody2D dog = Instantiate(dogPrefab, transform.position, transform.rotation).GetComponent<Rigidbody2D>();
-        dog.GetComponent<DogEnemyAI>().owner = this.transform;
         dogReleased = true;
-        yield return new WaitForSeconds(dogTimer);
-        dogReleased = false;
-        dogAttacking = false;
+        GameObject dog = Instantiate(dogPrefab, transform.position, transform.rotation);
+        DogEnemyAI dogAI = dog.GetComponent<DogEnemyAI>();
+        dogAI.owner = this.transform;//Tell dog script what object sent out the dog
+        dogCooldown = true;
+        yield return new WaitForSeconds(dogCooldownTime);
+        dogCooldown = false;
     }
 
     void OnTriggerEnter2D(Collider2D col)

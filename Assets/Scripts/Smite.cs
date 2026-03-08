@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class Smite : MonoBehaviour
 {
     public float countdownTimer;
+    public float dmgTimer;
     public int smiteDamage;
     public bool doDamage;
     public AudioClip smiteSound;
@@ -15,7 +16,7 @@ public class Smite : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if(other.CompareTag("Player") && doDamage)
+        if(other.CompareTag("Player") && doDamage && !isRunning)
         {
             other.GetComponent<PlayerHealth>().TakeDamage(smiteDamage);
             doDamage = false;
@@ -28,6 +29,8 @@ public class Smite : MonoBehaviour
         doDamage = true;
         if(gameObject.GetComponent<AudioSource>())
         gameObject.GetComponent<AudioSource>().PlayOneShot(smiteSound);
+        yield return new WaitForSeconds(dmgTimer);
+        doDamage = false;
         isRunning = false;
     }
 }

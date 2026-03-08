@@ -79681,12 +79681,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 870268917}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94feb0a9756596445b87cd91ffdfe099, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WinTrigger
-  target: {fileID: 0}
+  target: {fileID: 1131228774}
   winSceneName: WinScene
 --- !u!4 &870268919
 Transform:
@@ -80132,6 +80132,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: health
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: healthUI
+      value: 
+      objectReference: {fileID: 1090267552}
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: smiteDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6843089427659254959, guid: b41a582915321ef4482ab494fd52047e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -13.52
@@ -80177,78 +80189,25 @@ PrefabInstance:
       value: CityBossVariant
       objectReference: {fileID: 0}
     - target: {fileID: 6863068157502513071, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
+      propertyPath: m_TagString
+      value: Boss
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 497950281643080213, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-    - {fileID: 5042418881093023709, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6863068157502513071, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1131228783}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b41a582915321ef4482ab494fd52047e, type: 3}
---- !u!1 &1131228774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6863068157502513071, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-  m_PrefabInstance: {fileID: 1131228773}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1131228775 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1712012514519731847, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-  m_PrefabInstance: {fileID: 1131228773}
-  m_PrefabAsset: {fileID: 0}
---- !u!212 &1131228776 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 1398526345286004789, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-  m_PrefabInstance: {fileID: 1131228773}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1131228783
+--- !u!114 &1131228774 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+  m_PrefabInstance: {fileID: 1131228773}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131228774}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2121ff8a73856ae4db9a964c7f3cb554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CityBossAI
-  moveSpeed: 1
-  bossSprite: {fileID: 1131228776}
-  bossAnimator: {fileID: 1131228775}
-  damage: 1
-  healthUI: {fileID: 1090267552}
-  health: 150
-  maxHealth: 150
-  minDistance: 0
-  attackRange: 5
-  smiteTarget: {x: 0, y: 0}
-  meleeCooldown: 0
-  contactDamage: 1
-  allowSmite: 1
-  spawnDog: 0
-  dogReleased: 0
-  meleeMode: 1
-  phase: 4
-  smitePrefab: {fileID: 288681865847291458, guid: 604bc6bf7002aad48a939d79188bacc1, type: 3}
-  smiteCounter: 0
-  smiteCountMax: 5
-  smiteDelay: 3
-  smiteCooldownTime: 10
-  smiteCooldown: 0
-  smiteAttacking: 0
-  dogPrefab: {fileID: 2825934852813729431, guid: acf7160c7fae5564c9de40bda1f1e6d1, type: 3}
-  dogTimer: 7.5
-  dogCooldownTime: 10
-  dogAttacking: 0
-  direction: {x: 0, y: 0}
-  bossLevel: 0
-  debugDamageKey: 56
-  debugDamageAmount: 50
 --- !u!1001 &1153826880
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -82149,7 +82108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4899432532245730738, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: bypassPlayerPrefs
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7233425569726320240, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: footstepAudio
