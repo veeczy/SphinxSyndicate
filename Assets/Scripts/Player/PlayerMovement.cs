@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public bool chargeDodgeStart = false;
     public float chargedodgeDuration = 0.5f;
     public bool isCharging = false;
+    public float chargeDodgeTime;
     public Collider2D hit;
     ContactFilter2D contactFilter;
     LayerMask mask;
@@ -187,17 +188,17 @@ public class PlayerMovement : MonoBehaviour
         if (dodgekeypress)
         {
             chargeTimer += Time.fixedDeltaTime;
-            if (chargeTimer > .3)
+            if (chargeTimer > .05)
             {
                 isCharging = true;
                 anim.SetBool("ischarging", isCharging);
             }
-            if (chargeTimer > 1.5) chargeDodge = true;
+            if (chargeTimer > chargeDodgeTime) chargeDodge = true;
             else chargeDodge = false;
         }
         if (!dodgekeypress)
         {
-            if (chargeTimer <= 1.5) chargeTimer = 0;
+            if (chargeTimer <= chargeDodgeTime) chargeTimer = 0;
             isCharging = false;
         }
 
