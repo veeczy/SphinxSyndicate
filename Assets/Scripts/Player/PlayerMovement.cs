@@ -88,6 +88,12 @@ public class PlayerMovement : MonoBehaviour
         {
             offset = GameObject.Find("GunHolder"); //look for offset object in hierarchy and set it to that
         }
+
+        //SET CURSOR
+        if (SetCursor.Instance != null)
+        {
+            SetCursor.Instance.SetCrosshair(aimPos);
+        }
     }
 
     private void Update()
