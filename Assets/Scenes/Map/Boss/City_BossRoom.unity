@@ -80133,6 +80133,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: phase
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: damage
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
       propertyPath: health
       value: 150
       objectReference: {fileID: 0}
@@ -80141,8 +80149,36 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1090267552}
     - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: spawnDog
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: allowSmite
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: burstCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: burstDelay
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: meleeDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
       propertyPath: smiteDelay
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752870052120019323, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6752870052120019323, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: m_Size.y
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6843089427659254959, guid: b41a582915321ef4482ab494fd52047e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -80187,6 +80223,10 @@ PrefabInstance:
     - target: {fileID: 6863068157502513071, guid: b41a582915321ef4482ab494fd52047e, type: 3}
       propertyPath: m_Name
       value: CityBossVariant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6863068157502513071, guid: b41a582915321ef4482ab494fd52047e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6863068157502513071, guid: b41a582915321ef4482ab494fd52047e, type: 3}
       propertyPath: m_TagString
@@ -82062,6 +82102,14 @@ PrefabInstance:
       propertyPath: m_Resource
       value: 
       objectReference: {fileID: 8300000, guid: 8d4cae78448eafc45948300182722470, type: 3}
+    - target: {fileID: 217066545272836644, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844704270189968715, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4736883666061568222, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_LocalPosition.x
       value: 10.6
@@ -82105,6 +82153,10 @@ PrefabInstance:
     - target: {fileID: 4897928467854683093, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4897928467854683093, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4899432532245730738, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: bypassPlayerPrefs

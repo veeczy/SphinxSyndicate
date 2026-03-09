@@ -9,7 +9,6 @@ public class CityBossAI : MonoBehaviour
     public Rigidbody2D rb;
     public Animator bossAnimator;
     protected Transform player;
-    public int damage = 1;
 
     [Header("Health")]
     public Slider healthUI;
@@ -31,6 +30,15 @@ public class CityBossAI : MonoBehaviour
     public int phase = 1;
     public int phase2Health = 100;
     public int phase3Health = 50;
+
+    [Header("Melee Attack")]
+    public float meleeRange = 3f;
+    public float meleeDelay = 1f;
+    public float burstCount = 3f;
+    public float burstDelay = 0.5f;
+    public float attackTime = 10f;
+    public float meleeCooldownTime = 10f;
+    public int damage = 3;
 
 
     [Header("Smite Attack")]
@@ -60,6 +68,8 @@ public class CityBossAI : MonoBehaviour
     [Header("DEBUG")]
     public KeyCode debugDamageKey = KeyCode.Alpha8;
     public int debugDamageAmount = 50;
+    private bool isMelee = false;
+    public bool isContacting = false;
 
     void Start()
     {
@@ -91,8 +101,12 @@ public class CityBossAI : MonoBehaviour
         bossSprite.flipX = direction.x < 0;
         if(!smiteAttacking)//FREEZE BOSS WHEN SMITING
         {
-            if(allowSmite)
-                smiteTarget = player.position;//ONLY RECORD PLAYER POSITION WHEN NOT ABOUT TO SMITE
+            if(!meleeMode)
+            {
+                StartCoroutine("closeAttack");
+            }
+            else if(meleeMode && !isMelee)
+                StartCoroutine("meleeAttack");//HANDLE MELEE DAMAGE
             rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);//MOVE TOWARD PLAYER
             if(!dogAttacking && !dogReleased && spawnDog && !dogCooldown)
             {
@@ -107,9 +121,10 @@ public class CityBossAI : MonoBehaviour
         if (health <= phase2Health && phase < 2)
         {
             phase = 2;
+            spawnDog = true;
             moveSpeed *= 2f;
         }
-        else if(health <= phase3Health * 0.33f && phase < 3)
+        else if(health <= phase3Health && phase < 3)
         {
             phase = 3;
             spawnDog = true;
@@ -137,6 +152,7 @@ public class CityBossAI : MonoBehaviour
     IEnumerator smiteAttack()
     {
         smiteAttacking = true;
+        smiteTarget = player.position;
         yield return new WaitForSeconds(smiteDelay);
         GameObject smiteZone = Instantiate(smitePrefab, smiteTarget, transform.rotation);//SPAWNS TRIGGER THAT DETECTS PLAYER AND DOES LARGE DAMAGE IF PLAYER IS WITHIN TRIGGER AFTER TIMER
         smiteCounter++;
@@ -160,17 +176,49 @@ public class CityBossAI : MonoBehaviour
         yield return new WaitForSeconds(dogCooldownTime);
         dogCooldown = false;
     }
-
+private IEnumerator meleeAttack()
+    {
+        isMelee = true;
+        for(int i = 0; i < burstCount; i++)
+        {
+            float distance = Vector2.Distance(transform.position, player.position);
+        if (distance <= meleeRange && isContacting)
+        {
+            PlayerHealth ph = player.GetComponent<PlayerHealth>();
+            if (ph != null)
+                ph.TakeDamage(damage);
+                yield return new WaitForSeconds(burstDelay);
+        }
+        }  
+        yield return new WaitForSeconds(meleeDelay);
+        isMelee = false;
+    }
+    IEnumerator closeAttack()
+    {
+        meleeMode = true;
+        yield return new WaitForSeconds(attackTime);
+        meleeMode = false;
+        meleeCooldown = true;
+        yield return new WaitForSeconds(meleeCooldownTime + Random.Range(-2.5f, 2.5f));
+        meleeCooldown = false;
+    }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Bullet"))
+        if (col.CompareTag("Bullet") && col.GetComponent<BulletId>())
         {
             health -= col.GetComponent<BulletId>().dmg;
             healthUI.value = health;
         }
-        else if (col.CompareTag("Player"))
-        {
-            player.GetComponent<PlayerHealth>().currentHealth -= contactDamage;
-        }
+    }
+        void OnTriggerStay2D(Collider2D col)
+    {
+            if (col.CompareTag("Player"))
+            {
+                isContacting = true;
+            }
+            else
+            {
+                isContacting = false;
+            }
     }
 }

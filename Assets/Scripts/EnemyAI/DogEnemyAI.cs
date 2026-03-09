@@ -84,6 +84,7 @@ public class DogEnemyAI : MonoBehaviour
         if (health <= 0)
         {
             playerRb.simulated = true;
+            owner.GetComponent<CityBossAI>().dogReleased = false;
             Destroy(gameObject);
         }
     }

@@ -147,7 +147,6 @@ MonoBehaviour:
   bossSprite: {fileID: 1398526345286004789}
   rb: {fileID: 7883565597260841302}
   bossAnimator: {fileID: 1712012514519731847}
-  damage: 1
   healthUI: {fileID: 0}
   health: 20
   maxHealth: 150
@@ -163,10 +162,17 @@ MonoBehaviour:
   phase: 2
   phase2Health: 100
   phase3Health: 50
+  meleeRange: 3
+  meleeDelay: 1
+  burstCount: 3
+  burstDelay: 0.5
+  attackTime: 10
+  meleeCooldownTime: 10
+  damage: 1
   smitePrefab: {fileID: 288681865847291458, guid: 604bc6bf7002aad48a939d79188bacc1, type: 3}
   smiteCounter: 0
   smiteCountMax: 5
-  smiteDelay: 3
+  smiteDelay: 1
   smiteCooldownTime: 10
   smiteCooldown: 0
   smiteAttacking: 0
@@ -174,10 +180,12 @@ MonoBehaviour:
   dogTimer: 7.5
   dogCooldownTime: 10
   dogAttacking: 0
+  dogCooldown: 0
   direction: {x: 0, y: 0}
   bossLevel: 0
   debugDamageKey: 56
   debugDamageAmount: 50
+  isContacting: 0
 --- !u!50 &7883565597260841302
 Rigidbody2D:
   serializedVersion: 5

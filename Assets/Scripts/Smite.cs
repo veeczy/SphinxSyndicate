@@ -16,8 +16,9 @@ public class Smite : MonoBehaviour
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if(other.CompareTag("Player") && doDamage && !isRunning)
+        if(other.CompareTag("Player") && doDamage)
         {
+            Debug.Log("TRIGGERED");
             other.GetComponent<PlayerHealth>().TakeDamage(smiteDamage);
             doDamage = false;
         }

@@ -33,7 +33,7 @@ public class BulletId : MonoBehaviour
                 }
                 if (impactDestroy)
                 {
-                    Debug.Log(col.gameObject);
+                    //Debug.Log(col.gameObject);
                     Destroy(gameObject);
                 }
                     

@@ -72970,6 +72970,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 217066545272836644, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1419171099445873015, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: maxHealth
       value: 12
@@ -72984,7 +72988,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1419171099445873015, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: bypassPlayerPrefs
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3844704270189968715, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4340054961460727088, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_Constraints
@@ -73035,16 +73043,20 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4897928467854683093, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4897928467854683093, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4899432532245730738, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: invincible
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4899432532245730738, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: bypassPlayerPrefs
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7345569019691328946, guid: 2dce4446351741844ba3612a5aa77119, type: 3}
       propertyPath: m_SortingOrder
@@ -74397,6 +74409,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7616165524256399325, guid: 737450a9706c7f44d88e40101f8d58e9, type: 3}
   m_PrefabInstance: {fileID: 1709896579}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1716057798 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8623732951457362645, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+  m_PrefabInstance: {fileID: 1809628737}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1785630054
 GameObject:
   m_ObjectHideFlags: 0
@@ -74508,6 +74525,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1809628754}
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 74741099}
@@ -74515,6 +74536,14 @@ PrefabInstance:
       propertyPath: attackTime
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: burstDelay
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 872868850083306992, guid: 982713bda7157f04a8c9abaf0edb87a2, type: 3}
     - target: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
       propertyPath: 'landJumpPos.Array.data[0]'
       value: 
@@ -74535,6 +74564,22 @@ PrefabInstance:
       propertyPath: 'waterJumpPos.Array.data[3]'
       value: 
       objectReference: {fileID: 1679823018}
+    - target: {fileID: 4562543358952727549, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7348050273215528623, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440907636286024705, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: m_Size.x
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8440907636286024705, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      propertyPath: m_Size.y
+      value: 3.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8531131444231487957, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.31
@@ -74582,19 +74627,49 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8623732951457362645, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1809628754}
   m_SourcePrefab: {fileID: 100100000, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
 --- !u!114 &1809628746 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1321163794364074081, guid: 3096d494a14a4ad41877b5a701b089a9, type: 3}
   m_PrefabInstance: {fileID: 1809628737}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1716057798}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8f1a8e0077f7804fa71e02ccb563f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwampBossAI
+--- !u!50 &1809628754
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1716057798}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 512
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1001 &1830335984
 PrefabInstance:
   m_ObjectHideFlags: 0

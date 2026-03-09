@@ -9,6 +9,7 @@ public class SwampBossAI : MonoBehaviour
     public SpriteRenderer bossSprite;
     public Animator bossAnimator;
     protected Transform player;
+    public Rigidbody2D rb;
     public int damage = 1;
 
     [Header("Health")]
@@ -22,10 +23,10 @@ public class SwampBossAI : MonoBehaviour
     public float attackTime = 5;
     public float meleeCooldownTime;
     public bool meleeCooldown;
-    public int contactDamage = 1;
     public bool onLand = true;
     public bool isGrounded = true;
     public bool meleeMode = true;
+    public bool isContacting;
     public Transform[] waterJumpPos;//Where the boss can jump into the water
     public Transform[] landJumpPos;//Where the boss can jump back onto land
 
@@ -33,7 +34,7 @@ public class SwampBossAI : MonoBehaviour
     public bool phase2 = false;
 
     [Header("Projectile Attack")]
-    public GameObject sheepPrefab;
+    public GameObject projectilePrefab;
     public bool waterAttacking;
     public float projectileVelocity;
     public float projectileDelay;
@@ -42,6 +43,7 @@ public class SwampBossAI : MonoBehaviour
     public Vector2 direction;
     private float distance;
     public float jumpTimer;
+    public bool isDamaging;
 
     [Header("Boss Progress Tracking")]
     public int bossLevel; // 0 = desert, 1 = city, 2 = swamp
@@ -57,6 +59,8 @@ public class SwampBossAI : MonoBehaviour
     private float nextMeleeTime = 0f;
 
     private float meleeTimer = 0f;
+    public float meleeDelay = 2f;
+    public float burstDelay = 0.5f;
     public float meleeRange = 1.5f;
 
     void Start()
@@ -90,17 +94,19 @@ public class SwampBossAI : MonoBehaviour
         direction = (player.position - transform.position);
         bossSprite.flipX = direction.x < 0;
 
-        if(!meleeMode && isGrounded && !meleeCooldown)
+        if(!meleeMode && isGrounded && !meleeCooldown)//(!meleeMode && isGrounded && !meleeCooldown && isContacting && !isDamaging && !isMelee)
         {
-            StartCoroutine("closeAttack");//BEGIN MELEE ATTACK
+            StartCoroutine("closeAttack");//START MELEE MODE
         }
         else if(meleeMode && isGrounded)
         {
             if(!onLand)
             {
-                StartCoroutine("jump");
+                StartCoroutine("jump");//JUMP TO LAND
             }
-            transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;//MELEE ATTACK
+            if(!isMelee)
+                StartCoroutine("meleeAttack");//HANDLE MELEE DAMAGE
+            rb.MovePosition(rb.position + direction * moveSpeed * Time.deltaTime);//MOVE TOWARDS PLAYER POSITION
         }
         else if(!meleeMode && isGrounded && meleeCooldown && !waterAttacking)
         {
@@ -137,40 +143,26 @@ public class SwampBossAI : MonoBehaviour
         PlayerPrefs.Save();
         Destroy(gameObject);
     }
-   private IEnumerator MeleeAttack()
+   private IEnumerator meleeAttack()
     {
         isMelee = true;
-
-        yield return new WaitForSeconds(0.15f);
-
-        float distance = Vector2.Distance(transform.position, player.position);
-        if (distance <= meleeRange)
+        for(int i = 0; i < 3; i++)
+        {
+            float distance = Vector2.Distance(transform.position, player.position);
+        if (distance <= meleeRange && isContacting)
         {
             PlayerHealth ph = player.GetComponent<PlayerHealth>();
             if (ph != null)
                 ph.TakeDamage(damage);
+                yield return new WaitForSeconds(burstDelay);
         }
-
-        nextMeleeTime = Time.time + meleeCooldownTime;
+        }  
+        yield return new WaitForSeconds(meleeDelay);
         isMelee = false;
     }
     IEnumerator closeAttack()
     {
         meleeMode = true;
-        if (distance <= meleeRange && Time.time >= nextMeleeTime)
-        {
-            meleeTimer += Time.deltaTime;
-
-            if (meleeTimer >= meleeCooldownTime)
-            {
-                StartCoroutine(MeleeAttack());
-                meleeTimer = 0f;
-            }
-        }
-        else
-        {
-            meleeTimer = 0f;
-        }
         yield return new WaitForSeconds(attackTime);
         meleeMode = false;
         meleeCooldown = true;
@@ -181,7 +173,7 @@ public class SwampBossAI : MonoBehaviour
     IEnumerator waterAttack()
     {
         waterAttacking = true;
-        Rigidbody2D sheep = Instantiate(sheepPrefab, transform.position, transform.rotation).GetComponent<Rigidbody2D>();
+        Rigidbody2D sheep = Instantiate(projectilePrefab, transform.position, transform.rotation).GetComponent<Rigidbody2D>();
         sheep.AddForce(direction * projectileVelocity, ForceMode2D.Impulse);
         yield return new WaitForSeconds(projectileDelay);
         projectileCounter++;
@@ -210,14 +202,28 @@ public class SwampBossAI : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.CompareTag("Bullet"))
+        if (col.CompareTag("Bullet") && col.GetComponent<BulletId>())
         {
             health -= col.GetComponent<BulletId>().dmg;
             healthUI.value = health;
         }
-        else if (col.CompareTag("Player"))
+    }
+    void OnTriggerStay2D(Collider2D col)
+    {
+            if (col.CompareTag("Player"))
+            {
+                isContacting = true;
+            }
+            else
+            {
+                isContacting = false;
+            }
+    }
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if(col.CompareTag("Player"))
         {
-            player.GetComponent<PlayerHealth>().TakeDamage(contactDamage);
+            isDamaging = false;
         }
     }
 }
