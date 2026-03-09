@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.TextCore.Text;
 
 public class PlayerPrefsManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class PlayerPrefsManager : MonoBehaviour
         PlayerPrefs.SetInt("swampBoss", 0);
         PlayerPrefs.SetInt("bossCounter", 0); //reset amount of bosses beaten to 0
 
+        PlayerPrefs.SetInt("credits", 0);
         PlayerPrefs.SetFloat("gamma", 0.5f);
 
         SceneManager.LoadScene("MainMenu");
