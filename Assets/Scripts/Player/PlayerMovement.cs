@@ -8,8 +8,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement Settings")]
     public Rigidbody2D myPlayer;
-    public float speed = 5.0f; // movement speed
-    public float stopSpeed = 0.0f; // linear damping for Rigidbody2D
+    public float speed = 1.0f;
+    public float stopSpeed = 1.0f;
     private bool lookRight;
     public Vector2 direction;
 
@@ -34,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
     public bool chargeDodgeStart = false;
     public float chargedodgeDuration = 0.5f;
     public bool isCharging = false;
-    public float chargeDodgeTime;
     public Collider2D hit;
     ContactFilter2D contactFilter;
     LayerMask mask;
@@ -51,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     private float dodgeTimer;
     public float chargeTimer;
 
+
     [Header("Dodge Audio")]
     public AudioClip footstepAudio;
     private AudioSource playerAudio;
@@ -59,14 +59,19 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Aim")]
     public Vector2 aimPos;
+    public float controllerAimDist = 5f;
     public Vector2 lastStickPos;
+    public bool useCursor = true;
 
     // NEW   animator reference
     private Animator anim;
     //INPUT
     public bool controller = false;//true if controller input detected
+    public float controllerTurnSpeed = 15f;//Controller turn sensitivity
     public Vector2 deadzone = new Vector2(0.5f, 0.5f);
     public Vector2 stickAxis;
+    private float angle;
+    private Vector2 aimDir;
 
     void Start()
     {
@@ -75,12 +80,12 @@ public class PlayerMovement : MonoBehaviour
         playerSprite = GetComponent<SpriteRenderer>().sprite;
         playerAudio = GetComponent<AudioSource>();
         playerAudio.clip = footstepAudio;
-
         BlackJackObject = GameObject.Find("BJ-NPC-Test");
         if (BlackJackObject != null)
         {
             canMove = BlackJackObject.GetComponent<BlackJack>().canMove;
         }
+
 
         anim = GetComponent<Animator>(); // NEW
 
@@ -88,17 +93,13 @@ public class PlayerMovement : MonoBehaviour
         {
             offset = GameObject.Find("GunHolder"); //look for offset object in hierarchy and set it to that
         }
-
-        //SET CURSOR
-        if (SetCursor.Instance != null)
-        {
-            SetCursor.Instance.SetCrosshair(aimPos);
-        }
     }
 
     private void Update()
     {
-        // Controller input
+        if (LevelManager.instance.currentArea == LevelManager.AreaType.Swamp) { isSwamp = true; }
+        else { isSwamp = false; }
+
         stickAxis = new Vector2(Input.GetAxis("Joystick Aim X"), Input.GetAxis("Joystick Aim Y"));
         if (!controller && (stickAxis.sqrMagnitude > deadzone.sqrMagnitude || stickAxis.sqrMagnitude < -deadzone.sqrMagnitude))
         {
@@ -108,8 +109,8 @@ public class PlayerMovement : MonoBehaviour
         {
             controller = false;
         }
-
-        // Dodge input
+        //the controller for xbox rt is an axis, not a button
+        //dodgekeypress = Input.GetButton("Dodge");
         if (Input.GetButtonDown("Dodge")) dodgekeypress = true;
         if (Input.GetButtonUp("Dodge"))
         {
@@ -117,13 +118,16 @@ public class PlayerMovement : MonoBehaviour
             dodgekeypress = false;
         }
 
-        // Update canMove from BJ NPC
         if (BlackJackObject != null)
         {
             canMove = BlackJackObject.GetComponent<BlackJack>().canMove;
         }
-
-        // Aim rotation calculation
+        //SET CURSOR
+        if (SetCursor.Instance != null)
+        {
+            SetCursor.Instance.SetCrosshair(aimPos);
+        }
+        // Aim Rotation
         if (!controller)
         {
             Vector3 mousePos = Input.mousePosition;
@@ -135,51 +139,83 @@ public class PlayerMovement : MonoBehaviour
             if (stickAxis.sqrMagnitude > deadzone.sqrMagnitude)
             {
                 Vector2 stickPos = stickAxis.normalized;
-                aimPos = (Vector2)transform.position + stickPos;
+                aimPos = (Vector2)transform.position + stickPos * controllerAimDist;
                 lastStickPos = stickPos;
             }
             else
             {
                 aimPos = (Vector2)transform.position + lastStickPos;
             }
-        }
 
-        // Calculate movement direction
-        if (canMove)
-        {
-            direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
         }
-        else
-        {
-            direction = Vector2.zero;
-        }
+        aimDir = (Vector2)aimPos - (Vector2)transform.position;
+        angle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, angle), controllerTurnSpeed * Time.deltaTime);
     }
 
     void FixedUpdate()
     {
-        // Handle dodging
         if (isDodging)
         {
             dodgeTimer += Time.fixedDeltaTime;
             float t = dodgeTimer / dodgeDuration;
             myPlayer.MovePosition(Vector2.Lerp(dodgeStart, dodgeEnd, t));
+            //GetComponent<SpriteRenderer>().sprite = dodgeSprite; //OLD
+
+            // NEW   during dodge, force idle animation
             anim.SetBool("isWalking", false);
             anim.SetBool("isDodging", true);
             if (t >= 1f)
             {
                 isDodging = false;
+                //GetComponent<SpriteRenderer>().sprite = playerSprite; //OLD
                 StartCoroutine(DodgeCooldown());
             }
+
             return;
         }
 
-        // Move player
-        if (direction.magnitude > 0.01f)
+        //raycast stuff
+        if (isSwamp) { mask = LayerMask.GetMask("SwampWall"); } //if swamp, wall layer is swamp wall
+        if (!isSwamp) { mask = LayerMask.GetMask("Wall"); } //if not, normal wall
+        contactFilter.layerMask = mask;
+        offsetPos = offset.transform.position;
+
+
+
+        //charge dodge stuff
+        if (dodgekeypress)
         {
-            myPlayer.MovePosition(myPlayer.position + direction * speed * Time.fixedDeltaTime);
+            chargeTimer += Time.fixedDeltaTime;
+            if (chargeTimer > .3)
+            {
+                isCharging = true;
+                anim.SetBool("ischarging", isCharging);
+            }
+            if (chargeTimer > 1.5) chargeDodge = true;
+            else chargeDodge = false;
+        }
+        if (!dodgekeypress)
+        {
+            if (chargeTimer <= 1.5) chargeTimer = 0;
+            isCharging = false;
         }
 
-        // Walking animation toggle
+        //detect if movement should be frozen
+        if (!canMove)
+        {
+            // stop ability to move
+            direction = Vector2.zero;
+        }
+        if (canMove)
+        {
+            // Movement
+            direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+            myPlayer.linearVelocity = direction * speed;
+        }
+
+
+        // NEW   walking animation toggle
         bool isMoving = direction.magnitude > 0.1f;
         anim.SetBool("isWalking", isMoving);
         anim.SetBool("isDodging", isDodging);
@@ -198,18 +234,38 @@ public class PlayerMovement : MonoBehaviour
                 playerAudio.Stop();
         }
 
-        // Rotate player
-        Vector2 aimDir = (Vector2)aimPos - (Vector2)transform.position;
-        if (aimDir.sqrMagnitude > 0.001f)
+
+        //more raycast stuff
+        //.DrawLine(transform.position, aimPos, Color.red);
+        hit = Physics2D.OverlapCircle(offsetPos, .5f, mask);
+
+        //charge dodge movement
+        if (chargeDodgeStart)
         {
-            float targetAngle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-            float snappedAngle = Mathf.Round(targetAngle / 45f) * 45f; // snap to nearest 45
-            transform.rotation = Quaternion.Euler(0, 0, snappedAngle);
+            dodgeTimer += Time.fixedDeltaTime;
+
+            if (hit != null)
+            {
+                chargeDodgeStart = false; //stop charge dodge if hit wall
+                Debug.Log("Hit wall.");
+                anim.SetBool("isDodging", false);
+                StartCoroutine(DodgeCooldown());
+            }
+            if (hit == null)
+            {
+                myPlayer.position = myPlayer.position + aimDir * dodgeTimer;
+                anim.SetBool("isWalking", false);
+                anim.SetBool("isDodging", true);
+                anim.SetBool("ischarging", false);
+            }
+
+            return;
         }
 
-        // FLip sprite if aiming backwards
-        float flipAngle = Mathf.Atan2(aimDir.y, aimDir.x) * Mathf.Rad2Deg;
-        if (flipAngle > 90 || flipAngle < -90)
+
+
+
+        if (angle > 90 || angle < -90)
         {
             GetComponent<SpriteRenderer>().flipY = true;
             weaponObject.GetComponent<SpriteRenderer>().flipY = true;
@@ -223,34 +279,20 @@ public class PlayerMovement : MonoBehaviour
         // Dodge input
         if (canDodge)
         {
+
             if ((dodgeclick) && !chargeDodge)
             {
-                StartDodge(aimDir);
+                //StartDodge(direction); // Dodge towards Keyboard Movement
+
+                StartDodge(aimDir); // Dodge towards Mouse Click
             }
             if ((dodgeclick) && chargeDodge)
             {
-                StartChargeRoll(aimDir);
-            }
-        }
+                //StartChargeRoll(direction); //Charge Roll towards Keyboard Movement
 
-        // Charge dodge movement
-        if (chargeDodgeStart)
-        {
-            dodgeTimer += Time.fixedDeltaTime;
-            if (hit != null)
-            {
-                chargeDodgeStart = false;
-                Debug.Log("Hit wall.");
-                anim.SetBool("isDodging", false);
-                StartCoroutine(DodgeCooldown());
+                StartChargeRoll(aimDir); //Charge Roll towards Mouse Click
             }
-            if (hit == null)
-            {
-                myPlayer.position = myPlayer.position + aimDir * dodgeTimer;
-                anim.SetBool("isWalking", false);
-                anim.SetBool("isDodging", true);
-                anim.SetBool("ischarging", false);
-            }
+
         }
     }
 
@@ -259,30 +301,40 @@ public class PlayerMovement : MonoBehaviour
         isDodging = true;
         canDodge = false;
         dodgeTimer = 0f;
+
         dodgeStart = myPlayer.position;
 
         if (dodgeAudio != null) { playerAudio.PlayOneShot(dodgeAudio, dodgeVolume); }
 
+
         //* THIS IS STUFF FOR MOUSE AIM DODGE, DO NOT DELETE *//
-        dodgeDis = Vector3.Distance(dodgeStart, dir);
-        if (dodgeDis > 17) { dodgeDistance = .2f; }
-        if (dodgeDis < 5) { dodgeDistance = 1.1f; }
-        else { dodgeDistance = 1f; }
+
+        //calculate distance between mouse aim (where you dodge towards) and player position 
+        /*
+        dodgeDis = Vector3.Distance(dodgeStart, aimPos);
+
+        if (dodgeDis > 17) { dodgeDistance = .2f; } //if dodge is aimed really farm from arnold, dodge is lessened
+        if (dodgeDis < 5) { dodgeDistance = 1.1f; } //if dodge is aimed really close to arnold, dodge is amplified to be farther
+        else { dodgeDistance = 1f; }*/
+
         //* END MOUSE AIM DODGE STUFF *//
 
+        dodgeDistance = 1f;
         dodgeEnd = dodgeStart + dir * dodgeDistance;
+
         dodgeclick = false;
+        //Debug.Log("Dodged.");
     }
 
     private void StartChargeRoll(Vector2 dir)
     {
-        chargeTimer = 0;
+        chargeTimer = 0; // reset timer of holding button
         dodgeTimer = 0f;
-        chargeDodgeStart = true;
-        dodgeclick = false;
-        chargeDodge = false;
+        chargeDodgeStart = true; //turn on charge dodge start
+        //Debug.Log("Charge Dodged.");
+        dodgeclick = false; //reset clicking button
+        chargeDodge = false; //reset charge dodge from holding button being reached
     }
-
     private IEnumerator DodgeCooldown()
     {
         yield return new WaitForSeconds(dodgeCooldown);
