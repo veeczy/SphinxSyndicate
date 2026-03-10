@@ -49,6 +49,14 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8092182550609763393, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      propertyPath: m_Size.x
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092182550609763393, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8092182550609763393, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
       value: 2
       objectReference: {fileID: 0}
@@ -140,40 +148,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 6863068157502513071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2121ff8a73856ae4db9a964c7f3cb554, type: 3}
+  m_Script: {fileID: 11500000, guid: bb3bd7a861ecff143beeb8af3d6bcbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CityBossAI
-  moveSpeed: 1
+  moveSpeed: 3
   bossSprite: {fileID: 1398526345286004789}
   rb: {fileID: 7883565597260841302}
   bossAnimator: {fileID: 1712012514519731847}
   healthUI: {fileID: 0}
-  health: 20
+  health: 150
   maxHealth: 150
   minDistance: 0
   attackRange: 5
   smiteTarget: {x: 0, y: 0}
   meleeCooldown: 0
   contactDamage: 1
-  allowSmite: 1
-  spawnDog: 1
+  allowSmite: 0
+  spawnDog: 0
   dogReleased: 0
   meleeMode: 1
-  phase: 2
+  phase: 1
   phase2Health: 100
   phase3Health: 50
   meleeRange: 3
   meleeDelay: 1
-  burstCount: 3
-  burstDelay: 0.5
+  burstCount: 1
+  burstDelay: 0
   attackTime: 10
   meleeCooldownTime: 10
-  damage: 1
+  damage: 3
   smitePrefab: {fileID: 288681865847291458, guid: 604bc6bf7002aad48a939d79188bacc1, type: 3}
   smiteCounter: 0
   smiteCountMax: 5
   smiteDelay: 1
-  smiteCooldownTime: 10
+  smiteCooldownTime: 0
   smiteCooldown: 0
   smiteAttacking: 0
   dogPrefab: {fileID: 2825934852813729431, guid: acf7160c7fae5564c9de40bda1f1e6d1, type: 3}

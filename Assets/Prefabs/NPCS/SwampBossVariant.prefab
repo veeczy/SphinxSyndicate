@@ -161,42 +161,40 @@ MonoBehaviour:
   m_GameObject: {fileID: 8623732951457362645}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8f1a8e0077f7804fa71e02ccb563f80, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f1fdffa22b427f489fcd89995bc46f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SwampBossAI
   moveSpeed: 3
   bossSprite: {fileID: 4322245081710271823}
   bossAnimator: {fileID: 4562543358952727549}
+  rb: {fileID: 0}
   damage: 1
   healthUI: {fileID: 0}
-  health: 150
+  health: 0
   maxHealth: 150
-  minDistance: 1
-  attackRange: 2
-  attackTime: 10
-  meleeCooldownTime: 10
+  minDistance: 0
+  attackRange: 0
+  attackTime: 5
+  meleeCooldownTime: 0
   meleeCooldown: 0
-  contactDamage: 1
   onLand: 1
   isGrounded: 1
-  meleeMode: 0
-  waterJumpPos:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  landJumpPos:
-  - {fileID: 0}
-  jumpPos: {x: 0, y: 0, z: 0}
-  jumpSpeed: 3
+  meleeMode: 1
+  isContacting: 0
+  waterJumpPos: []
+  landJumpPos: []
   phase2: 0
-  sheepPrefab: {fileID: 872868850083306992, guid: 982713bda7157f04a8c9abaf0edb87a2, type: 3}
+  projectilePrefab: {fileID: 0}
   waterAttacking: 0
-  projectileVelocity: 1
-  projectileDelay: 0.5
+  projectileVelocity: 0
+  projectileDelay: 0
   projectileCounter: 0
   direction: {x: 0, y: 0}
-  jumpTimer: 3
-  bossLevel: 2
+  jumpTimer: 0
+  isDamaging: 0
+  bossLevel: 0
   debugDamageKey: 56
   debugDamageAmount: 50
+  meleeDelay: 2
+  burstDelay: 0.5
+  meleeRange: 1.5

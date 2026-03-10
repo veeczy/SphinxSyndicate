@@ -80133,18 +80133,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-      propertyPath: phase
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-      propertyPath: damage
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-      propertyPath: health
-      value: 150
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
       propertyPath: healthUI
       value: 
       objectReference: {fileID: 1090267552}
@@ -80157,16 +80145,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-      propertyPath: burstCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
       propertyPath: burstDelay
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-      propertyPath: meleeDelay
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4631927169213410237, guid: b41a582915321ef4482ab494fd52047e, type: 3}
       propertyPath: smiteDelay
@@ -80224,14 +80204,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CityBossVariant
       objectReference: {fileID: 0}
-    - target: {fileID: 6863068157502513071, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6863068157502513071, guid: b41a582915321ef4482ab494fd52047e, type: 3}
-      propertyPath: m_TagString
-      value: Boss
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -80245,7 +80217,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2121ff8a73856ae4db9a964c7f3cb554, type: 3}
+  m_Script: {fileID: 11500000, guid: bb3bd7a861ecff143beeb8af3d6bcbd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CityBossAI
 --- !u!1001 &1153826880
@@ -80401,12 +80373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 504ddf3b394e0a748830b2238e5a13dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  retrySceneName: Tavern Upstairs
-  howtoPlayUI: {fileID: 0}
-  pausemenutext: {fileID: 0}
-  buttons: {fileID: 0}
-  retryquitbutton: {fileID: 0}
-  ishowtoplay: 0
 --- !u!4 &1221462093
 Transform:
   m_ObjectHideFlags: 0
