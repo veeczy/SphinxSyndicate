@@ -39,7 +39,7 @@ public class PauseManager : MonoBehaviour
             lastGameplayScene = scene.name;
         }
 
-        pauseMenuUI = FindInactiveObjectByName("PAUSED");
+        pauseMenuUI = FindInactiveObjectByName("PausedCanvas");
 
         if (pauseMenuUI != null)
         {
