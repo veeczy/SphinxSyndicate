@@ -100,7 +100,10 @@ public class LevelManager : MonoBehaviour
     {
         if (sceneName != "") //if sceneName is not empty
         {
-            SceneManager.LoadScene(sceneName);
+            //old
+            //SceneManager.LoadScene(sceneName);
+
+            FadeManager.Instance.FadeAndLoadScene(sceneName); //new calls fade then load scene
             return;
         }
 
@@ -109,7 +112,10 @@ public class LevelManager : MonoBehaviour
 
     public void ReturnToTown()
     {
-        SceneManager.LoadScene("LoadingScreen"); //will go to biomedoor on loading screen and return to whatever town is starting area
+        //old
+        //SceneManager.LoadScene("LoadingScreen"); //will go to biomedoor on loading screen and return to whatever town is starting area
+
+        FadeManager.Instance.FadeAndLoadScene("LoadingScreen"); //new calls fade then load scene
     }
 
     private void RebuildAllRoomPools()
@@ -236,22 +242,36 @@ public class LevelManager : MonoBehaviour
     {
         if (roomsCompleted >= maxRoomsBeforeBoss) //if met condition to go to boss
         {
-            SceneManager.LoadScene(bossScene); //load boss
+            //old
+           // SceneManager.LoadScene(bossScene); //load boss
+
+            FadeManager.Instance.FadeAndLoadScene(bossScene); //new calls fade then load scene
             return;
         }
         switch (currentArea)
         {
             case AreaType.City: //if city
-                if (cityBossClear == 1) { SceneManager.LoadScene("LoadingScreen"); } //if city boss already cleared, go back to town
-                if (cityBossClear != 1) { SceneManager.LoadScene(cityRoomPool[currentRoomIndex]); } //load next scene
+                //old
+               // if (cityBossClear == 1) { SceneManager.LoadScene("LoadingScreen"); } //if city boss already cleared, go back to town
+                //if (cityBossClear != 1) { SceneManager.LoadScene(cityRoomPool[currentRoomIndex]); } //load next scene
+               
+               if (cityBossClear == 1) { FadeManager.Instance.FadeAndLoadScene("LoadingScreen"); }
+                if (cityBossClear != 1) { FadeManager.Instance.FadeAndLoadScene(cityRoomPool[currentRoomIndex]); } //load next scene
                 break;
             case AreaType.Swamp: //if swamp
-                if (swampBossClear == 1) { SceneManager.LoadScene("LoadingScreen"); } //if swamp boss already cleared, go back to town
-                if (swampBossClear != 1) { SceneManager.LoadScene(swampRoomPool[currentRoomIndex]); } //load next scene
+                //old
+              //  if (swampBossClear == 1) { SceneManager.LoadScene("LoadingScreen"); } //if swamp boss already cleared, go back to town
+                //if (swampBossClear != 1) { SceneManager.LoadScene(swampRoomPool[currentRoomIndex]); } //load next scene
+               
+               if (swampBossClear == 1) { FadeManager.Instance.FadeAndLoadScene("LoadingScreen"); }
+                if (swampBossClear != 1) { FadeManager.Instance.FadeAndLoadScene(swampRoomPool[currentRoomIndex]); } //load next scene
                 break;
             default: //if desert
-                if (desertBossClear == 1) { SceneManager.LoadScene("LoadingScreen"); } //if desert boss already cleared, go back to town
-                if (desertBossClear != 1) { SceneManager.LoadScene(desertRoomPool[currentRoomIndex]); } //load next scene
+                //old
+                //if (desertBossClear == 1) { SceneManager.LoadScene("LoadingScreen"); } //if desert boss already cleared, go back to town
+                // if (desertBossClear != 1) { SceneManager.LoadScene(desertRoomPool[currentRoomIndex]); } //load next scene
+               if (desertBossClear == 1) { FadeManager.Instance.FadeAndLoadScene("LoadingScreen"); }
+                if (desertBossClear != 1) { FadeManager.Instance.FadeAndLoadScene(desertRoomPool[currentRoomIndex]); } //load next scene
                 break;
         }
     }
@@ -260,7 +280,10 @@ public class LevelManager : MonoBehaviour
     {
         if (roomsCompleted >= maxRoomsBeforeBoss) //if met condition to go to boss
         {
-            SceneManager.LoadScene(bossScene); //load boss
+            //old
+           // SceneManager.LoadScene(bossScene); //load boss
+
+            FadeManager.Instance.FadeAndLoadScene(bossScene); //new calls fade then load scene
             return;
         }
         else //if not yet met boss condition
@@ -276,7 +299,10 @@ public class LevelManager : MonoBehaviour
 
         if (roomsCompleted >= maxRoomsBeforeBoss) //if met condition to go to boss
         {
-            SceneManager.LoadScene(bossScene); //load boss
+            //old
+           // SceneManager.LoadScene(bossScene); //load boss
+
+            FadeManager.Instance.FadeAndLoadScene(bossScene); //new calls fade then load scene
             return;
         }
         else //if not yet met boss condition
