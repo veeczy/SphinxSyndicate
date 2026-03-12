@@ -327,6 +327,38 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 117417212}
   m_CullTransparentMesh: 1
+--- !u!1 &272291174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 272291175}
+  m_Layer: 0
+  m_Name: =======UI==========
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &272291175
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272291174}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.55024, y: 6.03591, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 977064275}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &545715212
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,12 +445,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 545715212}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -19.55024, y: -6.03591, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1866000650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &545715216
 MonoBehaviour:
@@ -971,7 +1003,7 @@ RectTransform:
   - {fileID: 1956614229}
   - {fileID: 91209940}
   - {fileID: 1849322452}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 272291175}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1156,12 +1188,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216860214}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -19.55024, y: -6.03591, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1866000650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1216860218
 MonoBehaviour:
@@ -1367,12 +1399,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1452319348}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 277.85718, y: 255.77174, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 258.30695, y: 249.73584, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1866000650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1596740222
 GameObject:
@@ -1676,18 +1708,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelManager
   currentArea: 0
-  desertRoomIndexes: 0600000008000000090000000a0000000b0000000c0000000d0000000e0000000f000000110000001000000012000000130000001400000015000000160000001700000018000000190000001a0000001b000000
-  cityRoomIndexes: 22000000230000002400000025000000260000002700000028000000290000002a0000002b000000
-  swampRoomIndexes: 2f000000300000003100000032000000330000003400000035000000360000003700000038000000
-  desertSecretRoomIndexes: 050000001e0000001f000000
-  citySecretRoomIndexes: 
-  swampSecretRoomIndexes: 
-  desertBossRoomIndex: 7
-  cityBossRoomIndex: 60
-  swampBossRoomIndex: 57
+  desertRoomMaster: []
+  cityRoomMaster: []
+  swampRoomMaster: []
+  remainingdesertRoom: []
+  remainingcityRoom: []
+  remainingswampRoom: []
+  desertSecretRooms: []
+  citySecretRooms: []
+  swampSecretRooms: []
+  desertBossRoom: 
+  cityBossRoom: 
+  swampBossRoom: 
+  bossScene: 
+  desertRoomPool: []
+  cityRoomPool: []
+  swampRoomPool: []
+  randomRoomIndex: 0
+  randomRoomValue: 
   maxRoomsBeforeBoss: 10
   roomsCompleted: 0
-  resetSceneIndex: 2
+  currentRoom: 
+  currentRoomIndex: 0
+  firstRoom: 0
+  enemiesDefeated: 0
+  roomsCleared: 
+  resetSceneName: 
+  desertBossClear: 0
+  cityBossClear: 0
+  swampBossClear: 0
+  AllClear: 0
 --- !u!4 &1831634118
 Transform:
   m_ObjectHideFlags: 0
@@ -1696,12 +1746,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1831634116}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.73674, y: -9.24955, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -25.28698, y: -15.2854595, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1866000650}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1849322451
 PrefabInstance:
@@ -1805,6 +1855,41 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4589214634927258669, guid: c4a7b1fdb41da41489ab9f1c333a3a83, type: 3}
   m_PrefabInstance: {fileID: 1849322451}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1866000649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1866000650}
+  m_Layer: 0
+  m_Name: =======SETTINGS==========
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1866000650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866000649}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 19.55024, y: 6.03591, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 545715215}
+  - {fileID: 1216860217}
+  - {fileID: 1452319350}
+  - {fileID: 1831634118}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1870617058
 GameObject:
   m_ObjectHideFlags: 0
@@ -2424,8 +2509,5 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 545715215}
-  - {fileID: 977064275}
-  - {fileID: 1216860217}
-  - {fileID: 1452319350}
-  - {fileID: 1831634118}
+  - {fileID: 1866000650}
+  - {fileID: 272291175}
