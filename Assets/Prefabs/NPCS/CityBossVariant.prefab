@@ -9,6 +9,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      propertyPath: moveSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: bossSprite
       value: 
       objectReference: {fileID: 1398526345286004789}
@@ -30,39 +34,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5904209916246519186, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5904209916246519186, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6958221027935080175, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6958221027935080175, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8092182550609763393, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8092182550609763393, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_Name
       value: CityBossVariant
       objectReference: {fileID: 0}
+    - target: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      propertyPath: m_TagString
+      value: Boss
+      objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -13.52
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 13.85
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalPosition.z
@@ -96,10 +104,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4631927169213410237}
+    - targetCorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7883565597260841302}
   m_SourcePrefab: {fileID: 100100000, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
 --- !u!212 &1398526345286004789 stripped
 SpriteRenderer:
@@ -111,3 +126,90 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4195240358146315197, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
   m_PrefabInstance: {fileID: 3313020602948345146}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6863068157502513071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+  m_PrefabInstance: {fileID: 3313020602948345146}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4631927169213410237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863068157502513071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3bd7a861ecff143beeb8af3d6bcbd7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CityBossAI
+  moveSpeed: 3
+  bossSprite: {fileID: 1398526345286004789}
+  rb: {fileID: 7883565597260841302}
+  bossAnimator: {fileID: 1712012514519731847}
+  healthUI: {fileID: 0}
+  health: 0
+  maxHealth: 150
+  minDistance: 0
+  attackRange: 0
+  smiteTarget: {x: 0, y: 0}
+  meleeCooldown: 0
+  contactDamage: 1
+  allowSmite: 1
+  spawnDog: 1
+  dogReleased: 0
+  meleeMode: 1
+  phase: 1
+  phase2Health: 100
+  phase3Health: 50
+  meleeRange: 3
+  meleeDelay: 1
+  burstCount: 3
+  burstDelay: 0.5
+  attackTime: 10
+  meleeCooldownTime: 10
+  damage: 3
+  smitePrefab: {fileID: 0}
+  smiteCounter: 0
+  smiteCountMax: 5
+  smiteDelay: 3
+  smiteCooldownTime: 0
+  smiteCooldown: 0
+  smiteAttacking: 0
+  dogPrefab: {fileID: 0}
+  dogTimer: 7.5
+  dogCooldownTime: 10
+  dogAttacking: 0
+  dogCooldown: 0
+  direction: {x: 0, y: 0}
+  bossLevel: 0
+  debugDamageKey: 56
+  debugDamageAmount: 50
+  isContacting: 0
+--- !u!50 &7883565597260841302
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6863068157502513071}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

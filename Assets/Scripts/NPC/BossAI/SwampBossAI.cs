@@ -52,6 +52,7 @@ public class SwampBossAI : MonoBehaviour
     [Header("DEBUG")]
     public KeyCode debugDamageKey = KeyCode.Alpha8;
     public int debugDamageAmount = 50;
+    
     [Header("Melee")]
     private bool isMelee = false;
 
@@ -66,7 +67,6 @@ public class SwampBossAI : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-
         health = maxHealth;
         healthUI.maxValue = maxHealth;
         healthUI.value = maxHealth;

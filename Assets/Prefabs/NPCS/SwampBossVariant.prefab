@@ -90,11 +90,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.7007198
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -12.533306
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalPosition.z
@@ -106,15 +106,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8290492750954312085, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -128,10 +128,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3103865851303782191, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1321163794364074081}
+    - targetCorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1546957184669154338}
   m_SourcePrefab: {fileID: 100100000, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
 --- !u!212 &4322245081710271823 stripped
 SpriteRenderer:
@@ -143,3 +150,86 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 4195240358146315197, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
   m_PrefabInstance: {fileID: 389866903822168128}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8623732951457362645 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8269931146791486101, guid: 5e8652927da3b2b43a5ba989e0315240, type: 3}
+  m_PrefabInstance: {fileID: 389866903822168128}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1321163794364074081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623732951457362645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f1fdffa22b427f489fcd89995bc46f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SwampBossAI
+  moveSpeed: 3
+  bossSprite: {fileID: 4322245081710271823}
+  bossAnimator: {fileID: 4562543358952727549}
+  rb: {fileID: 1546957184669154338}
+  damage: 1
+  healthUI: {fileID: 0}
+  health: 150
+  maxHealth: 150
+  minDistance: 0
+  attackRange: 5
+  attackTime: 10
+  meleeCooldownTime: 10
+  meleeCooldown: 0
+  onLand: 1
+  isGrounded: 1
+  meleeMode: 0
+  isContacting: 0
+  waterJumpPos:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  landJumpPos:
+  - {fileID: 0}
+  phase2: 0
+  projectilePrefab: {fileID: 1616267154620934944, guid: f0ae342fcb743fe438716c857bdd3a8d, type: 3}
+  waterAttacking: 0
+  projectileVelocity: 3
+  projectileDelay: 0.35
+  projectileCounter: 0
+  direction: {x: 0, y: 0}
+  jumpTimer: 3
+  isDamaging: 0
+  bossLevel: 0
+  debugDamageKey: 56
+  debugDamageAmount: 50
+  meleeDelay: 2
+  burstDelay: 0.5
+  meleeRange: 1.5
+--- !u!50 &1546957184669154338
+Rigidbody2D:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8623732951457362645}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
