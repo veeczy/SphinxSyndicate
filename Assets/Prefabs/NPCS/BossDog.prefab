@@ -239,17 +239,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2825934852813729431}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 323502b65891f5447a6fc33b9bedfeb7, type: 3}
+  m_Script: {fileID: 11500000, guid: 551c0a007e176c943979b2608a2335ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DogEnemyAI
-  moveSpeed: 15
+  moveSpeed: 10
   owner: {fileID: 0}
   damage: 1
   health: 3
   maxHealth: 3
-  healthBar: {fileID: 4764129700232853823}
+  healthBar: {fileID: 0}
   isRetreating: 0
-  retreatTimer: 5
+  retreatTimer: 0
   stunTimer: 5
   playerRb: {fileID: 0}
   hurtSound: {fileID: 0}
@@ -270,7 +270,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -281,7 +281,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &3492721264006881536
 GameObject:
   m_ObjectHideFlags: 0
