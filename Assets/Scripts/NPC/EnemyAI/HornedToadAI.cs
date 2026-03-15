@@ -18,6 +18,7 @@ public class HornedToadAI : EnemyAI
 
     protected override void Update()
     {
+        if (!CheckAggro()) return;
         if (player == null) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
@@ -29,7 +30,7 @@ public class HornedToadAI : EnemyAI
             // Move toward player
             transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
 
-            // NEW: walking animation on
+            // walking animation on
             anim.SetBool("isWalking", true);
 
             // ensure attack animation stays off
@@ -37,7 +38,7 @@ public class HornedToadAI : EnemyAI
         }
         else if (distance <= attackRange)
         {
-            // NEW: stop walking when in attack range
+            // stop walking when in attack range
             anim.SetBool("isWalking", false);
 
             if (Time.time >= nextAttackTime && !isAttacking)
@@ -47,7 +48,7 @@ public class HornedToadAI : EnemyAI
         }
         else
         {
-            // NEW: idle when not moving
+            // idle when not moving
             anim.SetBool("isWalking", false);
         }
 
@@ -59,7 +60,7 @@ public class HornedToadAI : EnemyAI
         isAttacking = true;
 
         // Stop walking when attacking
-        anim.SetBool("isWalking", false); // NEW
+        anim.SetBool("isWalking", false);
 
         anim.SetBool("isAttacking", true);
 
@@ -77,9 +78,6 @@ public class HornedToadAI : EnemyAI
 
         isAttacking = false;
         anim.SetBool("isAttacking", false);
-
-        // NEW: after attack, idle (walking will turn on next frame if moving)
         anim.SetBool("isWalking", false);
     }
 }
-

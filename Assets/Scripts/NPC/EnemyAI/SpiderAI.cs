@@ -4,10 +4,9 @@ using System.Collections;
 public class SpiderAI : EnemyAI
 {
     [Header("Lunge Settings")]
-    public float detectionRadius = 4f;
     public float lungeForce = 8f;
     public float restTime = 2f;
-    public float damageRadius = 1.2f; // how close player must be to take damage
+    public float damageRadius = 1.2f;
 
     private Rigidbody2D rb;
     private Animator anim;
@@ -23,18 +22,15 @@ public class SpiderAI : EnemyAI
 
     protected override void Update()
     {
+        if (!CheckAggro()) return;
         if (player == null) return;
 
-        float distance = Vector2.Distance(transform.position, player.position);
-
-        // Activate when player enters radius
-        if (!hasActivated && distance <= detectionRadius)
+        if (!hasActivated)
         {
             hasActivated = true;
             StartCoroutine(LungeLoop());
         }
 
-        // Flip sprite
         Vector2 direction = (player.position - transform.position).normalized;
 
         if (direction.x > 0)
@@ -64,7 +60,7 @@ public class SpiderAI : EnemyAI
         // Play lunge animation
         anim.SetBool("isLunging", true);
 
-        yield return new WaitForSeconds(0.15f); // windup
+        yield return new WaitForSeconds(0.15f);
 
         // Direction toward player
         Vector2 direction = (player.position - transform.position).normalized;
@@ -84,7 +80,7 @@ public class SpiderAI : EnemyAI
                 ph.TakeDamage(damage);
         }
 
-        yield return new WaitForSeconds(0.15f); // finish movement
+        yield return new WaitForSeconds(0.15f);
 
         // Stop movement
         rb.linearVelocity = Vector2.zero;

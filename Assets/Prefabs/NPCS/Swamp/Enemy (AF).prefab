@@ -114,9 +114,11 @@ MonoBehaviour:
   health: 3
   maxHealth: 3
   healthBar: {fileID: 6158821582069705904}
+  aggroRange: 6
   hurtSound: {fileID: 8300000, guid: d6b7241a77b11f84bbd18bc98a85585b, type: 3}
   hurtVolume: 0.2
   safeDistance: 6
+  attackRange: 10
   shootInterval: 2
   projectilePrefab: {fileID: 2464918242123611638, guid: 4393fd63653d4b948b473d5f91560a77, type: 3}
 --- !u!50 &2145647449293016800

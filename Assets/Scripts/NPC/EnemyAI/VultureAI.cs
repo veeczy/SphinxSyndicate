@@ -4,24 +4,25 @@ public class VultureAI : EnemyAI
 {
     [Header("Vulture Settings")]
     public float safeDistance = 6f;
+    public float attackRange = 10f; // max distance vulture will shoot
     public float shootInterval = 2f;
     public GameObject projectilePrefab;
 
     private float nextShootTime = 0f;
     private SpriteRenderer sr;
 
-    private Animator anim;       // NEW
+    private Animator anim;
     private bool isAttacking = false;
-
 
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
-        anim = GetComponent<Animator>(); // NEW
+        anim = GetComponent<Animator>();
     }
 
     protected override void Update()
     {
+        if (!CheckAggro()) return;
         if (player == null) return;
 
         float distance = Vector2.Distance(transform.position, player.position);
@@ -34,7 +35,7 @@ public class VultureAI : EnemyAI
             else if (direction.x < 0) sr.flipX = true;
         }
 
-        bool isMoving = false; // NEW
+        bool isMoving = false;
 
         // Hover movement (but no movement during shoot)
         if (!isAttacking)
@@ -43,42 +44,39 @@ public class VultureAI : EnemyAI
             {
                 Vector2 retreatDir = (transform.position - player.position).normalized;
                 transform.position += (Vector3)retreatDir * moveSpeed * Time.deltaTime;
-                isMoving = true; // NEW
+                isMoving = true;
             }
             else if (distance > safeDistance * 1.2f)
             {
                 Vector2 approachDir = (player.position - transform.position).normalized;
                 transform.position += (Vector3)approachDir * moveSpeed * Time.deltaTime;
-                isMoving = true; // NEW
+                isMoving = true;
             }
         }
 
-        // NEW — walking animation toggle
         anim.SetBool("isWalking", isMoving && !isAttacking);
 
-        // Shooting logic
-        if (Time.time >= nextShootTime && !isAttacking)
+        // Shooting logic (only if player is within attack range)
+        if (distance <= attackRange && Time.time >= nextShootTime && !isAttacking)
         {
             StartCoroutine(ShootAnim());
             nextShootTime = Time.time + shootInterval;
         }
 
-        // Idle (no attack) animation
         if (!isAttacking)
             anim.SetBool("isAttacking", false);
 
         CheckHealth();
     }
 
-    // Attack + animation coroutine
     private System.Collections.IEnumerator ShootAnim()
     {
         isAttacking = true;
 
-        anim.SetBool("isWalking", false);      // NEW — stop walk anim
-        anim.SetBool("isAttacking", true);     // Play shoot anim
+        anim.SetBool("isWalking", false);
+        anim.SetBool("isAttacking", true);
 
-        yield return new WaitForSeconds(0.2f); // Timing for animation
+        yield return new WaitForSeconds(0.2f);
 
         Shoot();
 
@@ -86,7 +84,7 @@ public class VultureAI : EnemyAI
 
         isAttacking = false;
         anim.SetBool("isAttacking", false);
-        anim.SetBool("isWalking", false);      // NEW — return to idle hover
+        anim.SetBool("isWalking", false);
     }
 
     void Shoot()

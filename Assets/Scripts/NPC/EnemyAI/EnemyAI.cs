@@ -13,13 +13,17 @@ public class EnemyAI : MonoBehaviour
     protected Rigidbody2D rb;
     protected SpriteRenderer sr;
 
+    [Header("Aggro")]
+    public float aggroRange = 6f; // player must enter this range before enemy activates
+    protected bool hasAggro = false;
+
     [Header("Audio")]
     public AudioClip hurtSound;
     public float hurtVolume = 1f;
 
     private AudioSource audioSource;
 
-    // PUSH ZONE
+    // push zone
     private bool inPushZone = false;
     private Vector2 pushDir = Vector2.zero;
     private float pushStrength = 1f;
@@ -39,8 +43,27 @@ public class EnemyAI : MonoBehaviour
 
     protected virtual void Update()
     {
+        // stay idle until player enters aggro range
+        if (!CheckAggro()) return;
+
         HandleMovement();
         CheckHealth();
+    }
+
+    // check if player has entered aggro range
+    protected bool CheckAggro()
+    {
+        if (player == null) return false;
+
+        if (!hasAggro)
+        {
+            float distance = Vector2.Distance(transform.position, player.position);
+
+            if (distance <= aggroRange)
+                hasAggro = true;
+        }
+
+        return hasAggro;
     }
 
     protected void HandleMovement()
@@ -55,7 +78,8 @@ public class EnemyAI : MonoBehaviour
         else
             direction = ((Vector2)player.position - (Vector2)transform.position).normalized;
 
-        transform.position += (Vector3)direction * moveSpeed * Time.deltaTime;
+        float speed = inPushZone ? moveSpeed * pushStrength : moveSpeed;
+        transform.position += (Vector3)direction * speed * Time.deltaTime;
 
         // Flip left/right only
         if (direction.x > 0) sr.flipX = false;
@@ -70,7 +94,7 @@ public class EnemyAI : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        // PushZone enter
+        // pushZone enter
         PushZone zone = col.GetComponent<PushZone>();
         if (zone != null)
         {
@@ -93,14 +117,16 @@ public class EnemyAI : MonoBehaviour
         if (bullet != null)
         {
             health -= bullet.dmg;
+
             if (healthBar)
-                healthBar.transform.localScale = new Vector2(hbScale.x * ((float)health / (float)maxHealth), hbScale.y);
+                healthBar.transform.localScale =
+                    new Vector2(hbScale.x * ((float)health / (float)maxHealth), hbScale.y);
         }
     }
 
     void OnTriggerStay2D(Collider2D col)
     {
-        // Keep updating while inside zone (works even if multiple zones overlap)
+        // keep updating while inside zone (works even if multiple zones overlap)
         PushZone zone = col.GetComponent<PushZone>();
         if (zone != null)
         {
@@ -119,5 +145,12 @@ public class EnemyAI : MonoBehaviour
             pushDir = Vector2.zero;
             pushStrength = 1f;
         }
+    }
+
+    // draws a red circle around the enemy which show aggro range
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, aggroRange);
     }
 }

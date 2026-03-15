@@ -3,10 +3,6 @@ using System.Collections;
 
 public class RedCrayfishAI : EnemyAI
 {
-    [Header("Activation")]
-    public float detectionRadius = 8f;
-    private bool hasActivated = false;
-
     [Header("Ranges")]
     public float shootRange = 6f;
     public float meleeRange = 1.5f;
@@ -23,7 +19,7 @@ public class RedCrayfishAI : EnemyAI
     public float meleeHoldTime = 1f;
     public float meleeCooldown = 1.25f;
 
-    [Header("Animation (optional)")]
+    [Header("Animation")]
     public Animator anim;
     public string shootTrigger = "Shoot";
     public string meleeTrigger = "Melee";
@@ -44,21 +40,8 @@ public class RedCrayfishAI : EnemyAI
 
     protected override void Update()
     {
+        if (!CheckAggro()) return;
         if (player == null) return;
-
-        // Activate when player enters radius (like SpiderAI)
-        if (!hasActivated)
-        {
-            float activateDist = Vector2.Distance(transform.position, player.position);
-            if (activateDist > detectionRadius)
-            {
-                // stay idle until activated
-                SetWalkingAnim(false);
-                return;
-            }
-
-            hasActivated = true;
-        }
 
         float distance = Vector2.Distance(transform.position, player.position);
 
@@ -72,7 +55,7 @@ public class RedCrayfishAI : EnemyAI
             return;
         }
 
-        // ----- MELEE -----
+        // melee
         if (distance <= meleeRange && Time.time >= nextMeleeTime)
         {
             meleeTimer += Time.deltaTime;
@@ -90,7 +73,7 @@ public class RedCrayfishAI : EnemyAI
             meleeTimer = 0f;
         }
 
-        // ----- SHOOT BURST -----
+        // shoot burst
         if (distance <= shootRange && Time.time >= nextBurstTime)
         {
             StartCoroutine(ShootBurst());
@@ -98,7 +81,7 @@ public class RedCrayfishAI : EnemyAI
             return;
         }
 
-        // ----- CHASE -----
+        // chase
         SetWalkingAnim(true);
         HandleMovement();
 
